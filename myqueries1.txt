@@ -1,0 +1,2476 @@
+SQL> select sum(sal) from emp;
+
+  SUM(SAL)                                                                      
+----------                                                                      
+     29025                                                                      
+
+SQL> select deptno,job,sum(sal) from emp group by deptno,job order by deptno,job;
+
+    DEPTNO JOB         SUM(SAL)                                                 
+---------- --------- ----------                                                 
+        10 CLERK           1300                                                 
+        10 MANAGER         2450                                                 
+        10 PRESIDENT       5000                                                 
+        20 ANALYST         6000                                                 
+        20 CLERK           1900                                                 
+        20 MANAGER         2975                                                 
+        30 CLERK            950                                                 
+        30 MANAGER         2850                                                 
+        30 SALESMAN        5600                                                 
+
+9 rows selected.
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by deptno,job order by deptno,job;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        10 CLERK           1300          1                                      
+        10 MANAGER         2450          1                                      
+        10 PRESIDENT       5000          1                                      
+        20 ANALYST         6000          2                                      
+        20 CLERK           1900          2                                      
+        20 MANAGER         2975          1                                      
+        30 CLERK            950          1                                      
+        30 MANAGER         2850          1                                      
+        30 SALESMAN        5600          4                                      
+
+9 rows selected.
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by rollup(deptno,job) order by deptno,job;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        10 CLERK           1300          1                                      
+        10 MANAGER         2450          1                                      
+        10 PRESIDENT       5000          1                                      
+        10                 8750          3                                      
+        20 ANALYST         6000          2                                      
+        20 CLERK           1900          2                                      
+        20 MANAGER         2975          1                                      
+        20                10875          5                                      
+        30 CLERK            950          1                                      
+        30 MANAGER         2850          1                                      
+        30 SALESMAN        5600          4                                      
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        30                 9400          6                                      
+                          29025         14                                      
+
+13 rows selected.
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job) order by deptno,job;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        10 CLERK           1300          1                                      
+        10 MANAGER         2450          1                                      
+        10 PRESIDENT       5000          1                                      
+        10                 8750          3                                      
+        20 ANALYST         6000          2                                      
+        20 CLERK           1900          2                                      
+        20 MANAGER         2975          1                                      
+        20                10875          5                                      
+        30 CLERK            950          1                                      
+        30 MANAGER         2850          1                                      
+        30 SALESMAN        5600          4                                      
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        30                 9400          6                                      
+           ANALYST         6000          2                                      
+           CLERK           4150          4                                      
+           MANAGER         8275          3                                      
+           PRESIDENT       5000          1                                      
+           SALESMAN        5600          4                                      
+                          29025         14                                      
+
+18 rows selected.
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job)
+  2  where deptno=20;
+where deptno=20
+*
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job) and deptno=20;
+select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job) and deptno=20
+                                                                         *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job) ;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+                          29025         14                                      
+           CLERK           4150          4                                      
+           ANALYST         6000          2                                      
+           MANAGER         8275          3                                      
+           SALESMAN        5600          4                                      
+           PRESIDENT       5000          1                                      
+        10                 8750          3                                      
+        10 CLERK           1300          1                                      
+        10 MANAGER         2450          1                                      
+        10 PRESIDENT       5000          1                                      
+        20                10875          5                                      
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        20 CLERK           1900          2                                      
+        20 ANALYST         6000          2                                      
+        20 MANAGER         2975          1                                      
+        30                 9400          6                                      
+        30 CLERK            950          1                                      
+        30 MANAGER         2850          1                                      
+        30 SALESMAN        5600          4                                      
+
+18 rows selected.
+
+SQL> select deptno,job,sum(sal),count(job) from emp whre deptno=20 group by cube(deptno,job) ;
+select deptno,job,sum(sal),count(job) from emp whre deptno=20 group by cube(deptno,job) 
+                                                    *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> 
+SQL> select deptno,job,sum(sal),count(job) from emp where deptno=20 group by cube(deptno,job) ;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+                          10875          5                                      
+           CLERK           1900          2                                      
+           ANALYST         6000          2                                      
+           MANAGER         2975          1                                      
+        20                10875          5                                      
+        20 CLERK           1900          2                                      
+        20 ANALYST         6000          2                                      
+        20 MANAGER         2975          1                                      
+
+8 rows selected.
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job) ;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+                          29025         14                                      
+           CLERK           4150          4                                      
+           ANALYST         6000          2                                      
+           MANAGER         8275          3                                      
+           SALESMAN        5600          4                                      
+           PRESIDENT       5000          1                                      
+        10                 8750          3                                      
+        10 CLERK           1300          1                                      
+        10 MANAGER         2450          1                                      
+        10 PRESIDENT       5000          1                                      
+        20                10875          5                                      
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        20 CLERK           1900          2                                      
+        20 ANALYST         6000          2                                      
+        20 MANAGER         2975          1                                      
+        30                 9400          6                                      
+        30 CLERK            950          1                                      
+        30 MANAGER         2850          1                                      
+        30 SALESMAN        5600          4                                      
+
+18 rows selected.
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job)
+  2  having deptno=20;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        20 CLERK           1900          2                                      
+        20 ANALYST         6000          2                                      
+        20 MANAGER         2975          1                                      
+        20                10875          5                                      
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job)
+  2  having deptno=20 and job is null;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        20                10875          5                                      
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job)
+  2  having deptno is null and job is null;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+                          29025         14                                      
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job)
+  2  having deptno is null and job is not null;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+           CLERK           4150          4                                      
+           ANALYST         6000          2                                      
+           MANAGER         8275          3                                      
+           SALESMAN        5600          4                                      
+           PRESIDENT       5000          1                                      
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job)
+  2  having deptno is not null and job is null;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        10                 8750          3                                      
+        20                10875          5                                      
+        30                 9400          6                                      
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by cube(deptno,job)
+  2  having deptno is not null and job is not null;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        20 MANAGER         2975          1                                      
+        30 SALESMAN        5600          4                                      
+        30 CLERK            950          1                                      
+        20 CLERK           1900          2                                      
+        10 PRESIDENT       5000          1                                      
+        30 MANAGER         2850          1                                      
+        10 CLERK           1300          1                                      
+        10 MANAGER         2450          1                                      
+        20 ANALYST         6000          2                                      
+
+9 rows selected.
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by deptno,job;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        20 MANAGER         2975          1                                      
+        30 SALESMAN        5600          4                                      
+        30 CLERK            950          1                                      
+        20 CLERK           1900          2                                      
+        10 PRESIDENT       5000          1                                      
+        30 MANAGER         2850          1                                      
+        10 CLERK           1300          1                                      
+        10 MANAGER         2450          1                                      
+        20 ANALYST         6000          2                                      
+
+9 rows selected.
+
+SQL> select deptno,job,sum(sal),count(job) from emp group by deptno,job
+  2  having count(job) > 3;
+
+    DEPTNO JOB         SUM(SAL) COUNT(JOB)                                      
+---------- --------- ---------- ----------                                      
+        30 SALESMAN        5600          4                                      
+
+SQL> @D:\DEMO.TXT
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+Table dropped.
+
+
+View dropped.
+
+
+Sequence dropped.
+
+
+Sequence dropped.
+
+
+Sequence dropped.
+
+
+Table created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+Table created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+Table created.
+
+
+Table created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+Table created.
+
+
+1 row created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+Table created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+Index created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+Sequence created.
+
+
+Sequence created.
+
+
+Sequence created.
+
+
+View created.
+
+SQL> SELECT * FROM DEPT;
+
+    DEPTNO DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        10 ACCOUNTING     NEW YORK                                              
+        20 RESEARCH       DALLAS                                                
+        30 SALES          CHICAGO                                               
+        40 OPERATIONS     BOSTON                                                
+
+SQL> SELECT * FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                 
+        10                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7566 JONES      MANAGER         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0      
+        30                                                                      
+                                                                                
+      7900 JAMES      CLERK           7698 03-DEC-81        950                 
+        30                                                                      
+                                                                                
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                 
+        20                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                 
+        20                                                                      
+                                                                                
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                 
+        10                                                                      
+                                                                                
+
+14 rows selected.
+
+SQL> SELECT * FROM CUSTOMER;
+
+    CUSTID NAME                                                                 
+---------- ---------------------------------------------                        
+ADDRESS                                  CITY                           ST      
+---------------------------------------- ------------------------------ --      
+ZIP             AREA PHONE          REPID CREDITLIMIT                           
+--------- ---------- --------- ---------- -----------                           
+COMMENTS                                                                        
+--------------------------------------------------------------------------------
+       100 JOCKSPORTS                                                           
+345 VIEWRIDGE                            BELMONT                        CA      
+96711            415 598-6609        7844        5000                           
+Very friendly people to work with -- sales rep likes to be called Mike.         
+                                                                                
+
+    CUSTID NAME                                                                 
+---------- ---------------------------------------------                        
+ADDRESS                                  CITY                           ST      
+---------------------------------------- ------------------------------ --      
+ZIP             AREA PHONE          REPID CREDITLIMIT                           
+--------- ---------- --------- ---------- -----------                           
+COMMENTS                                                                        
+--------------------------------------------------------------------------------
+       101 TKB SPORT SHOP                                                       
+490 BOLI RD.                             REDWOOD CITY                   CA      
+94061            415 368-1223        7521       10000                           
+Rep called 5/8 about change in order - contact shipping.                        
+                                                                                
+
+    CUSTID NAME                                                                 
+---------- ---------------------------------------------                        
+ADDRESS                                  CITY                           ST      
+---------------------------------------- ------------------------------ --      
+ZIP             AREA PHONE          REPID CREDITLIMIT                           
+--------- ---------- --------- ---------- -----------                           
+COMMENTS                                                                        
+--------------------------------------------------------------------------------
+       102 VOLLYRITE                                                            
+9722 HAMILTON                            BURLINGAME                     CA      
+95133            415 644-3341        7654        7000                           
+Company doing heavy promotion beginning 10/89. Prepare for large orders during  
+                                                                                
+
+    CUSTID NAME                                                                 
+---------- ---------------------------------------------                        
+ADDRESS                                  CITY                           ST      
+---------------------------------------- ------------------------------ --      
+ZIP             AREA PHONE          REPID CREDITLIMIT                           
+--------- ---------- --------- ---------- -----------                           
+COMMENTS                                                                        
+--------------------------------------------------------------------------------
+                                                                                
+       103 JUST TENNIS                                                          
+HILLVIEW MALL                            BURLINGAME                     CA      
+97544            415 677-9312        7521        3000                           
+Contact rep about new line of tennis rackets.                                   
+
+    CUSTID NAME                                                                 
+---------- ---------------------------------------------                        
+ADDRESS                                  CITY                           ST      
+---------------------------------------- ------------------------------ --      
+ZIP             AREA PHONE          REPID CREDITLIMIT                           
+--------- ---------- --------- ---------- -----------                           
+COMMENTS                                                                        
+--------------------------------------------------------------------------------
+                                                                                
+       104 EVERY MOUNTAIN                                                       
+574 SURRY RD.                            CUPERTINO                      CA      
+93301            408 996-2323        7499       10000                           
+Customer with high market share (23%) due to aggressive advertising.            
+
+    CUSTID NAME                                                                 
+---------- ---------------------------------------------                        
+ADDRESS                                  CITY                           ST      
+---------------------------------------- ------------------------------ --      
+ZIP             AREA PHONE          REPID CREDITLIMIT                           
+--------- ---------- --------- ---------- -----------                           
+COMMENTS                                                                        
+--------------------------------------------------------------------------------
+                                                                                
+       105 K + T SPORTS                                                         
+3476 EL PASEO                            SANTA CLARA                    CA      
+91003            408 376-9966        7844        5000                           
+Tends to order large amounts of merchandise at once. Accounting is considering  
+
+    CUSTID NAME                                                                 
+---------- ---------------------------------------------                        
+ADDRESS                                  CITY                           ST      
+---------------------------------------- ------------------------------ --      
+ZIP             AREA PHONE          REPID CREDITLIMIT                           
+--------- ---------- --------- ---------- -----------                           
+COMMENTS                                                                        
+--------------------------------------------------------------------------------
+                                                                                
+                                                                                
+       106 SHAPE UP                                                             
+908 SEQUOIA                              PALO ALTO                      CA      
+94301            415 364-9777        7521        6000                           
+
+    CUSTID NAME                                                                 
+---------- ---------------------------------------------                        
+ADDRESS                                  CITY                           ST      
+---------------------------------------- ------------------------------ --      
+ZIP             AREA PHONE          REPID CREDITLIMIT                           
+--------- ---------- --------- ---------- -----------                           
+COMMENTS                                                                        
+--------------------------------------------------------------------------------
+Support intensive. Orders small amounts (< 800) of merchandise at a time.       
+                                                                                
+       107 WOMENS SPORTS                                                        
+VALCO VILLAGE                            SUNNYVALE                      CA      
+93301            408 967-4398        7499       10000                           
+
+    CUSTID NAME                                                                 
+---------- ---------------------------------------------                        
+ADDRESS                                  CITY                           ST      
+---------------------------------------- ------------------------------ --      
+ZIP             AREA PHONE          REPID CREDITLIMIT                           
+--------- ---------- --------- ---------- -----------                           
+COMMENTS                                                                        
+--------------------------------------------------------------------------------
+First sporting goods store geared exclusively towards women. Unusual promotion  
+a                                                                               
+                                                                                
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER                         
+98 LONE PINE WAY                         HIBBING                        MN      
+
+    CUSTID NAME                                                                 
+---------- ---------------------------------------------                        
+ADDRESS                                  CITY                           ST      
+---------------------------------------- ------------------------------ --      
+ZIP             AREA PHONE          REPID CREDITLIMIT                           
+--------- ---------- --------- ---------- -----------                           
+COMMENTS                                                                        
+--------------------------------------------------------------------------------
+55649            612 566-9123        7844        8000                           
+                                                                                
+                                                                                
+
+9 rows selected.
+
+SQL> SELECT * FROM ORD;
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                          
+---------- --------- - ---------- --------- ----------                          
+       610 07-JAN-87 A        101 08-JAN-87      101.4                          
+       611 11-JAN-87 B        102 11-JAN-87         45                          
+       612 15-JAN-87 C        104 20-JAN-87       5860                          
+       601 01-MAY-86 A        106 30-MAY-86        2.4                          
+       602 05-JUN-86 B        102 20-JUN-86         56                          
+       604 15-JUN-86 A        106 30-JUN-86        698                          
+       605 14-JUL-86 A        106 30-JUL-86       8324                          
+       606 14-JUL-86 A        100 30-JUL-86        3.4                          
+       609 01-AUG-86 B        100 15-AUG-86       97.5                          
+       607 18-JUL-86 C        104 18-JUL-86        5.6                          
+       608 25-JUL-86 C        104 25-JUL-86       35.2                          
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                          
+---------- --------- - ---------- --------- ----------                          
+       603 05-JUN-86          102 05-JUN-86        224                          
+       620 12-MAR-87          100 12-MAR-87       4450                          
+       613 01-FEB-87          108 01-FEB-87       6400                          
+       614 01-FEB-87          102 05-FEB-87      23940                          
+       616 03-FEB-87          103 10-FEB-87        764                          
+       619 22-FEB-87          104 04-FEB-87       1260                          
+       617 05-FEB-87          105 03-MAR-87      46370                          
+       615 01-FEB-87          107 06-FEB-87        710                          
+       618 15-FEB-87 A        102 06-MAR-87     3510.5                          
+       621 15-MAR-87 A        100 01-JAN-87        730                          
+
+21 rows selected.
+
+SQL> SELECT * FROM ITEM;
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT              
+---------- ---------- ---------- ----------- ---------- ----------              
+       610          3     100890          58          1         58              
+       611          1     100861          45          1         45              
+       612          1     100860          30        100       3000              
+       601          1     200376         2.4          1        2.4              
+       602          1     100870         2.8         20         56              
+       604          1     100890          58          3        174              
+       604          2     100861          42          2         84              
+       604          3     100860          44         10        440              
+       603          2     100860          56          4        224              
+       610          1     100860          35          1         35              
+       610          2     100870         2.8          3        8.4              
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT              
+---------- ---------- ---------- ----------- ---------- ----------              
+       613          4     200376         2.2        200        440              
+       614          1     100860          35        444      15540              
+       614          2     100870         2.8       1000       2800              
+       612          2     100861        40.5         20        810              
+       612          3     101863          10        150       1500              
+       620          1     100860          35         10        350              
+       620          2     200376         2.4       1000       2400              
+       620          3     102130         3.4        500       1700              
+       613          1     100871         5.6        100        560              
+       613          2     101860          24        200       4800              
+       613          3     200380           4        150        600              
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT              
+---------- ---------- ---------- ----------- ---------- ----------              
+       619          3     102130         3.4        100        340              
+       617          1     100860          35         50       1750              
+       617          2     100861          45        100       4500              
+       614          3     100871         5.6       1000       5600              
+       616          1     100861          45         10        450              
+       616          2     100870         2.8         50        140              
+       616          3     100890          58          2        116              
+       616          4     102130         3.4         10         34              
+       616          5     200376         2.4         10         24              
+       619          1     200380           4        100        400              
+       619          2     200376         2.4        100        240              
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT              
+---------- ---------- ---------- ----------- ---------- ----------              
+       615          1     100861          45          4        180              
+       607          1     100871         5.6          1        5.6              
+       615          2     100870         2.8        100        280              
+       617          3     100870         2.8        500       1400              
+       617          4     100871         5.6        500       2800              
+       617          5     100890          58        500      29000              
+       617          6     101860          24        100       2400              
+       617          7     101863        12.5        200       2500              
+       617          8     102130         3.4        100        340              
+       617          9     200376         2.4        200        480              
+       617         10     200380           4        300       1200              
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT              
+---------- ---------- ---------- ----------- ---------- ----------              
+       609          2     100870         2.5          5       12.5              
+       609          3     100890          50          1         50              
+       618          1     100860          35         23        805              
+       618          2     100861       45.11         50     2255.5              
+       618          3     100870          45         10        450              
+       621          1     100861          45         10        450              
+       621          2     100870         2.8        100        280              
+       615          3     100871           5         50        250              
+       608          1     101860          24          1         24              
+       608          2     100871         5.6          2       11.2              
+       609          1     100861          35          1         35              
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT              
+---------- ---------- ---------- ----------- ---------- ----------              
+       606          1     102130         3.4          1        3.4              
+       605          1     100861          45        100       4500              
+       605          2     100870         2.8        500       1400              
+       605          3     100890          58          5        290              
+       605          4     101860          24         50       1200              
+       605          5     101863           9        100        900              
+       605          6     102130         3.4         10         34              
+       612          4     100871         5.5        100        550              
+       619          4     100871         5.6         50        280              
+
+64 rows selected.
+
+SQL> SELECT * FROM PRODUCT;
+
+    PRODID DESCRIP                                                              
+---------- ------------------------------                                       
+    100860 ACE TENNIS RACKET I                                                  
+    100861 ACE TENNIS RACKET II                                                 
+    100870 ACE TENNIS BALLS-3 PACK                                              
+    100871 ACE TENNIS BALLS-6 PACK                                              
+    100890 ACE TENNIS NET                                                       
+    101860 SP TENNIS RACKET                                                     
+    101863 SP JUNIOR RACKET                                                     
+    102130 RH: "GUIDE TO TENNIS"                                                
+    200376 SB ENERGY BAR-6 PACK                                                 
+    200380 SB VITA SNACK-6 PACK                                                 
+
+10 rows selected.
+
+SQL> SELECT * FROM PRICE;
+
+    PRODID   STDPRICE   MINPRICE STARTDATE ENDDATE                              
+---------- ---------- ---------- --------- ---------                            
+    100871        4.8        3.2 01-JAN-85 01-DEC-85                            
+    100890         58       46.4 01-JAN-85                                      
+    100890         54       40.5 01-JUN-84 31-MAY-84                            
+    100860         35         28 01-JUN-86                                      
+    100860         32       25.6 01-JAN-86 31-MAY-86                            
+    100860         30         24 01-JAN-85 31-DEC-85                            
+    100861         45         36 01-JUN-86                                      
+    100861         42       33.6 01-JAN-86 31-MAY-86                            
+    100861         39       31.2 01-JAN-85 31-DEC-85                            
+    100870        2.8        2.4 01-JAN-86                                      
+    100870        2.4        1.9 01-JAN-85 01-DEC-85                            
+
+    PRODID   STDPRICE   MINPRICE STARTDATE ENDDATE                              
+---------- ---------- ---------- --------- ---------                            
+    100871        5.6        4.8 01-JAN-86                                      
+    101860         24         18 15-FEB-85                                      
+    101863       12.5        9.4 15-FEB-85                                      
+    102130        3.4        2.8 18-AUG-85                                      
+    200376        2.4       1.75 15-NOV-86                                      
+    200380          4        3.2 15-NOV-86                                      
+
+17 rows selected.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                 
+        10                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7566 JONES      MANAGER         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0      
+        30                                                                      
+                                                                                
+      7900 JAMES      CLERK           7698 03-DEC-81        950                 
+        30                                                                      
+                                                                                
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                 
+        20                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                 
+        20                                                                      
+                                                                                
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                 
+        10                                                                      
+                                                                                
+
+14 rows selected.
+
+SQL> set linesize 120;
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                   
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20                                   
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                   
+
+14 rows selected.
+
+SQL> select * from emp where empno=7839;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                   
+
+SQL> select * from dept;
+
+    DEPTNO DNAME          LOC                                                                                           
+---------- -------------- -------------                                                                                 
+        10 ACCOUNTING     NEW YORK                                                                                      
+        20 RESEARCH       DALLAS                                                                                        
+        30 SALES          CHICAGO                                                                                       
+        40 OPERATIONS     BOSTON                                                                                        
+
+SQL> select * from dept where loc='DALLAS';
+
+    DEPTNO DNAME          LOC                                                                                           
+---------- -------------- -------------                                                                                 
+        20 RESEARCH       DALLAS                                                                                        
+
+SQL> select deptno from dept where loc='DALLAS';
+
+    DEPTNO                                                                                                              
+----------                                                                                                              
+        20                                                                                                              
+
+SQL> select * from emp where deptno = (select deptno from dept where loc='DALLAS');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                   
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20                                   
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20                                   
+
+SQL> select * from emp where empno=7839;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                   
+
+SQL> select deptno from emp where ename='KING';
+
+    DEPTNO                                                                                                              
+----------                                                                                                              
+        10                                                                                                              
+
+SQL> select * from dept where deptno = (select deptno from emp where ename='KING');
+
+    DEPTNO DNAME          LOC                                                                                           
+---------- -------------- -------------                                                                                 
+        10 ACCOUNTING     NEW YORK                                                                                      
+
+SQL> select * from emp where deptno = (select deptno from dept where loc='DALLAS');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                   
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20                                   
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20                                   
+
+SQL> select * from dept;
+
+    DEPTNO DNAME          LOC                                                                                           
+---------- -------------- -------------                                                                                 
+        10 ACCOUNTING     NEW YORK                                                                                      
+        20 RESEARCH       DALLAS                                                                                        
+        30 SALES          CHICAGO                                                                                       
+        40 OPERATIONS     BOSTON                                                                                        
+
+SQL> select * from emp order by deptno;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                   
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20                                   
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                   
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                   
+
+14 rows selected.
+
+SQL> select * from emp where deptno = (select deptno from dept where loc='DALLAS');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                   
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                    20                                   
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                    20                                   
+
+SQL> select * from dept where deptno = (select deptno from emp where ename='KING');
+
+    DEPTNO DNAME          LOC                                                                                           
+---------- -------------- -------------                                                                                 
+        10 ACCOUNTING     NEW YORK                                                                                      
+
+SQL> 
+SQL> select * from emp where deptno=30;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                   
+
+6 rows selected.
+
+SQL> select * from customer;
+
+    CUSTID NAME                                          ADDRESS                                                        
+---------- --------------------------------------------- ----------------------------------------                       
+CITY                           ST ZIP             AREA PHONE          REPID CREDITLIMIT                                 
+------------------------------ -- --------- ---------- --------- ---------- -----------                                 
+COMMENTS                                                                                                                
+--------------------------------------------------------------------------------                                        
+       100 JOCKSPORTS                                    345 VIEWRIDGE                                                  
+BELMONT                        CA 96711            415 598-6609        7844        5000                                 
+Very friendly people to work with -- sales rep likes to be called Mike.                                                 
+                                                                                                                        
+       101 TKB SPORT SHOP                                490 BOLI RD.                                                   
+REDWOOD CITY                   CA 94061            415 368-1223        7521       10000                                 
+Rep called 5/8 about change in order - contact shipping.                                                                
+
+    CUSTID NAME                                          ADDRESS                                                        
+---------- --------------------------------------------- ----------------------------------------                       
+CITY                           ST ZIP             AREA PHONE          REPID CREDITLIMIT                                 
+------------------------------ -- --------- ---------- --------- ---------- -----------                                 
+COMMENTS                                                                                                                
+--------------------------------------------------------------------------------                                        
+                                                                                                                        
+       102 VOLLYRITE                                     9722 HAMILTON                                                  
+BURLINGAME                     CA 95133            415 644-3341        7654        7000                                 
+Company doing heavy promotion beginning 10/89. Prepare for large orders during                                          
+                                                                                                                        
+                                                                                                                        
+       103 JUST TENNIS                                   HILLVIEW MALL                                                  
+
+    CUSTID NAME                                          ADDRESS                                                        
+---------- --------------------------------------------- ----------------------------------------                       
+CITY                           ST ZIP             AREA PHONE          REPID CREDITLIMIT                                 
+------------------------------ -- --------- ---------- --------- ---------- -----------                                 
+COMMENTS                                                                                                                
+--------------------------------------------------------------------------------                                        
+BURLINGAME                     CA 97544            415 677-9312        7521        3000                                 
+Contact rep about new line of tennis rackets.                                                                           
+                                                                                                                        
+       104 EVERY MOUNTAIN                                574 SURRY RD.                                                  
+CUPERTINO                      CA 93301            408 996-2323        7499       10000                                 
+Customer with high market share (23%) due to aggressive advertising.                                                    
+                                                                                                                        
+
+    CUSTID NAME                                          ADDRESS                                                        
+---------- --------------------------------------------- ----------------------------------------                       
+CITY                           ST ZIP             AREA PHONE          REPID CREDITLIMIT                                 
+------------------------------ -- --------- ---------- --------- ---------- -----------                                 
+COMMENTS                                                                                                                
+--------------------------------------------------------------------------------                                        
+       105 K + T SPORTS                                  3476 EL PASEO                                                  
+SANTA CLARA                    CA 91003            408 376-9966        7844        5000                                 
+Tends to order large amounts of merchandise at once. Accounting is considering                                          
+                                                                                                                        
+                                                                                                                        
+       106 SHAPE UP                                      908 SEQUOIA                                                    
+PALO ALTO                      CA 94301            415 364-9777        7521        6000                                 
+
+    CUSTID NAME                                          ADDRESS                                                        
+---------- --------------------------------------------- ----------------------------------------                       
+CITY                           ST ZIP             AREA PHONE          REPID CREDITLIMIT                                 
+------------------------------ -- --------- ---------- --------- ---------- -----------                                 
+COMMENTS                                                                                                                
+--------------------------------------------------------------------------------                                        
+Support intensive. Orders small amounts (< 800) of merchandise at a time.                                               
+                                                                                                                        
+       107 WOMENS SPORTS                                 VALCO VILLAGE                                                  
+SUNNYVALE                      CA 93301            408 967-4398        7499       10000                                 
+First sporting goods store geared exclusively towards women. Unusual promotion                                          
+a                                                                                                                       
+                                                                                                                        
+
+    CUSTID NAME                                          ADDRESS                                                        
+---------- --------------------------------------------- ----------------------------------------                       
+CITY                           ST ZIP             AREA PHONE          REPID CREDITLIMIT                                 
+------------------------------ -- --------- ---------- --------- ---------- -----------                                 
+COMMENTS                                                                                                                
+--------------------------------------------------------------------------------                                        
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER  98 LONE PINE WAY                                               
+HIBBING                        MN 55649            612 566-9123        7844        8000                                 
+                                                                                                                        
+                                                                                                                        
+
+9 rows selected.
+
+SQL> set linesize 400;
+SQL> /
+
+    CUSTID NAME                                          ADDRESS                                  CITY                           ST ZIP             AREA PHONE          REPID CREDITLIMIT COMMENTS                                                                                                                                                                                                              
+---------- --------------------------------------------- ---------------------------------------- ------------------------------ -- --------- ---------- --------- ---------- ----------- --------------------------------------------------------------------------------                                                                                                                                      
+       100 JOCKSPORTS                                    345 VIEWRIDGE                            BELMONT                        CA 96711            415 598-6609        7844        5000 Very friendly people to work with -- sales rep likes to be called Mike.                                                                                                                                               
+       101 TKB SPORT SHOP                                490 BOLI RD.                             REDWOOD CITY                   CA 94061            415 368-1223        7521       10000 Rep called 5/8 about change in order - contact shipping.                                                                                                                                                              
+       102 VOLLYRITE                                     9722 HAMILTON                            BURLINGAME                     CA 95133            415 644-3341        7654        7000 Company doing heavy promotion beginning 10/89. Prepare for large orders during                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                
+       103 JUST TENNIS                                   HILLVIEW MALL                            BURLINGAME                     CA 97544            415 677-9312        7521        3000 Contact rep about new line of tennis rackets.                                                                                                                                                                         
+       104 EVERY MOUNTAIN                                574 SURRY RD.                            CUPERTINO                      CA 93301            408 996-2323        7499       10000 Customer with high market share (23%) due to aggressive advertising.                                                                                                                                                  
+       105 K + T SPORTS                                  3476 EL PASEO                            SANTA CLARA                    CA 91003            408 376-9966        7844        5000 Tends to order large amounts of merchandise at once. Accounting is considering                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                
+       106 SHAPE UP                                      908 SEQUOIA                              PALO ALTO                      CA 94301            415 364-9777        7521        6000 Support intensive. Orders small amounts (< 800) of merchandise at a time.                                                                                                                                             
+
+    CUSTID NAME                                          ADDRESS                                  CITY                           ST ZIP             AREA PHONE          REPID CREDITLIMIT COMMENTS                                                                                                                                                                                                              
+---------- --------------------------------------------- ---------------------------------------- ------------------------------ -- --------- ---------- --------- ---------- ----------- --------------------------------------------------------------------------------                                                                                                                                      
+       107 WOMENS SPORTS                                 VALCO VILLAGE                            SUNNYVALE                      CA 93301            408 967-4398        7499       10000 First sporting goods store geared exclusively towards women. Unusual promotion                                                                                                                                        
+                                                                                                                                                                                          a                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER  98 LONE PINE WAY                         HIBBING                        MN 55649            612 566-9123        7844        8000                                                                                                                                                                                                                       
+
+9 rows selected.
+
+SQL> set linesize 1400;
+SQL> /
+
+    CUSTID NAME                                          ADDRESS                                  CITY                           ST ZIP             AREA PHONE          REPID CREDITLIMIT COMMENTS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+---------- --------------------------------------------- ---------------------------------------- ------------------------------ -- --------- ---------- --------- ---------- ----------- --------------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+       100 JOCKSPORTS                                    345 VIEWRIDGE                            BELMONT                        CA 96711            415 598-6609        7844        5000 Very friendly people to work with -- sales rep likes to be called Mike.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+       101 TKB SPORT SHOP                                490 BOLI RD.                             REDWOOD CITY                   CA 94061            415 368-1223        7521       10000 Rep called 5/8 about change in order - contact shipping.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+       102 VOLLYRITE                                     9722 HAMILTON                            BURLINGAME                     CA 95133            415 644-3341        7654        7000 Company doing heavy promotion beginning 10/89. Prepare for large orders during                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+       103 JUST TENNIS                                   HILLVIEW MALL                            BURLINGAME                     CA 97544            415 677-9312        7521        3000 Contact rep about new line of tennis rackets.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+       104 EVERY MOUNTAIN                                574 SURRY RD.                            CUPERTINO                      CA 93301            408 996-2323        7499       10000 Customer with high market share (23%) due to aggressive advertising.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+       105 K + T SPORTS                                  3476 EL PASEO                            SANTA CLARA                    CA 91003            408 376-9966        7844        5000 Tends to order large amounts of merchandise at once. Accounting is considering                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+       106 SHAPE UP                                      908 SEQUOIA                              PALO ALTO                      CA 94301            415 364-9777        7521        6000 Support intensive. Orders small amounts (< 800) of merchandise at a time.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+    CUSTID NAME                                          ADDRESS                                  CITY                           ST ZIP             AREA PHONE          REPID CREDITLIMIT COMMENTS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+---------- --------------------------------------------- ---------------------------------------- ------------------------------ -- --------- ---------- --------- ---------- ----------- --------------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+       107 WOMENS SPORTS                                 VALCO VILLAGE                            SUNNYVALE                      CA 93301            408 967-4398        7499       10000 First sporting goods store geared exclusively towards women. Unusual promotion                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                          a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER  98 LONE PINE WAY                         HIBBING                        MN 55649            612 566-9123        7844        8000                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
+9 rows selected.
+
+SQL> desc customer;
+ Name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ CUSTID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            NOT NULL NUMBER(6)
+ NAME                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       VARCHAR2(45)
+ ADDRESS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    VARCHAR2(40)
+ CITY                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       VARCHAR2(30)
+ STATE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      VARCHAR2(2)
+ ZIP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        VARCHAR2(9)
+ AREA                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       NUMBER(3)
+ PHONE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      VARCHAR2(9)
+ REPID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             NOT NULL NUMBER(4)
+ CREDITLIMIT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                NUMBER(9,2)
+ COMMENTS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   LONG
+
+SQL> set linesize 120;
+SQL> desc customer;
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ CUSTID                                                            NOT NULL NUMBER(6)
+ NAME                                                                       VARCHAR2(45)
+ ADDRESS                                                                    VARCHAR2(40)
+ CITY                                                                       VARCHAR2(30)
+ STATE                                                                      VARCHAR2(2)
+ ZIP                                                                        VARCHAR2(9)
+ AREA                                                                       NUMBER(3)
+ PHONE                                                                      VARCHAR2(9)
+ REPID                                                             NOT NULL NUMBER(4)
+ CREDITLIMIT                                                                NUMBER(9,2)
+ COMMENTS                                                                   LONG
+
+SQL> select custid,name,address from customer;
+
+    CUSTID NAME                                          ADDRESS                                                        
+---------- --------------------------------------------- ----------------------------------------                       
+       100 JOCKSPORTS                                    345 VIEWRIDGE                                                  
+       101 TKB SPORT SHOP                                490 BOLI RD.                                                   
+       102 VOLLYRITE                                     9722 HAMILTON                                                  
+       103 JUST TENNIS                                   HILLVIEW MALL                                                  
+       104 EVERY MOUNTAIN                                574 SURRY RD.                                                  
+       105 K + T SPORTS                                  3476 EL PASEO                                                  
+       106 SHAPE UP                                      908 SEQUOIA                                                    
+       107 WOMENS SPORTS                                 VALCO VILLAGE                                                  
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER  98 LONE PINE WAY                                               
+
+9 rows selected.
+
+SQL> select custid,name,city from customer;
+
+    CUSTID NAME                                          CITY                                                           
+---------- --------------------------------------------- ------------------------------                                 
+       100 JOCKSPORTS                                    BELMONT                                                        
+       101 TKB SPORT SHOP                                REDWOOD CITY                                                   
+       102 VOLLYRITE                                     BURLINGAME                                                     
+       103 JUST TENNIS                                   BURLINGAME                                                     
+       104 EVERY MOUNTAIN                                CUPERTINO                                                      
+       105 K + T SPORTS                                  SANTA CLARA                                                    
+       106 SHAPE UP                                      PALO ALTO                                                      
+       107 WOMENS SPORTS                                 SUNNYVALE                                                      
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER  HIBBING                                                        
+
+9 rows selected.
+
+SQL> select custid,name,area from customer;
+
+    CUSTID NAME                                                AREA                                                     
+---------- --------------------------------------------- ----------                                                     
+       100 JOCKSPORTS                                           415                                                     
+       101 TKB SPORT SHOP                                       415                                                     
+       102 VOLLYRITE                                            415                                                     
+       103 JUST TENNIS                                          415                                                     
+       104 EVERY MOUNTAIN                                       408                                                     
+       105 K + T SPORTS                                         408                                                     
+       106 SHAPE UP                                             415                                                     
+       107 WOMENS SPORTS                                        408                                                     
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER         612                                                     
+
+9 rows selected.
+
+SQL> select custid,name,area,state from customer;
+
+    CUSTID NAME                                                AREA ST                                                  
+---------- --------------------------------------------- ---------- --                                                  
+       100 JOCKSPORTS                                           415 CA                                                  
+       101 TKB SPORT SHOP                                       415 CA                                                  
+       102 VOLLYRITE                                            415 CA                                                  
+       103 JUST TENNIS                                          415 CA                                                  
+       104 EVERY MOUNTAIN                                       408 CA                                                  
+       105 K + T SPORTS                                         408 CA                                                  
+       106 SHAPE UP                                             415 CA                                                  
+       107 WOMENS SPORTS                                        408 CA                                                  
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER         612 MN                                                  
+
+9 rows selected.
+
+SQL> select custid,name,area,state,zip from customer;
+
+    CUSTID NAME                                                AREA ST ZIP                                              
+---------- --------------------------------------------- ---------- -- ---------                                        
+       100 JOCKSPORTS                                           415 CA 96711                                            
+       101 TKB SPORT SHOP                                       415 CA 94061                                            
+       102 VOLLYRITE                                            415 CA 95133                                            
+       103 JUST TENNIS                                          415 CA 97544                                            
+       104 EVERY MOUNTAIN                                       408 CA 93301                                            
+       105 K + T SPORTS                                         408 CA 91003                                            
+       106 SHAPE UP                                             415 CA 94301                                            
+       107 WOMENS SPORTS                                        408 CA 93301                                            
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER         612 MN 55649                                            
+
+9 rows selected.
+
+SQL> select custid,name,area,state,zip,repid from customer;
+
+    CUSTID NAME                                                AREA ST ZIP            REPID                             
+---------- --------------------------------------------- ---------- -- --------- ----------                             
+       100 JOCKSPORTS                                           415 CA 96711           7844                             
+       101 TKB SPORT SHOP                                       415 CA 94061           7521                             
+       102 VOLLYRITE                                            415 CA 95133           7654                             
+       103 JUST TENNIS                                          415 CA 97544           7521                             
+       104 EVERY MOUNTAIN                                       408 CA 93301           7499                             
+       105 K + T SPORTS                                         408 CA 91003           7844                             
+       106 SHAPE UP                                             415 CA 94301           7521                             
+       107 WOMENS SPORTS                                        408 CA 93301           7499                             
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER         612 MN 55649           7844                             
+
+9 rows selected.
+
+SQL> select * from emp where deptno=30;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                   
+
+6 rows selected.
+
+SQL> select * from emp where ename='WARD';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                   
+
+SQL> select empno from emp where ename='WARD';
+
+     EMPNO                                                                                                              
+----------                                                                                                              
+      7521                                                                                                              
+
+SQL> select custid,name,area,state,zip,repid from customer
+  2  where repid = (select empno from emp where ename='WARD');
+
+    CUSTID NAME                                                AREA ST ZIP            REPID                             
+---------- --------------------------------------------- ---------- -- --------- ----------                             
+       101 TKB SPORT SHOP                                       415 CA 94061           7521                             
+       103 JUST TENNIS                                          415 CA 97544           7521                             
+       106 SHAPE UP                                             415 CA 94301           7521                             
+
+SQL> select custid,name,area,state,zip,repid from customer
+  2  where repid = (select empno from emp where ename='ALLEN');
+
+    CUSTID NAME                                                AREA ST ZIP            REPID                             
+---------- --------------------------------------------- ---------- -- --------- ----------                             
+       104 EVERY MOUNTAIN                                       408 CA 93301           7499                             
+       107 WOMENS SPORTS                                        408 CA 93301           7499                             
+
+SQL> select custid,name,area,state,zip,repid from customer
+  2  where repid = (select empno from emp where ename='MARTIN');
+
+    CUSTID NAME                                                AREA ST ZIP            REPID                             
+---------- --------------------------------------------- ---------- -- --------- ----------                             
+       102 VOLLYRITE                                            415 CA 95133           7654                             
+
+SQL> select custid,name,area,state,zip,repid from customer
+  2  where repid = (select empno from emp where ename='TURNER');
+
+    CUSTID NAME                                                AREA ST ZIP            REPID                             
+---------- --------------------------------------------- ---------- -- --------- ----------                             
+       100 JOCKSPORTS                                           415 CA 96711           7844                             
+       105 K + T SPORTS                                         408 CA 91003           7844                             
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER         612 MN 55649           7844                             
+
+SQL> select custid,name,area,state,zip,repid from customer
+  2  where repid = (select empno from emp where ename='MARTIN');
+
+    CUSTID NAME                                                AREA ST ZIP            REPID                             
+---------- --------------------------------------------- ---------- -- --------- ----------                             
+       102 VOLLYRITE                                            415 CA 95133           7654                             
+
+SQL> select * from ord;
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       610 07-JAN-87 A        101 08-JAN-87      101.4                                                                  
+       611 11-JAN-87 B        102 11-JAN-87         45                                                                  
+       612 15-JAN-87 C        104 20-JAN-87       5860                                                                  
+       601 01-MAY-86 A        106 30-MAY-86        2.4                                                                  
+       602 05-JUN-86 B        102 20-JUN-86         56                                                                  
+       604 15-JUN-86 A        106 30-JUN-86        698                                                                  
+       605 14-JUL-86 A        106 30-JUL-86       8324                                                                  
+       606 14-JUL-86 A        100 30-JUL-86        3.4                                                                  
+       609 01-AUG-86 B        100 15-AUG-86       97.5                                                                  
+       607 18-JUL-86 C        104 18-JUL-86        5.6                                                                  
+       608 25-JUL-86 C        104 25-JUL-86       35.2                                                                  
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       603 05-JUN-86          102 05-JUN-86        224                                                                  
+       620 12-MAR-87          100 12-MAR-87       4450                                                                  
+       613 01-FEB-87          108 01-FEB-87       6400                                                                  
+       614 01-FEB-87          102 05-FEB-87      23940                                                                  
+       616 03-FEB-87          103 10-FEB-87        764                                                                  
+       619 22-FEB-87          104 04-FEB-87       1260                                                                  
+       617 05-FEB-87          105 03-MAR-87      46370                                                                  
+       615 01-FEB-87          107 06-FEB-87        710                                                                  
+       618 15-FEB-87 A        102 06-MAR-87     3510.5                                                                  
+       621 15-MAR-87 A        100 01-JAN-87        730                                                                  
+
+21 rows selected.
+
+SQL> select custid,name,area,state,zip,repid from customer
+  2  where repid = (select empno from emp where ename='MARTIN');
+
+    CUSTID NAME                                                AREA ST ZIP            REPID                             
+---------- --------------------------------------------- ---------- -- --------- ----------                             
+       102 VOLLYRITE                                            415 CA 95133           7654                             
+
+SQL> select * from ord where
+  2  custid=102;
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       611 11-JAN-87 B        102 11-JAN-87         45                                                                  
+       602 05-JUN-86 B        102 20-JUN-86         56                                                                  
+       603 05-JUN-86          102 05-JUN-86        224                                                                  
+       614 01-FEB-87          102 05-FEB-87      23940                                                                  
+       618 15-FEB-87 A        102 06-MAR-87     3510.5                                                                  
+
+SQL> select * from ord where
+  2  custid in (  select custid,name,area,state,zip,repid from customer
+  3  		   where repid = (select empno from emp where ename='MARTIN')
+  4            );
+custid in (  select custid,name,area,state,zip,repid from customer
+             *
+ERROR at line 2:
+ORA-00913: too many values 
+
+
+SQL> select * from ord where
+  2  custid in (  select custid from customer
+  3  			 where repid = (select empno from emp where ename='MARTIN')
+  4  	 );
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       611 11-JAN-87 B        102 11-JAN-87         45                                                                  
+       602 05-JUN-86 B        102 20-JUN-86         56                                                                  
+       603 05-JUN-86          102 05-JUN-86        224                                                                  
+       614 01-FEB-87          102 05-FEB-87      23940                                                                  
+       618 15-FEB-87 A        102 06-MAR-87     3510.5                                                                  
+
+SQL> 
+SQL>  select * from ord
+  2   where custid in (select custid from customer
+  3     where repid = ( select empno from emp
+  4  where ename='&ANYNAME'));
+Enter value for anyname: MARTIN
+old   4: where ename='&ANYNAME'))
+new   4: where ename='MARTIN'))
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       611 11-JAN-87 B        102 11-JAN-87         45                                                                  
+       602 05-JUN-86 B        102 20-JUN-86         56                                                                  
+       603 05-JUN-86          102 05-JUN-86        224                                                                  
+       614 01-FEB-87          102 05-FEB-87      23940                                                                  
+       618 15-FEB-87 A        102 06-MAR-87     3510.5                                                                  
+
+SQL> /
+Enter value for anyname: ALLEN
+old   4: where ename='&ANYNAME'))
+new   4: where ename='ALLEN'))
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       612 15-JAN-87 C        104 20-JAN-87       5860                                                                  
+       607 18-JUL-86 C        104 18-JUL-86        5.6                                                                  
+       608 25-JUL-86 C        104 25-JUL-86       35.2                                                                  
+       619 22-FEB-87          104 04-FEB-87       1260                                                                  
+       615 01-FEB-87          107 06-FEB-87        710                                                                  
+
+SQL> /
+Enter value for anyname: TURNER
+old   4: where ename='&ANYNAME'))
+new   4: where ename='TURNER'))
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       606 14-JUL-86 A        100 30-JUL-86        3.4                                                                  
+       609 01-AUG-86 B        100 15-AUG-86       97.5                                                                  
+       620 12-MAR-87          100 12-MAR-87       4450                                                                  
+       613 01-FEB-87          108 01-FEB-87       6400                                                                  
+       617 05-FEB-87          105 03-MAR-87      46370                                                                  
+       621 15-MAR-87 A        100 01-JAN-87        730                                                                  
+
+6 rows selected.
+
+SQL> /
+Enter value for anyname: WARD
+old   4: where ename='&ANYNAME'))
+new   4: where ename='WARD'))
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       610 07-JAN-87 A        101 08-JAN-87      101.4                                                                  
+       601 01-MAY-86 A        106 30-MAY-86        2.4                                                                  
+       604 15-JUN-86 A        106 30-JUN-86        698                                                                  
+       605 14-JUL-86 A        106 30-JUL-86       8324                                                                  
+       616 03-FEB-87          103 10-FEB-87        764                                                                  
+
+SQL>  select * from ord
+  2   where custid in (select custid from customer
+  3     where repid = ( select empno from emp
+  4  where ename='&ANYNAME'))
+  5  order by ordid;
+Enter value for anyname: MARTIN
+old   4: where ename='&ANYNAME'))
+new   4: where ename='MARTIN'))
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       602 05-JUN-86 B        102 20-JUN-86         56                                                                  
+       603 05-JUN-86          102 05-JUN-86        224                                                                  
+       611 11-JAN-87 B        102 11-JAN-87         45                                                                  
+       614 01-FEB-87          102 05-FEB-87      23940                                                                  
+       618 15-FEB-87 A        102 06-MAR-87     3510.5                                                                  
+
+SQL> /
+Enter value for anyname: ALLEN
+old   4: where ename='&ANYNAME'))
+new   4: where ename='ALLEN'))
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       607 18-JUL-86 C        104 18-JUL-86        5.6                                                                  
+       608 25-JUL-86 C        104 25-JUL-86       35.2                                                                  
+       612 15-JAN-87 C        104 20-JAN-87       5860                                                                  
+       615 01-FEB-87          107 06-FEB-87        710                                                                  
+       619 22-FEB-87          104 04-FEB-87       1260                                                                  
+
+SQL> /
+Enter value for anyname: TURNER
+old   4: where ename='&ANYNAME'))
+new   4: where ename='TURNER'))
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       606 14-JUL-86 A        100 30-JUL-86        3.4                                                                  
+       609 01-AUG-86 B        100 15-AUG-86       97.5                                                                  
+       613 01-FEB-87          108 01-FEB-87       6400                                                                  
+       617 05-FEB-87          105 03-MAR-87      46370                                                                  
+       620 12-MAR-87          100 12-MAR-87       4450                                                                  
+       621 15-MAR-87 A        100 01-JAN-87        730                                                                  
+
+6 rows selected.
+
+SQL> /
+Enter value for anyname: WARD
+old   4: where ename='&ANYNAME'))
+new   4: where ename='WARD'))
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       601 01-MAY-86 A        106 30-MAY-86        2.4                                                                  
+       604 15-JUN-86 A        106 30-JUN-86        698                                                                  
+       605 14-JUL-86 A        106 30-JUL-86       8324                                                                  
+       610 07-JAN-87 A        101 08-JAN-87      101.4                                                                  
+       616 03-FEB-87          103 10-FEB-87        764                                                                  
+
+SQL>  select * from ord order by total;
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       601 01-MAY-86 A        106 30-MAY-86        2.4                                                                  
+       606 14-JUL-86 A        100 30-JUL-86        3.4                                                                  
+       607 18-JUL-86 C        104 18-JUL-86        5.6                                                                  
+       608 25-JUL-86 C        104 25-JUL-86       35.2                                                                  
+       611 11-JAN-87 B        102 11-JAN-87         45                                                                  
+       602 05-JUN-86 B        102 20-JUN-86         56                                                                  
+       609 01-AUG-86 B        100 15-AUG-86       97.5                                                                  
+       610 07-JAN-87 A        101 08-JAN-87      101.4                                                                  
+       603 05-JUN-86          102 05-JUN-86        224                                                                  
+       604 15-JUN-86 A        106 30-JUN-86        698                                                                  
+       615 01-FEB-87          107 06-FEB-87        710                                                                  
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       621 15-MAR-87 A        100 01-JAN-87        730                                                                  
+       616 03-FEB-87          103 10-FEB-87        764                                                                  
+       619 22-FEB-87          104 04-FEB-87       1260                                                                  
+       618 15-FEB-87 A        102 06-MAR-87     3510.5                                                                  
+       620 12-MAR-87          100 12-MAR-87       4450                                                                  
+       612 15-JAN-87 C        104 20-JAN-87       5860                                                                  
+       613 01-FEB-87          108 01-FEB-87       6400                                                                  
+       605 14-JUL-86 A        106 30-JUL-86       8324                                                                  
+       614 01-FEB-87          102 05-FEB-87      23940                                                                  
+       617 05-FEB-87          105 03-MAR-87      46370                                                                  
+
+21 rows selected.
+
+SQL> select * from ord
+  2   where custid in (select custid from customer
+  3     where repid = ( select empno from emp
+  4  where ename='&ANYNAME'))
+  5  order by ordid;
+Enter value for anyname: TURNER
+old   4: where ename='&ANYNAME'))
+new   4: where ename='TURNER'))
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       606 14-JUL-86 A        100 30-JUL-86        3.4                                                                  
+       609 01-AUG-86 B        100 15-AUG-86       97.5                                                                  
+       613 01-FEB-87          108 01-FEB-87       6400                                                                  
+       617 05-FEB-87          105 03-MAR-87      46370                                                                  
+       620 12-MAR-87          100 12-MAR-87       4450                                                                  
+       621 15-MAR-87 A        100 01-JAN-87        730                                                                  
+
+6 rows selected.
+
+SQL>  select total from ord
+  2   where custid in (select custid from customer
+  3     where repid = ( select empno from emp
+  4  where ename='&ANYNAME'))
+  5  group by total;
+Enter value for anyname: TURNER
+old   4: where ename='&ANYNAME'))
+new   4: where ename='TURNER'))
+
+     TOTAL                                                                                                              
+----------                                                                                                              
+       730                                                                                                              
+      6400                                                                                                              
+      97.5                                                                                                              
+     46370                                                                                                              
+       3.4                                                                                                              
+      4450                                                                                                              
+
+6 rows selected.
+
+SQL>  select max(total) from ord
+  2   where custid in (select custid from customer
+  3     where repid = ( select empno from emp
+  4  where ename='&ANYNAME'))
+  5  group by total;
+Enter value for anyname: TURNER
+old   4: where ename='&ANYNAME'))
+new   4: where ename='TURNER'))
+
+MAX(TOTAL)                                                                                                              
+----------                                                                                                              
+       730                                                                                                              
+      6400                                                                                                              
+      97.5                                                                                                              
+     46370                                                                                                              
+       3.4                                                                                                              
+      4450                                                                                                              
+
+6 rows selected.
+
+SQL>  select max(total) from ord
+  2   where custid in (select custid from customer
+  3     where repid = ( select empno from emp
+  4  where ename='&ANYNAME'))
+  5  
+SQL> /
+Enter value for anyname: TURNER
+old   4: where ename='&ANYNAME'))
+new   4: where ename='TURNER'))
+
+MAX(TOTAL)                                                                                                              
+----------                                                                                                              
+     46370                                                                                                              
+
+SQL>  select ordid,max(total) from ord
+  2   where custid in (select custid from customer
+  3     where repid = ( select empno from emp
+  4  where ename='&ANYNAME'))
+  5  group by ordid;
+Enter value for anyname: TURNER
+old   4: where ename='&ANYNAME'))
+new   4: where ename='TURNER'))
+
+     ORDID MAX(TOTAL)                                                                                                   
+---------- ----------                                                                                                   
+       606        3.4                                                                                                   
+       620       4450                                                                                                   
+       609       97.5                                                                                                   
+       613       6400                                                                                                   
+       621        730                                                                                                   
+       617      46370                                                                                                   
+
+6 rows selected.
+
+SQL> 
+SQL>  select ordid,max(total) from ord
+  2   where custid in (select custid from customer
+  3     where repid = ( select empno from emp
+  4  where ename='&ANYNAME'))
+  5  group by ordid having max(total) > 40000;
+Enter value for anyname: TURNER
+old   4: where ename='&ANYNAME'))
+new   4: where ename='TURNER'))
+
+     ORDID MAX(TOTAL)                                                                                                   
+---------- ----------                                                                                                   
+       617      46370                                                                                                   
+
+SQL> select ordid from ord
+  2   where custid in (select custid from customer
+  3     where repid = ( select empno from emp
+  4  where ename='&ANYNAME'))
+  5  group by ordid having max(total) > 40000;
+Enter value for anyname: TURNER
+old   4: where ename='&ANYNAME'))
+new   4: where ename='TURNER'))
+
+     ORDID                                                                                                              
+----------                                                                                                              
+       617                                                                                                              
+
+SQL> select * from items;
+
+   ITEM_ID NAME                      DESCRIPTION     INITIALPRICE RESERVEPRICE VALIDTILL                                
+---------- ------------------------- --------------- ------------ ------------ ---------                                
+         1 MARUTI 800                                      125000       150000 15-OCT-20                                
+         2 MARUTI ESTEEM                                   500000       600000 20-OCT-20                                
+         3 HYUNDAI ACCENT                                  750000       175000 20-OCT-20                                
+         4 HYUANDAI SANTRO                                 800000       900000 25-OCT-20                                
+         5 CHEVROLET OPTRA                                1200000      1300000 30-OCT-20                                
+         6 TOYOTA CAMRY                                   1500000      1600000 10-OCT-20                                
+         7 SAHARA LAPTOP                                    25000        30000 15-OCT-20                                
+         8 DELL INSPIRON                                   450000        50000 25-OCT-20                                
+         9 SONY VAIO                                        60000        70000 30-OCT-20                                
+        10 HCL PC                                           20000        22000 20-OCT-20                                
+        11 WIPRO DESKTOP PC                                 25000        27000 20-OCT-20                                
+
+   ITEM_ID NAME                      DESCRIPTION     INITIALPRICE RESERVEPRICE VALIDTILL                                
+---------- ------------------------- --------------- ------------ ------------ ---------                                
+        12 ACER WORKSTATION                                 25000        28000 20-OCT-20                                
+        13 NOKIA 6600                                        5000         6000 15-OCT-20                                
+        14 SONY W50I                                         6000         6500 25-OCT-20                                
+        15 SAMSUNG D50                                       7000         7500 30-OCT-20                                
+        16 IBM MOUSE                                          250          300 30-OCT-20                                
+        17 MARUTI SWIFT                                    125000       150000 15-OCT-20                                
+        18 MARUTI DZIRE                                    500000       600000 20-OCT-20                                
+        19 HYUNDAI I10                                     750000       175000 20-OCT-20                                
+        20 HYUANDAI I20                                    800000       900000 25-OCT-20                                
+        21 CHEVROLET CRUZE                                1200000      1300000 30-OCT-20                                
+        22 TOYOTA COROLLA                                 1500000      1600000 10-OCT-20                                
+
+   ITEM_ID NAME                      DESCRIPTION     INITIALPRICE RESERVEPRICE VALIDTILL                                
+---------- ------------------------- --------------- ------------ ------------ ---------                                
+        23 ASUS LAPTOP                                      25000        30000 15-OCT-20                                
+        24 DELL 15R                                        450000        50000 25-OCT-20                                
+        25 MSI NETBOOK                                      60000        70000 30-OCT-20                                
+        26 HCL ME LAPTOP                                    20000        22000 20-OCT-20                                
+        27 APPPLE MACBOOK                                   25000        27000 20-OCT-20                                
+        28 APPLE IPHONE                                     25000        28000 20-OCT-20                                
+        29 NOKIA 68200                                       5000         6000 15-OCT-20                                
+        30 SONY VIVAZ                                        6000         6500 25-OCT-20                                
+        31 SAMSUNG GALAXY                                    7000         7500 30-OCT-20                                
+        32 HP MOUSE                                           250          300 30-OCT-20                                
+
+32 rows selected.
+
+SQL> select * from item;
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT                                                      
+---------- ---------- ---------- ----------- ---------- ----------                                                      
+       610          3     100890          58          1         58                                                      
+       611          1     100861          45          1         45                                                      
+       612          1     100860          30        100       3000                                                      
+       601          1     200376         2.4          1        2.4                                                      
+       602          1     100870         2.8         20         56                                                      
+       604          1     100890          58          3        174                                                      
+       604          2     100861          42          2         84                                                      
+       604          3     100860          44         10        440                                                      
+       603          2     100860          56          4        224                                                      
+       610          1     100860          35          1         35                                                      
+       610          2     100870         2.8          3        8.4                                                      
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT                                                      
+---------- ---------- ---------- ----------- ---------- ----------                                                      
+       613          4     200376         2.2        200        440                                                      
+       614          1     100860          35        444      15540                                                      
+       614          2     100870         2.8       1000       2800                                                      
+       612          2     100861        40.5         20        810                                                      
+       612          3     101863          10        150       1500                                                      
+       620          1     100860          35         10        350                                                      
+       620          2     200376         2.4       1000       2400                                                      
+       620          3     102130         3.4        500       1700                                                      
+       613          1     100871         5.6        100        560                                                      
+       613          2     101860          24        200       4800                                                      
+       613          3     200380           4        150        600                                                      
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT                                                      
+---------- ---------- ---------- ----------- ---------- ----------                                                      
+       619          3     102130         3.4        100        340                                                      
+       617          1     100860          35         50       1750                                                      
+       617          2     100861          45        100       4500                                                      
+       614          3     100871         5.6       1000       5600                                                      
+       616          1     100861          45         10        450                                                      
+       616          2     100870         2.8         50        140                                                      
+       616          3     100890          58          2        116                                                      
+       616          4     102130         3.4         10         34                                                      
+       616          5     200376         2.4         10         24                                                      
+       619          1     200380           4        100        400                                                      
+       619          2     200376         2.4        100        240                                                      
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT                                                      
+---------- ---------- ---------- ----------- ---------- ----------                                                      
+       615          1     100861          45          4        180                                                      
+       607          1     100871         5.6          1        5.6                                                      
+       615          2     100870         2.8        100        280                                                      
+       617          3     100870         2.8        500       1400                                                      
+       617          4     100871         5.6        500       2800                                                      
+       617          5     100890          58        500      29000                                                      
+       617          6     101860          24        100       2400                                                      
+       617          7     101863        12.5        200       2500                                                      
+       617          8     102130         3.4        100        340                                                      
+       617          9     200376         2.4        200        480                                                      
+       617         10     200380           4        300       1200                                                      
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT                                                      
+---------- ---------- ---------- ----------- ---------- ----------                                                      
+       609          2     100870         2.5          5       12.5                                                      
+       609          3     100890          50          1         50                                                      
+       618          1     100860          35         23        805                                                      
+       618          2     100861       45.11         50     2255.5                                                      
+       618          3     100870          45         10        450                                                      
+       621          1     100861          45         10        450                                                      
+       621          2     100870         2.8        100        280                                                      
+       615          3     100871           5         50        250                                                      
+       608          1     101860          24          1         24                                                      
+       608          2     100871         5.6          2       11.2                                                      
+       609          1     100861          35          1         35                                                      
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT                                                      
+---------- ---------- ---------- ----------- ---------- ----------                                                      
+       606          1     102130         3.4          1        3.4                                                      
+       605          1     100861          45        100       4500                                                      
+       605          2     100870         2.8        500       1400                                                      
+       605          3     100890          58          5        290                                                      
+       605          4     101860          24         50       1200                                                      
+       605          5     101863           9        100        900                                                      
+       605          6     102130         3.4         10         34                                                      
+       612          4     100871         5.5        100        550                                                      
+       619          4     100871         5.6         50        280                                                      
+
+64 rows selected.
+
+SQL> select * from item where ordid=617;
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT                                                      
+---------- ---------- ---------- ----------- ---------- ----------                                                      
+       617          1     100860          35         50       1750                                                      
+       617          2     100861          45        100       4500                                                      
+       617          3     100870         2.8        500       1400                                                      
+       617          4     100871         5.6        500       2800                                                      
+       617          5     100890          58        500      29000                                                      
+       617          6     101860          24        100       2400                                                      
+       617          7     101863        12.5        200       2500                                                      
+       617          8     102130         3.4        100        340                                                      
+       617          9     200376         2.4        200        480                                                      
+       617         10     200380           4        300       1200                                                      
+
+10 rows selected.
+
+SQL> 
+SQL> select * from item where ordid in (
+  2  select ordid from ord
+  3   where custid in (select custid from customer
+  4     where repid = ( select empno from emp
+  5  where ename='&ANYNAME'))
+  6  group by ordid having max(total) > 40000);
+Enter value for anyname: TURNER
+old   5: where ename='&ANYNAME'))
+new   5: where ename='TURNER'))
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT                                                      
+---------- ---------- ---------- ----------- ---------- ----------                                                      
+       617          8     102130         3.4        100        340                                                      
+       617          5     100890          58        500      29000                                                      
+       617          4     100871         5.6        500       2800                                                      
+       617          2     100861          45        100       4500                                                      
+       617          3     100870         2.8        500       1400                                                      
+       617         10     200380           4        300       1200                                                      
+       617          6     101860          24        100       2400                                                      
+       617          1     100860          35         50       1750                                                      
+       617          9     200376         2.4        200        480                                                      
+       617          7     101863        12.5        200       2500                                                      
+
+10 rows selected.
+
+SQL> select * from emp where job='SALESMAN';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                   
+
+SQL> select custid,name,repid from customer where repid=7844;
+
+    CUSTID NAME                                               REPID                                                     
+---------- --------------------------------------------- ----------                                                     
+       100 JOCKSPORTS                                          7844                                                     
+       105 K + T SPORTS                                        7844                                                     
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER        7844                                                     
+
+SQL> 
+SQL> select * from ord where custid=105;
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       617 05-FEB-87          105 03-MAR-87      46370                                                                  
+
+SQL> select * from item where ordid=617;
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT                                                      
+---------- ---------- ---------- ----------- ---------- ----------                                                      
+       617          1     100860          35         50       1750                                                      
+       617          2     100861          45        100       4500                                                      
+       617          3     100870         2.8        500       1400                                                      
+       617          4     100871         5.6        500       2800                                                      
+       617          5     100890          58        500      29000                                                      
+       617          6     101860          24        100       2400                                                      
+       617          7     101863        12.5        200       2500                                                      
+       617          8     102130         3.4        100        340                                                      
+       617          9     200376         2.4        200        480                                                      
+       617         10     200380           4        300       1200                                                      
+
+10 rows selected.
+
+SQL> select * from emp where job='SALESMAN' and ename='TURNER';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                   
+
+SQL> select custid,name,repid from customer where repid=7844;
+
+    CUSTID NAME                                               REPID                                                     
+---------- --------------------------------------------- ----------                                                     
+       100 JOCKSPORTS                                          7844                                                     
+       105 K + T SPORTS                                        7844                                                     
+       108 NORTH WOODS HEALTH AND FITNESS SUPPLY CENTER        7844                                                     
+
+SQL> select * from ord where custid=105;
+
+     ORDID ORDERDATE C     CUSTID SHIPDATE       TOTAL                                                                  
+---------- --------- - ---------- --------- ----------                                                                  
+       617 05-FEB-87          105 03-MAR-87      46370                                                                  
+
+SQL> select * from item where ordid=617;
+
+     ORDID     ITEMID     PRODID ACTUALPRICE        QTY    ITEMTOT                                                      
+---------- ---------- ---------- ----------- ---------- ----------                                                      
+       617          1     100860          35         50       1750                                                      
+       617          2     100861          45        100       4500                                                      
+       617          3     100870         2.8        500       1400                                                      
+       617          4     100871         5.6        500       2800                                                      
+       617          5     100890          58        500      29000                                                      
+       617          6     101860          24        100       2400                                                      
+       617          7     101863        12.5        200       2500                                                      
+       617          8     102130         3.4        100        340                                                      
+       617          9     200376         2.4        200        480                                                      
+       617         10     200380           4        300       1200                                                      
+
+10 rows selected.
+
+SQL> select 1750+ 4500+ 1400+ 2800+29000+ 2400+ 2500+  340+  480+ 1200
+  2  from dual;
+
+1750+4500+1400+2800+29000+2400+2500+340+480+1200                                                                        
+------------------------------------------------                                                                        
+                                           46370                                                                        
+
+SQL> select * from product;
+
+    PRODID DESCRIP                                                                                                      
+---------- ------------------------------                                                                               
+    100860 ACE TENNIS RACKET I                                                                                          
+    100861 ACE TENNIS RACKET II                                                                                         
+    100870 ACE TENNIS BALLS-3 PACK                                                                                      
+    100871 ACE TENNIS BALLS-6 PACK                                                                                      
+    100890 ACE TENNIS NET                                                                                               
+    101860 SP TENNIS RACKET                                                                                             
+    101863 SP JUNIOR RACKET                                                                                             
+    102130 RH: "GUIDE TO TENNIS"                                                                                        
+    200376 SB ENERGY BAR-6 PACK                                                                                         
+    200380 SB VITA SNACK-6 PACK                                                                                         
+
+10 rows selected.
+
+SQL> select * from product
+  2  where prodid in
+  3  (select prodid from item
+  4  where ordid in
+  5  (select ordid from ord
+  6   where custid in
+  7  (select custid from customer
+  8   where repid =
+  9  (select empno from emp
+ 10   where ename='&ANYNAME')
+ 11  )
+ 12    group by ordid having max(total) > 40000
+ 13   )
+ 14  );
+Enter value for anyname: TURNER
+old  10:  where ename='&ANYNAME')
+new  10:  where ename='TURNER')
+
+    PRODID DESCRIP                                                                                                      
+---------- ------------------------------                                                                               
+    100870 ACE TENNIS BALLS-3 PACK                                                                                      
+    101860 SP TENNIS RACKET                                                                                             
+    200380 SB VITA SNACK-6 PACK                                                                                         
+    100860 ACE TENNIS RACKET I                                                                                          
+    100871 ACE TENNIS BALLS-6 PACK                                                                                      
+    102130 RH: "GUIDE TO TENNIS"                                                                                        
+    101863 SP JUNIOR RACKET                                                                                             
+    100861 ACE TENNIS RACKET II                                                                                         
+    100890 ACE TENNIS NET                                                                                               
+    200376 SB ENERGY BAR-6 PACK                                                                                         
+
+10 rows selected.
+
+SQL> select * from price;
+
+    PRODID   STDPRICE   MINPRICE STARTDATE ENDDATE                                                                      
+---------- ---------- ---------- --------- ---------                                                                    
+    100871        4.8        3.2 01-JAN-85 01-DEC-85                                                                    
+    100890         58       46.4 01-JAN-85                                                                              
+    100890         54       40.5 01-JUN-84 31-MAY-84                                                                    
+    100860         35         28 01-JUN-86                                                                              
+    100860         32       25.6 01-JAN-86 31-MAY-86                                                                    
+    100860         30         24 01-JAN-85 31-DEC-85                                                                    
+    100861         45         36 01-JUN-86                                                                              
+    100861         42       33.6 01-JAN-86 31-MAY-86                                                                    
+    100861         39       31.2 01-JAN-85 31-DEC-85                                                                    
+    100870        2.8        2.4 01-JAN-86                                                                              
+    100870        2.4        1.9 01-JAN-85 01-DEC-85                                                                    
+
+    PRODID   STDPRICE   MINPRICE STARTDATE ENDDATE                                                                      
+---------- ---------- ---------- --------- ---------                                                                    
+    100871        5.6        4.8 01-JAN-86                                                                              
+    101860         24         18 15-FEB-85                                                                              
+    101863       12.5        9.4 15-FEB-85                                                                              
+    102130        3.4        2.8 18-AUG-85                                                                              
+    200376        2.4       1.75 15-NOV-86                                                                              
+    200380          4        3.2 15-NOV-86                                                                              
+
+17 rows selected.
+
+SQL> select * from price order by prodid;
+
+    PRODID   STDPRICE   MINPRICE STARTDATE ENDDATE                                                                      
+---------- ---------- ---------- --------- ---------                                                                    
+    100860         30         24 01-JAN-85 31-DEC-85                                                                    
+    100860         32       25.6 01-JAN-86 31-MAY-86                                                                    
+    100860         35         28 01-JUN-86                                                                              
+    100861         39       31.2 01-JAN-85 31-DEC-85                                                                    
+    100861         42       33.6 01-JAN-86 31-MAY-86                                                                    
+    100861         45         36 01-JUN-86                                                                              
+    100870        2.4        1.9 01-JAN-85 01-DEC-85                                                                    
+    100870        2.8        2.4 01-JAN-86                                                                              
+    100871        4.8        3.2 01-JAN-85 01-DEC-85                                                                    
+    100871        5.6        4.8 01-JAN-86                                                                              
+    100890         54       40.5 01-JUN-84 31-MAY-84                                                                    
+
+    PRODID   STDPRICE   MINPRICE STARTDATE ENDDATE                                                                      
+---------- ---------- ---------- --------- ---------                                                                    
+    100890         58       46.4 01-JAN-85                                                                              
+    101860         24         18 15-FEB-85                                                                              
+    101863       12.5        9.4 15-FEB-85                                                                              
+    102130        3.4        2.8 18-AUG-85                                                                              
+    200376        2.4       1.75 15-NOV-86                                                                              
+    200380          4        3.2 15-NOV-86                                                                              
+
+17 rows selected.
+
+SQL> select * from product;
+
+    PRODID DESCRIP                                                                                                      
+---------- ------------------------------                                                                               
+    100860 ACE TENNIS RACKET I                                                                                          
+    100861 ACE TENNIS RACKET II                                                                                         
+    100870 ACE TENNIS BALLS-3 PACK                                                                                      
+    100871 ACE TENNIS BALLS-6 PACK                                                                                      
+    100890 ACE TENNIS NET                                                                                               
+    101860 SP TENNIS RACKET                                                                                             
+    101863 SP JUNIOR RACKET                                                                                             
+    102130 RH: "GUIDE TO TENNIS"                                                                                        
+    200376 SB ENERGY BAR-6 PACK                                                                                         
+    200380 SB VITA SNACK-6 PACK                                                                                         
+
+10 rows selected.
+
+SQL> select * from price order by prodid;
+
+    PRODID   STDPRICE   MINPRICE STARTDATE ENDDATE                                                                      
+---------- ---------- ---------- --------- ---------                                                                    
+    100860         30         24 01-JAN-85 31-DEC-85                                                                    
+    100860         32       25.6 01-JAN-86 31-MAY-86                                                                    
+    100860         35         28 01-JUN-86                                                                              
+    100861         39       31.2 01-JAN-85 31-DEC-85                                                                    
+    100861         42       33.6 01-JAN-86 31-MAY-86                                                                    
+    100861         45         36 01-JUN-86                                                                              
+    100870        2.4        1.9 01-JAN-85 01-DEC-85                                                                    
+    100870        2.8        2.4 01-JAN-86                                                                              
+    100871        4.8        3.2 01-JAN-85 01-DEC-85                                                                    
+    100871        5.6        4.8 01-JAN-86                                                                              
+    100890         54       40.5 01-JUN-84 31-MAY-84                                                                    
+
+    PRODID   STDPRICE   MINPRICE STARTDATE ENDDATE                                                                      
+---------- ---------- ---------- --------- ---------                                                                    
+    100890         58       46.4 01-JAN-85                                                                              
+    101860         24         18 15-FEB-85                                                                              
+    101863       12.5        9.4 15-FEB-85                                                                              
+    102130        3.4        2.8 18-AUG-85                                                                              
+    200376        2.4       1.75 15-NOV-86                                                                              
+    200380          4        3.2 15-NOV-86                                                                              
+
+17 rows selected.
+
+SQL> exit

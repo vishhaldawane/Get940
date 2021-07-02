@@ -1,0 +1,384 @@
+https://livesql.oracle.com/apex/f?p=590:1000
+https://www.mycompiler.io/new/sql
+
+
+
+
+
+
+
+Day 1
+	Oracle SQL
+Day2
+	Oracle SQL
+Day 3
+	Oracle PLSQL
+
+
+
+
+		DBMS 
+
+
+		Database management    system
+		|	  create	|
+		|	  read/readAll  to automate
+		|	  update
+		|	  delete
+		|     CRUD operation
+	-----------------------------
+	|	|	|	|
+  integral   floating  char   varchar
+   100	     100.4      'M'	'New York'
+			'F'	'New Delhi'
+			'Y'
+			'N'
+  
+
+	tables 
+
+	employee
+
+emp.txt
+----------------------------------------------------------------------
+empno	ename	job	mgr	joining		sal	comm	deptno
+----------------------------------------------------------------------
+7839	King   President null   10-Mar-2020	5000	0	10
+1839	Miller Manager   7839   10-Apr-2020	4500	0	10
+2839	Smith  clerk     1839   10-May-2020	3000	0	10
+3839	Ford   Analyst   null   20-Mar-2020	3700	0	20
+
+
+accountant	clerk	manager		president
+
+1. no login required - autherization / authentication
+		blacklist/whitelist	 login details
+2. unsafe 
+3. not encrypted
+4. dupliction of data is possible
+5. redundancy
+6. recovery ???
+7. no logs 
+8. joining of text files ????
+9. data sharing - repository ???
+
+	
+
+c program to manage these files - text files
+
+	struct Employee { 
+		int empno	
+		char ename[20]
+		job	
+		mgr	
+		joining		
+		sal	
+		comm	
+		deptno 
+	};
+
+
+Employee e1={7839	King   President null   10-Mar-2020	5000	0	10};
+Employee e2={7839	King   President null   10-Mar-2020	5000	0	10};
+Employee e3={7839	King   President null   10-Mar-2020	5000	0	10};
+
+Dept
+
+Customer
+
+Order
+	Item
+
+	Product
+
+
+
+
+
+
+
+
+
+
+	physical - common environment
+	online - we are in our own unique env.
+		
+	audio  video 
+	|
+	typing
+
+	v	a	k	
+	|	|	|
+	eye	ear	skin
+
+			who
+			| java full stack developer
+			| Oracle
+	-------------------------------------
+		|		|
+		where		when
+		|LTI		|2021
+	---------------------------------
+	|		|		|
+	why		what		how
+	|		|KNOWLEDGE	| APPLY = WISDOM
+	reason		inFORMation	Implementation
+					|
+
+
+
+
+	DQL - data query - select
+
+	DML - insert / update / delete
+
+	DDL - create table, alter, truncate, drop
+
+	DCL - grant, revoke
+
+	TCL - rollback, commit, savepoint
+
+
+1. begin with the end in mind
+
+
+
+
+	DQL - data query - select
+
+	select * from emp
+
+
+	69 students
+	
+	5 students in a project group 
+
+	14 groups = 14 projects
+
+	1st	- airline reservation - 6/7 modules
+			reservation chart
+			seat selection logic/view
+			ticket booking
+			flight addition
+			flight cancellation
+			ticket cancellation
+			user registration
+			user login
+			
+			Sparsh + Harshit + Vinay + Himanshu + Akash
+ 
+	2nd	- banking system
+			user registration
+			user login
+			see the balance
+			see the statement
+			see the payee/ add the payee
+			
+	3rd	- bus booking reservation
+	4th	- insurance ...
+	..
+	..
+	..
+
+			database <-- data layer - database tables
+			|
+		-----------------------
+		|
+		spring <-- business layer
+		|
+	---------------------
+	|
+	angular(html+css+ts) <-- presentation layer
+
+
+			  10
+			   |
+			KING - SPORTS PRODUCT MANUFACTURING
+			   |7839 | 5000 | PRESIDENT 
+	-----------------------------------------
+	|MANAGER	|MANAGER	|MANAGER
+	CLARK 7782	JONES 7566	BLAKE 7698
+	|10 2450	|20 2975	|30 2850
+--------------	---------------		---------------------------------------
+|		|ANALYST   |ANALYST	|	|	|	|	|
+MILLER		FORD 7902  SCOTT 7788	MARTIN	ALLEN	TURNER	WARD	JAMES
+|10 CLERK 1300	|20 3000   |20 3000	|	|	|	|	|
+		|	   |		<--------SALESMAN------->	CLERK
+		|CLERK	   |CLERK
+		SMITH 7369 | ADAMS 7876
+		|20 800	   |20 1100
+
+
+
+
+
+SELECT * FROM EMP
+SELECT * FROM EMP EMPNO=7839;
+SELECT * FROM EMP ENAME='KING';
+SELECT * FROM EMP JOB='CLERK';
+SELECT * FROM EMP JOB='CLERK' OR JOB='MANAGER';
+SELECT * FROM EMP JOB='CLERK' OR JOB='MANAGER' OR JOB='SALESMAN';
+SELECT * FROM EMP JOB IN ('CLERK','MANAGER','SALESMAN');
+SELECT * FROM EMP WHERE MGR=7839;
+
+SELECT * FROM EMP WHERE MGR=7698;
+SELECT * FROM EMP WHERE MGR=7782;
+SELECT * FROM EMP WHERE MGR=7566;
+
+SELECT * FROM EMP WHERE ENAME LIKE 'A%'; -- STARTS WITH A AND END WITH ANY STRING
+SELECT * FROM EMP WHERE ENAME LIKE '_A%'; -- FIRST LETTER BE ANY, SECOND IS 'A' AND THIRD ONWARDS ANYSTRING
+
+
+	U CANNOT DECIDE YOUR FUTURE,
+	BUT U CAN DECIDE YOUR HABITS
+	AND YOUR HABITS WILL DECIDE YOUR FUTURE
+----------------------------------------------------------
+08.30 TO 18:00
+
+7 HABITS OF HIGHLY EFFECTIVE PEOPLE
+	PERSONAL (PRIVATE) VICTORY
+1. BE PROACTIVE - 
+2. BEGIN WITH THE END IN MIND - PROJECT 28TH DAY - GLADIATOR
+3. PUT FIRST THING FIRST - 
+
+4. THINK WIN-WIN - U ALSO WIN - ORGANIZATION ALSO WINS
+
+	PUBLIC VICTORY
+5. SEEK FIRST TO UNDERSTAND THEN TO BE UNDERSTOOD - ORGANIZATIONAL REQUIREMENT
+6. SYNERGY - 69 PEOPLE IN A TRAINING PROJECT - PRODUCTION READY
+7. SHARPEN THE SAW (PRACTICE ON DAILY BASIS)
+
+
+
+
+
+	Single row functions
+	---------------------------
+
+		function to produce single row 
+
+
+	ORDER BY CLAUSE
+
+	SELECT * FROM EMP ORDER BY DEPTNO;
+	SELECT * FROM EMP ORDER BY JOB;
+	SELECT * FROM EMP ORDER BY JOB DESC;
+	SELECT * FROM EMP ORDER BY DEPTNO,JOB DESC;
+
+	IT MUST BE THE LAST CLAUSE OF THE SELECT QUERY
+
+
+
+	group by clause
+
+
+
+
+	select job,sum(sal) from emp group by job;
+		|				|
+		+-------------------------------+
+
+	select deptno,job,sum(sal) from emp group by deptno,job;
+		|     |					|   |
+		+-----+-------------------------------------+
+
+
+
+	select job,sum(sal) from emp       group by deptno,job;
+		|     |					|   |
+		+-----+-------------------------------------+
+
+
+
+
+
+
+	having clause : further filter the data extracted
+	from the group by clause
+
+
+
+	1 airline
+	2 banking
+	3 insurance
+	4 bus booking
+	5 shopping
+	6 online vehicle loan
+	7 online finance scheme - emi card to purchase items 
+	8 online scholarship portal
+	9 online home loan
+	10. scheme for farmers and bidders
+	11. ONLINE HR
+	12. ONLINE LIBRARY
+	13. ONLINE MOVIE BOOKING - LIKE BOOK MY SHOW
+	14. 
+
+
+
+
+
+
+
+
+
+	Nested Queries
+	-------------------
+
+		Query within Query
+
+	Query1 ( Query2 ..... ( Query3...) ..... ) .......
+				 |
+			 innermost 
+
+
+
+
+
+ select ordid,max(total) from ord 
+ where custid in (select custid from customer
+		   where repid = ( select empno from emp 
+					where ename='&ANYNAME'))
+	group by ordid having max(total) > 40000
+	
+
+
+ select ordid from ord 
+ where custid in (select custid from customer
+		   where repid = ( select empno from emp 
+					where ename='&ANYNAME'))
+	group by ordid having max(total) > 40000
+
+
+select * from item 
+where ordid in 
+	(select ordid from ord 
+	 where custid in 
+		(select custid from customer
+		 where repid = 
+			(select empno from emp 
+			 where ename='&ANYNAME')
+		)
+	  group by ordid having max(total) > 40000
+	 )
+
+
+select 1750+ 4500+ 1400+ 2800+29000+ 2400+ 2500+  340+  480+ 1200
+from dual
+
+select * from product
+where prodid in
+	(select prodid from item 
+	where ordid in 
+		(select ordid from ord 
+		 where custid in 
+			(select custid from customer
+			 where repid = 
+				(select empno from emp 
+				 where ename='&ANYNAME')
+			)
+		  group by ordid having max(total) > 40000
+	 	)
+	)
+
+
+
