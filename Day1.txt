@@ -1,7 +1,7 @@
+https://teams.microsoft.com/l/meetup-join/19%3ameeting_ODRiYjU5NzEtNmEwNC00NWY4LWE0MWMtNDYwYjMyNjA1NzQz%40thread.v2/0?context=%7b%22Tid%22%3a%2202aa9fc1-18bc-4798-a020-e01c854dd434%22%2c%22Oid%22%3a%22cf68d694-d395-4f13-a515-8b8fd7165dbc%22%7d
+
 https://livesql.oracle.com/apex/f?p=590:1000
 https://www.mycompiler.io/new/sql
-
-
 
 
 
@@ -113,20 +113,20 @@ Order
 
 			who
 			| java full stack developer
-			| Oracle
+			| Oracle   SME <--> AKASH
 	-------------------------------------
 		|		|
 		where		when
-		|LTI		|2021
+		|LTI |sme ROUND	|2021 | 3 + 4 = 7 DAYS LATER
 	---------------------------------
 	|		|		|
 	why		what		how
 	|		|KNOWLEDGE	| APPLY = WISDOM
-	reason		inFORMation	Implementation
-					|
-
-
-
+	reason		inFORMation	Implementation ( TYPE IT ON THE KEYBOARD = URSELF)
+	|		|			|
+			WHAT IS JOIN?	   ----------------
+					   |		|
+					SUCCESS	<=====	FEEDBACK
 
 	DQL - data query - select
 
@@ -209,6 +209,7 @@ MILLER		FORD 7902  SCOTT 7788	MARTIN	ALLEN	TURNER	WARD	JAMES
 		|20 800	   |20 1100
 
 
+	king's empno is the mgr code for clark, jones and blake
 
 
 
@@ -379,6 +380,246 @@ where prodid in
 		  group by ordid having max(total) > 40000
 	 	)
 	)
+
+------------------------------------------------------------------------
+
+
+	Join
+
+
+		why joins ?
+
+
+	
+
+
+select * from product <-- DESCRIPT
+where prodid in
+	(select prodid from item <-- ITEMID
+	where ordid in 
+		(select ordid from ord <-- ORDERDATE, SHIPDATE
+		 where custid in 
+			(select custid from customer <-- CUSTID,NAME
+			 where repid = 
+				(select empno from emp <-- ENAME
+				 where ename='&ANYNAME')
+			)
+		  group by ordid having max(total) > 40000
+	 	)
+	)
+
+
+
+	SELECT * FROM DEPT
+	SELECT * FROM EMP
+
+
+
+	Joins
+
+	1. Cross Join / natural Join
+
+		select * from A,B,C
+		SELECT EMPNO,ENAME,JOB, EMP.DEPTNO, DNAME, LOC,DEPT.DEPTNO FROM DEPT ,EMP
+		
+
+	2. Equi Join
+		SELECT EMPNO,ENAME,JOB, EMP.DEPTNO, DNAME, LOC,DEPT.DEPTNO FROM DEPT ,EMP
+		where EMP.DEPTNO = DEPT.DEPTNO;
+
+		SELECT EMPNO,ENAME,JOB, DNAME, LOC,DEPT.DEPTNO FROM DEPT ,EMP
+		where EMP.DEPTNO = DEPT.DEPTNO;
+
+		SELECT EMPNO,ENAME,JOB, EMP.DEPTNO,DNAME, LOC FROM DEPT ,EMP
+		where EMP.DEPTNO = DEPT.DEPTNO;
+
+
+	
+	3. Non-Equi Join
+
+	4. Outer Join
+		Left Outer
+		Right Outer
+		Full Outer
+
+		a. drop table emp
+		b. recreate the table (chat box)
+		   CREATE TABLE EMP (
+		 	EMPNO               NUMBER(4) NOT NULL,
+			 ENAME               VARCHAR2(10),
+			 JOB                 VARCHAR2(9),
+			 MGR                 NUMBER(4) CONSTRAINT EMP_SELF_KEY REFERENCES EMP (EMPNO),
+			 HIREDATE            DATE,
+			 SAL                 NUMBER(7,2),
+			 COMM                NUMBER(7,2),
+			 DEPTNO              NUMBER(2), <== not null is removed
+			 CONSTRAINT EMP_FOREIGN_KEY FOREIGN KEY (DEPTNO) REFERENCES DEPT (DEPTNO),
+			 CONSTRAINT EMP_PRIMARY_KEY PRIMARY KEY (EMPNO));
+
+		c. insert predefined 14 records + 2 more records(chat box) with dept no as null
+
+		d. SELECT EMPNO,ENAME,JOB, DNAME,LOC FROM EMP,DEPT
+ 			 WHERE EMP.DEPTNO (+)= DEPT.DEPTNO;
+		
+	   	   SELECT EMPNO,ENAME,JOB, DNAME,LOC FROM EMP,DEPT
+			 WHERE EMP.DEPTNO = DEPT.DEPTNO (+);
+
+
+		Left join or Left outer join
+		===============================
+		select  column list
+		from TABLE1
+		LEFT JOIN TABLE2
+		ON TABLE1.COL = TABLE2.COL
+		-----------------------------------
+		ANSI SQL
+		--------
+		select  EMPNO,ENAME,JOB, DNAME,LOC
+		from emp lEFT JOIN dept ON emp.deptno = dept.deptno;
+
+		select  EMPNO,ENAME,JOB, DNAME,LOC
+		from emp RIGHT JOIN dept ON emp.deptno = dept.deptno;
+
+		select  EMPNO,ENAME,JOB, DNAME,LOC
+		from emp FULL JOIN dept  ON dept.deptno = emp.deptno;
+
+
+		ORACLE SPECIFIC
+		----------------
+	    =>	SELECT EMPNO,ENAME,JOB, DNAME,LOC FROM EMP,DEPT
+			 WHERE DEPT.DEPTNO = EMP.DEPTNO (+);
+
+	
+	    =>	SELECT EMPNO,ENAME,JOB, DNAME,LOC FROM EMP,DEPT
+			 WHERE DEPT.DEPTNO (+)= EMP.DEPTNO ;
+
+	    =>	SELECT EMPNO,ENAME,JOB, DNAME,LOC FROM EMP,DEPT
+			 WHERE DEPT.DEPTNO = EMP.DEPTNO (+);
+		UNION
+		SELECT EMPNO,ENAME,JOB, DNAME,LOC FROM EMP,DEPT
+			 WHERE DEPT.DEPTNO (+)= EMP.DEPTNO ;
+
+	
+	5. Self join
+
+
+
+	select w.ename || ' is working as ' || w.job || 
+		' and reporting to ' || m.ename || ' working as ' || m.job 
+	from emp m, emp w where m.empno = w.mgr; <== VALID AND LOGICAL
+
+			SAME AS BELOW
+
+	select w.ename || ' is working as ' || w.job || 
+		' and reporting to ' || m.ename || ' working as ' || m.job 
+	from emp m, emp w where w.mgr = m.empno;
+
+
+	select w.ename || ' is working as ' || w.job || 
+		' and reporting to ' || m.ename || ' working as ' || m.job 
+	from emp m, emp w where w.empno = m.mgr; <== logically invalid
+
+
+
+
+select * from product  <== PRODID, DESCRIPT
+where prodid in
+	(select prodid from item  <== QTY, ACTUALPRICE
+	where ordid in 
+		(select ordid from ord <= ORDERDATE
+		 where custid in 
+			(select custid from customer <= NAME
+			 where repid = 
+				(select empno from emp  <= ENAME
+				 where ename='&ANYNAME')
+			)
+		  group by ordid having max(total) > 40000
+	 	)
+	)
+
+	  P	I    I            O        C    E 
+select DESCRIP,QTY,ACTUALPRICE, ORDERDATE,NAME,ENAME from product,ITEM,ORD,CUSTOMER,EMP
+WHERE EMP.EMPNO = CUSTOMER.REPID AND
+      CUSTOMER.CUSTID = ORD.CUSTID AND
+      ORD.ORDID = ITEM.ORDID AND
+      ITEM.PRODID = PRODUCT.PRODID
+      AND ENAME='TURNER' AND ORD.ORDID=617;
+
+
+where prodid in
+	(select prodid from item 
+	where ordid in 
+		(select ordid from ord 
+		 where custid in 
+			(select custid from customer 
+			 where repid = 
+				(select empno from emp 
+				 where ename='&ANYNAME')
+			)
+		  group by ordid having max(total) > 40000
+	 	)
+	)
+
+
+
+		STUDENT 1		--> 1.  DONE 100%
+		STUDENT 9		--> 9.  DONE 70%
+		STUDENT 19		--> 19. DONE 30% ( GIVE ME 5 MNTS )
+
+		
+	SELECT ename, job FROM emp
+         WHERE (deptno, sal) IN  (SELECT EMP.deptno, max(sal)
+           FROM emp GROUP BY deptno);
+
+
+	INSERT INTO EMP VALUES (1234,'JACK','BENCH',null,'12-Dec-1980',1200,0,null);
+
+
+	SELECT deptno, dname FROM dept a 
+      WHERE EXISTS (SELECT empno FROM emp e 
+                               WHERE a.deptno = e.deptno);
+
+
+	    SELECT deptno, dname FROM dept a
+       WHERE NOT EXISTS (SELECT empno FROM emp e                    
+                                       WHERE a.deptno = e.deptno);
+
+
+14 POOJA PATIL - 2ND HALF - NO REPLY - JOINED LATE
+58 SPARSH AHMED - - 2ND HALF - NO REPLY - NETWORK ISSUE - SYSTEM RESTARTED
+
+
+SET OPERATORS
+
+ select rowid,rownum, empno,ename,job, deptno from emp where rownum<=7
+    UNION
+ select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5;
+
+
+ select rowid,rownum, empno,ename,job, deptno from emp where rownum<=7
+    UNION ALL
+ select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5;
+
+
+ select rowid,rownum, empno,ename,job, deptno from emp where rownum<=7
+    INTERSECT
+ select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5;
+
+
+ select rowid,rownum, empno,ename,job, deptno from emp where rownum<=7
+    MINUS
+ select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5;
+
+
+
+
+
+
+
+
+
+
+
 
 
 

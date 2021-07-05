@@ -1,0 +1,125 @@
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum>=5 and rownum<=7;
+
+no rows selected
+
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5;
+
+ROWID                  ROWNUM      EMPNO ENAME      JOB           DEPTNO        
+------------------ ---------- ---------- ---------- --------- ----------        
+AAATE5AABAAAVP5AAA          1       7839 KING       PRESIDENT         10        
+AAATE5AABAAAVP5AAB          2       7698 BLAKE      MANAGER           30        
+AAATE5AABAAAVP5AAC          3       7782 CLARK      MANAGER           10        
+AAATE5AABAAAVP5AAD          4       7566 JONES      MANAGER           20        
+AAATE5AABAAAVP5AAE          5       7654 MARTIN     SALESMAN          30        
+
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum<=7;
+
+ROWID                  ROWNUM      EMPNO ENAME      JOB           DEPTNO        
+------------------ ---------- ---------- ---------- --------- ----------        
+AAATE5AABAAAVP5AAA          1       7839 KING       PRESIDENT         10        
+AAATE5AABAAAVP5AAB          2       7698 BLAKE      MANAGER           30        
+AAATE5AABAAAVP5AAC          3       7782 CLARK      MANAGER           10        
+AAATE5AABAAAVP5AAD          4       7566 JONES      MANAGER           20        
+AAATE5AABAAAVP5AAE          5       7654 MARTIN     SALESMAN          30        
+AAATE5AABAAAVP5AAF          6       7499 ALLEN      SALESMAN          30        
+AAATE5AABAAAVP5AAG          7       7844 TURNER     SALESMAN          30        
+
+7 rows selected.
+
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5;
+
+ROWID                  ROWNUM      EMPNO ENAME      JOB           DEPTNO        
+------------------ ---------- ---------- ---------- --------- ----------        
+AAATE5AABAAAVP5AAA          1       7839 KING       PRESIDENT         10        
+AAATE5AABAAAVP5AAB          2       7698 BLAKE      MANAGER           30        
+AAATE5AABAAAVP5AAC          3       7782 CLARK      MANAGER           10        
+AAATE5AABAAAVP5AAD          4       7566 JONES      MANAGER           20        
+AAATE5AABAAAVP5AAE          5       7654 MARTIN     SALESMAN          30        
+
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5
+  2  union
+  3  select rowid,rownum, empno,ename,job, deptno from emp where rownum<=7;
+
+ROWID                  ROWNUM      EMPNO ENAME      JOB           DEPTNO        
+------------------ ---------- ---------- ---------- --------- ----------        
+AAATE5AABAAAVP5AAA          1       7839 KING       PRESIDENT         10        
+AAATE5AABAAAVP5AAB          2       7698 BLAKE      MANAGER           30        
+AAATE5AABAAAVP5AAC          3       7782 CLARK      MANAGER           10        
+AAATE5AABAAAVP5AAD          4       7566 JONES      MANAGER           20        
+AAATE5AABAAAVP5AAE          5       7654 MARTIN     SALESMAN          30        
+AAATE5AABAAAVP5AAF          6       7499 ALLEN      SALESMAN          30        
+AAATE5AABAAAVP5AAG          7       7844 TURNER     SALESMAN          30        
+
+7 rows selected.
+
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5
+  2  union all
+  3  select rowid,rownum, empno,ename,job, deptno from emp where rownum<=7;
+
+ROWID                  ROWNUM      EMPNO ENAME      JOB           DEPTNO        
+------------------ ---------- ---------- ---------- --------- ----------        
+AAATE5AABAAAVP5AAA          1       7839 KING       PRESIDENT         10        
+AAATE5AABAAAVP5AAB          2       7698 BLAKE      MANAGER           30        
+AAATE5AABAAAVP5AAC          3       7782 CLARK      MANAGER           10        
+AAATE5AABAAAVP5AAD          4       7566 JONES      MANAGER           20        
+AAATE5AABAAAVP5AAE          5       7654 MARTIN     SALESMAN          30        
+AAATE5AABAAAVP5AAA          1       7839 KING       PRESIDENT         10        
+AAATE5AABAAAVP5AAB          2       7698 BLAKE      MANAGER           30        
+AAATE5AABAAAVP5AAC          3       7782 CLARK      MANAGER           10        
+AAATE5AABAAAVP5AAD          4       7566 JONES      MANAGER           20        
+AAATE5AABAAAVP5AAE          5       7654 MARTIN     SALESMAN          30        
+AAATE5AABAAAVP5AAF          6       7499 ALLEN      SALESMAN          30        
+
+ROWID                  ROWNUM      EMPNO ENAME      JOB           DEPTNO        
+------------------ ---------- ---------- ---------- --------- ----------        
+AAATE5AABAAAVP5AAG          7       7844 TURNER     SALESMAN          30        
+
+12 rows selected.
+
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5
+  2  
+SQL> 
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum<=7
+  2  intersect
+  3  select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5;
+
+ROWID                  ROWNUM      EMPNO ENAME      JOB           DEPTNO        
+------------------ ---------- ---------- ---------- --------- ----------        
+AAATE5AABAAAVP5AAA          1       7839 KING       PRESIDENT         10        
+AAATE5AABAAAVP5AAB          2       7698 BLAKE      MANAGER           30        
+AAATE5AABAAAVP5AAC          3       7782 CLARK      MANAGER           10        
+AAATE5AABAAAVP5AAD          4       7566 JONES      MANAGER           20        
+AAATE5AABAAAVP5AAE          5       7654 MARTIN     SALESMAN          30        
+
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5;
+
+ROWID                  ROWNUM      EMPNO ENAME      JOB           DEPTNO        
+------------------ ---------- ---------- ---------- --------- ----------        
+AAATE5AABAAAVP5AAA          1       7839 KING       PRESIDENT         10        
+AAATE5AABAAAVP5AAB          2       7698 BLAKE      MANAGER           30        
+AAATE5AABAAAVP5AAC          3       7782 CLARK      MANAGER           10        
+AAATE5AABAAAVP5AAD          4       7566 JONES      MANAGER           20        
+AAATE5AABAAAVP5AAE          5       7654 MARTIN     SALESMAN          30        
+
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5
+  2  intersect
+  3  select rowid,rownum, empno,ename,job, deptno from emp where rownum<=7;
+
+ROWID                  ROWNUM      EMPNO ENAME      JOB           DEPTNO        
+------------------ ---------- ---------- ---------- --------- ----------        
+AAATE5AABAAAVP5AAA          1       7839 KING       PRESIDENT         10        
+AAATE5AABAAAVP5AAB          2       7698 BLAKE      MANAGER           30        
+AAATE5AABAAAVP5AAC          3       7782 CLARK      MANAGER           10        
+AAATE5AABAAAVP5AAD          4       7566 JONES      MANAGER           20        
+AAATE5AABAAAVP5AAE          5       7654 MARTIN     SALESMAN          30        
+
+SQL> select rowid,rownum, empno,ename,job, deptno from emp where rownum<=7
+  2  minus
+  3  select rowid,rownum, empno,ename,job, deptno from emp where rownum<=5;
+
+ROWID                  ROWNUM      EMPNO ENAME      JOB           DEPTNO        
+------------------ ---------- ---------- ---------- --------- ----------        
+AAATE5AABAAAVP5AAF          6       7499 ALLEN      SALESMAN          30        
+AAATE5AABAAAVP5AAG          7       7844 TURNER     SALESMAN          30        
+
+SQL> EXIT
