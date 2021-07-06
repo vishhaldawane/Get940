@@ -1,3 +1,30 @@
+	created in the other realm - non physical world
+	|
+	ur brain recieves it
+	|
+	and then u have to "perceive" it - viveka ( what is good? or what is bad? for me)
+
+
+		one of the top 100 hundred 
+			|
+		"The Autobiography of A Yogi" 33 languages
+		   |
+		thoughtrons
+		|eminated
+		thoughts <--- faster than light -- not visible
+		...	
+		..
+		 |
+	neutron proton electron <--> molecules <--> compounds
+	|
+	Atom 
+	
+
+	
+
+69 - 1 
+vaishnavi - spool file notification
+
 https://teams.microsoft.com/l/meetup-join/19%3ameeting_ODRiYjU5NzEtNmEwNC00NWY4LWE0MWMtNDYwYjMyNjA1NzQz%40thread.v2/0?context=%7b%22Tid%22%3a%2202aa9fc1-18bc-4798-a020-e01c854dd434%22%2c%22Oid%22%3a%22cf68d694-d395-4f13-a515-8b8fd7165dbc%22%7d
 
 https://livesql.oracle.com/apex/f?p=590:1000
@@ -538,7 +565,7 @@ where prodid in
 	)
 
 	  P	I    I            O        C    E 
-select DESCRIP,QTY,ACTUALPRICE, ORDERDATE,NAME,ENAME from product,ITEM,ORD,CUSTOMER,EMP
+select DESCRIP,QTY,ACTUALPRICE, ORDERDATE,NAME from product,ITEM,ORD,CUSTOMER,EMP
 WHERE EMP.EMPNO = CUSTOMER.REPID AND
       CUSTOMER.CUSTID = ORD.CUSTID AND
       ORD.ORDID = ITEM.ORDID AND
@@ -612,6 +639,61 @@ SET OPERATORS
 
 
 
+---------------------------------------------------------------------------------------------
+	rajesh			DriverManager
+
+	rajesh2			DriverManager2
+
+
+      emotional indicator system
+
+   feeling good		feeling bad
+	|		|
+	Upscaling - downscaling
+
+	invisible			visible
+
+	Thoughts + emotions	=	Action	+ Result
+	|		|	|	|	    |	
+	invisible    good<=bad	time	apply	 output
+	brain		heart
+	->		->		->	->
+
+	normalization = 1st, 2nd, 3d, 4th
+
+	DDL - define your structure
+
+
+	employee
+		PK
+		empno	gender	age	hiredate	ename		desg		salary
+		|	|	|	|		|		|		|
+		number	char(1)	number	date		varchar2(10)   varchar2(10)	number(12,2)
+		7839	M	23	12-Jan-1990	king	      PRESIDENT		25000.50
+	project
+	dept
+	emp_project_hours
+
+	create table 
+
+
+	DDL
+	DML
+		insert , update, delete
+	TCL	
+	DCL 
+	
+	Constraints 
+	------------
+
+	Views
+	------------
+
+	2nd half
+	----------
+	PLSQL - stored procedures and stored functions
+
+	
 
 
 
@@ -619,7 +701,563 @@ SET OPERATORS
 
 
 
+ create table myemployee
+    (
+       empno number,
+       ename  varchar2(10),
+       gender char(1),
+       HIREDATE date,
+       age number(3),
+       desg varchar2(10),
+       salary number(12,2) <-- comma is not there, being the last line
+   );
+
+insert into myemployee values (7839,'KING','F','12-Jan-1990',23,'PRESIDENT',5000);
+ insert into myemployee values (7839,'QUEEN','M','12-DEC-1991',27,'AVP',8000);
+
+TRY BELOW LINE "ONLY FOR" PLSQL PLUS COMMAND WINDOW SCREEN 
+		
+insert into myemployee values (&EMPNO,'&ENAME','&GENDER','&JOINING',&AGE,'&DESG',&SALARY);
+
+	SELECT * FROM MYEMPLOYEE
+
+
+		bfile  blob  lob
+		|
+	pdf image/ pdf url/doc /excel 
+
+
+		
+
+	insert into myemployee (EMPNO,ENAME) values (1839,'JOHN');
+	insert into myemployee (GENDER,EMPNO,ENAME) values ('F',1839,'JOHN');
 
 
 
+					<------10---------->
+		FNAME CHAR(10)  	[K|I|N|G| | | | | | ]
+		| 'KING'
+		or
+		|
+		FNAME VARCHAR2(10); 	[K|I|N|G|]
+
+
+		TABLEA
+		|
+	FNAME CHAR(10)
+	-------
+	KING		[K|I|N|G| | | | | | ]	+10
+	MARTIN		[M A R T I N  | | | ]	+10
+	JOE		[J O E| | | | | | | ]	+10
+	MILLER		[M|I|L|L|E|R| | | | ]	+10
+		-----------------------------------------
+						40
+
+
+	TABLEb
+		|
+	FNAME varCHAR2(10)
+	-------
+	KING		[K|I|N|G|\0]	+	 4
+	MARTIN		[M A R T I N|\0]	+6
+	Joe		[J O E|\0]		+3
+	MILLER		[M|I|L|L|E|R|\0]	+6
+		-----------------------------------------
+						19
+
+
+
+		char month[10]="July";	[J|u|l|y| | | | | | |] <-- char 
+
+		char *month="July";	[J|u|l|y|] <--- varchar
+
+
+
+
+		ORACLE
+		     -->  -->
+			X NUMBER
+
+		C/C++/JAVA
+
+			int x;
+		--> ----> -->
+
+
+
+
+
+
+ insert into myemployee (EMPNO,ENAME) values (&empnumber,'&empname');
+
+         into myemployee (EMPNO,ENAME) values (13129,'John2')
+         into myemployee (EMPNO,ENAME) values (14129,'John3')
+    select 1 from dual;
+
+
+
+	DML
+		-  update myemployee111 set email='king@gmail.com',salary=8888 where empno=7839;
+
+
+	CREATE:		create table myemployee ( ..... )
+			create table myemp222 as select * from myemployee;
+
+	RENAME:		rename myemployee to myemployee111;
+
+	emptyIt:	truncate table tablename
+				( delete all the rows with commit )
+				the above command cannot rollback the data
+
+	
+	DROP:		drop table tablename 
+				 delete all the rows + the structure
+
+
+	ALTER:
+			alter table myemployee111
+			add email varchar2(20);
+
+
+		"WORDS BECOME FLESH"
+
+	if ddl follows dml, it is autocommitted (by default )
+
+
+		insert..mytable		<--	DML
+		update..mytable		<--	DML
+		delete....mytable	<--	DML
+
+		create table someothertable <--DDL
+
+
+
+	FROM MYSQL - 	RECORDS GOT UPDATED
+	     |
+	AUTOCOMMIT WAS ON		YES U ALL CAN HAVE A BREAK -- YES DEAR ALL 
+					WILL MEET AT 11:35
+				
+
+	ALTER TABLE MYEMPLOYEE111 ADD EMAIL VARCHAR2(20);
+	ALTER TABLE MYEMPLOYEE111 RENAME COLUMN EMAIL TO MYEMAIL;
+	ALTER TABLE MYEMPLOYEE111 MODIFY MYEMAIL VARCHAR2(30);
+	ALTER TABLE MYEMPLOYEE111 DROP COLUMN EMAIL;
+
+
+
+TO DO LIST
+-------------
+
+	4TH GENERATION TIME TABLE
+
+
+				
+				|	URGENT	|	NOT<=URGENT		|
+		=================================================================
+				| DDL		|	PLSQL			|
+		IMPORTANT	|		|	LUNCH-BREAK		|
+				|		|				|
+		-----------------------------------------------------------------
+				|		|	FACEBOOK		|
+				| 		|	WHATSAPP		|
+		NOT<=IMPORTANT	|		|	MARRIAGE PLANNING	|
+		=================================================================
+
+			SMART PHONE	VS	WISE PHONE
+			|			|
+			USING YOU		YOU ARE USING IT
+
+	
+	
+		+ <-- - IS HIDDEN IN IT
+
+
+
+	WRITE DOWN UR QUERY -INK IS BETTER THAN MEMORY
+
+
+		CONSTRAINTS
+
+			
+		1.Integrity constraints
+
+				PRIMARY KEY
+
+		2. Unique constraints
+				UNIQUE
+
+		3. defualt value of any column
+				DEFAULT
+
+		4.  no null values in the column (it must have a value )
+				NOT NULL - is a domain constraint - must be specified
+				alongwith col def	
+
+		5. check the column data against a set /range/ list
+				CHECK
+
+		6. referential integrity 
+				check the column value against some other/table othercolumn
+				FOREIGN KEY
+
+
+
+
+
+		regular expression - regex - length- char
+
+create table MYEMP34
+    (
+       empno number primary key,
+       ename  varchar2(10) not null,
+       EMAIL  varchar2(20) unique check (email like '%@%.%'),
+       gender char(1) default 'F',
+       HIREDATE date check (hiredate > '12-Jan-2020'),
+       age number(3) check (age between 18 and 58),
+       desg varchar2(10) check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+       comm number(12,2) CHECK (comm < salary),
+       salary number(12,2) CHECK (SALARY > comm)
+
+
+	
+   );
+
+insert into myemp33 values (&EMPNO,'&ENAME','&email','&GENDER','&JOINING',&urAge,'&DESG',&SALARY);
+
+insert into myemp33 values (1234,'Queen','queen@gmail.com','F','12-Jan-2021',22,'CLERK',7000);
+
+
+
+ unique constraint (SYSTEM.SYS_C0013560) violated - PRIMARY KEY 
+ cannot insert NULL into ("SYSTEM"."MYEMP33"."ENAME")
+ unique constraint (SYSTEM.SYS_C0013561) violated - EMAIL UNIQUENESS
+check constraint   (SYSTEM.SYS_C0013556) violated - CHECK HIREDATE
+check constraint   (SYSTEM.SYS_C0013557) violated - AGE
+check constraint   (SYSTEM.SYS_C0013558) violated - desg
+check constraint   (SYSTEM.SYS_C0013559) violated - salary
+
+
+
+naming the contstraints ( name them in such a way that their name will depict err msg too)
+
+ unique constraint (empno_pk_invalid) violated - PRIMARY KEY 
+ cannot insert NULL into ("SYSTEM"."MYEMP33"."ENAME")
+ unique constraint (email_not_uniq) violated - EMAIL UNIQUENESS
+check constraint   (hiredate_gt_12012020) violated - CHECK HIREDATE
+check constraint   (age_oo_range) violated - AGE
+check constraint   (desg_notlisted) violated - desg
+check constraint   (sal_oo_range) violated - salary
+
+
+	DL <-- like operator for email 
+	|
+	BL <-- validate java code - regex
+	|
+	PL <-- html form - validate Javascript / angular
+
+				Constraints
+				|
+		----------------------------------
+		|			|
+		column level		table level
+
+
+
+	create table A					create table B
+	(						(
+	   x number primary key,			   x number,
+	   y number unqiue,				   y number,
+           z varchar2(20) check (z in('X,'Y'))		   z varchar2(20),
+	);						   primary key (x),
+							   unique (y),
+							   check (z in('X,'Y'))
+							)
+		
+
+
+
+
+create table MYEMP35
+    (
+       empno number, 
+       ename  varchar2(10) not null,
+       EMAIL  varchar2(20) , 
+       gender char(1) default 'F',
+       HIREDATE date, 
+       age number(3) ,
+       desg varchar2(10),
+       salary number(12,2), 
+       comm number(10,2),
+       primary key (empno),
+       check (gender in ('M','F','T')),
+       unique(email),
+       check (hiredate > '12-Jan-2020'),    
+       check (age between 18 and 58),    
+       check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+       CHECK (SALARY > 5000),
+       check (salary > comm)
+   );
+
+    insert into myemp35 values (1234,'Queen','queen@gmail.com','F','12-Jan-2021',22,'CLERK',7000,700); 
+
+
+select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status  
+from user_constraints where table_name='MYEMP35';
+
+RENAME THE CONSTRAINT
+---------------------------
+  alter table myemp35
+  rename constraint SYS_C0013577 to empno_pk;
+
+
+add THE CONSTRAINT
+----------------------
+	alter table myemp35
+	add constraint sal_gt_6k check (salary>6000); 
+
+DROP THE CONSTRAINT
+-----------------------
+	alter table myemp35
+	drop constraint SYS_C0013575 <-- (in ur case its ur constraint name)
+
+ENABLE/DISABLE CONSTRAINT	
+	alter table myemp35
+	disable constraint empno_pk;
+
+	ALTER TABLE MYEMP35 ENABLE PRIMARY KEY;
+	ALTER TABLE MYEMP35 ENABLE CONSTRAINT empno_pk;
+
+
+	CREATE TABLE MYDEPT <-- REFERRED TABLE
+	(
+		DEPTNO NUMBER PRIMARY KEY, <--NOT NULL + UNIQUE - PARENT KEY
+		DNAME VARCHAR2(20),
+		LOC VARCHAR2(10)
+	);
+
+    create table MYEMP36 <-- REFERENCING TABLE
+    (
+       empno number, 
+       ename  varchar2(10) not null,
+       DNO NUMBER REFERENCES MYDEPT <-- MAY HAVE NULL + DUPLICATE ( PARENT KEY DATA IS VALIDATED )
+   );
+
+
+  create table MYEMP37
+    (
+       empno number, 
+       ename  varchar2(10) not null,
+       SAL NUMBER,
+       DNO NUMBER,
+       PRIMARY KEY (EMPNO),
+       FOREIGN KEY ( DNO) REFERENCES MYDEPT(DEPTNO) <-- TABLE LEVEL - CHILD KEY
+   );
+
+
+	tcl - 
+
+        dcl - grant and revoke
+
+		SQL> connect /as sysdba
+		SQL> create user jack identified by julie
+		SQL> grant create session to jacky;
+		SQL> grant create table to jacky;
+		SQL> grant all privilege to jacky;
+
+		SQL> revoke create table from jacky;
+		SQL> revoke create session from jacky;
+		SQL> revoke all privilege from jacky;
+
+
+
+	views
+	-------
+
+	logical unit/entity 	<--------------physical table and associated queries --->
+		|			|	|	|	|	|	|
+ create view turner_view as select DESCRIP,QTY,ACTUALPRICE, ORDERDATE,NAME from product,ITEM,ORD,CUSTOMER,EMP
+      WHERE EMP.EMPNO = CUSTOMER.REPID AND
+      CUSTOMER.CUSTID = ORD.CUSTID AND
+      ORD.ORDID = ITEM.ORDID AND
+      ITEM.PRODID = PRODUCT.PRODID
+      AND ENAME='TURNER' AND ORD.ORDID=617;	
+
+
+	2.30
+
+
+CREATE VIEW PRODVIEW  AS select * from product  
+where prodid in
+	(select prodid from item  
+	where ordid in 
+		(select ordid from ord 
+		 where custid in 
+			(select custid from customer 
+			 where repid = 
+				(select empno from emp  
+				 where ename='&ANYNAME')
+			)
+		  group by ordid having max(total) > 40000
+	 	)
+	)
+
+
+
+CREATE VIEW DD AS select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status  
+from user_constraints where table_name='&tname';
+
+
+========================================================
+
+
+
+		PROCEDURAL LANGUAGE - STRUCTURED QUERY LANGUAGE
+		|
+		SET OF STATEMENTS
+
+
+	quantum leap
+
+	BEGIN
+       		DBMS_OUTPUT.PUT_LINE('WELCOME TO THE WORLD OF PLSQL');
+	END;
+        /
+
+annonymous block converted into a named block ( stored procedure AND stored function)
+
+	create or replace procedure fundTransfer(sourceAccount number,targetAccount number,
+			amountToTransfer number)
+	as
+		sourceBalance number;
+	BEGIN
+       		DBMS_OUTPUT.PUT_LINE('-- Fund Transfer In Progress --');
+		select acbalance INTO sourceBalance from account where acno=sourceAccount;
+
+	if sourceBalance > amountToTransfer
+	then
+		update account set acbalance=acbalance-amountToTransfer where acno=sourceAccount;
+       		DBMS_OUTPUT.PUT_LINE('Debiting '||amountToTransfer||' from the source account...');
+		
+		update account set acbalance=acbalance+amountToTransfer where acno=targetAccount;
+       		DBMS_OUTPUT.PUT_LINE('Credited '||amountToTransfer||' to the beneficiary account...');
+		commit;
+		DBMS_OUTPUT.PUT_LINE('-- Funds Transferred --');
+	else
+		DBMS_OUTPUT.PUT_LINE('Insufficient funds at source');
+	end if;
+	END;
+        /
+	-------------------
+	BEGIN
+		FUNDTRANSFER(101,102,5000);	FUNDTRANSFER(103,104,8000);
+	END;
+	/
+	SHOW ERR
+
+
+
+	PROCEDURE			VS		FUNCTION
+	|						|
+	CANNOT RETURN VALUE				MUST RETURN A VALUE
+	|						|
+	CANNOT BE INVOKED ON SQL LINE			CAN BE INVOKED ON SQL LINE
+	|						|
+	CAN TAKE 'IN' PARAMETERS			CAN TAKE 'IN' PARAMETERS
+	CAN HAVE 'OUT' PARAMETERS			CAN HAVE 'OUT' PARAMETERS
+
+
+
+
+
+CREATE OR REPLACE FUNCTION  NETSAL(X NUMBER) RETURN NUMBER
+  2  AS
+  3     TOTALSALARY NUMBER;
+  4  BEGIN
+  5      SELECT SAL+NVL(COMM,0) INTO TOTALSALARY FROM EMP WHERE EMPNO=X;
+  6      RETURN TOTALSALARY;
+  7  END;
+  8  /	
+
+DECLARE
+  2    NS NUMBER;
+  3  BEGIN
+  4    NS:=NETSAL(7839);
+  5    DBMS_OUTPUT.PUT_LINE('NET SALARY IS : ' || NS);
+  6  END;
+  7  /
+
+FUNCTIONS CAN ALSO TAKE OUT PARAMETERS, APART FROM RETURN KEYWORD
+
+CREATE OR REPLACE PROCEDURE GETEMPDETAILS(X NUMBER, Y OUT VARCHAR2, Z OUT VARCHAR2)
+  2  AS
+  3    BEGIN
+  4    SELECT ENAME,JOB INTO Y,Z FROM EMP WHERE EMPNO=X;
+  5    EXCEPTION WHEN
+  6       NO_DATA_FOUND
+  7    THEN
+  8        Y:=NULL;
+  9        Z:=NULL;
+ 10  END;
+ 11  /	
+
+ DECLARE
+      VNAME VARCHAR2(20);
+      VJOB VARCHAR2(20);
+    BEGIN
+        GETEMPDETAILS(&ENO,VNAME,VJOB);
+        DBMS_OUTPUT.PUT_LINE('EMP NAME  : ' || VNAME);
+        DBMS_OUTPUT.PUT_LINE('EMP JOB   : ' || VJOB);
+    END;
+    /
+
+===
+
+CREATE OR REPLACE FUNCTION  NETSAL(X NUMBER, Y OUT VARCHAR2, Z OUT VARCHAR2) RETURN NUMBER
+    AS
+       TOTALSALARY NUMBER;
+    BEGIN
+        SELECT ENAME,JOB, SAL+NVL(COMM,0) INTO Y,Z,TOTALSALARY FROM EMP WHERE EMPNO=X;
+        RETURN TOTALSALARY;
+	 EXCEPTION WHEN NO_DATA_FOUND THEN
+		Y:=NULL;
+		Z:=NULL;
+    END;
+    /	
+
+DECLARE
+      VNAME VARCHAR2(20);
+      VJOB VARCHAR2(20);
+      NS NUMBER;
+    BEGIN
+        NS:=NETSAL(&ENO,VNAME,VJOB);
+        DBMS_OUTPUT.PUT_LINE('EMP NAME  : ' || VNAME);
+        DBMS_OUTPUT.PUT_LINE('EMP JOB   : ' || VJOB);
+        DBMS_OUTPUT.PUT_LINE('EMP NET   : ' || NS);
+    END;
+    /
+=======
+
+
+CREATE OR REPLACE PROCEDURE GETEMPDETAILS(X IN NUMBER, Y OUT VARCHAR2, Z OUT VARCHAR2)
+  2  AS
+   .................
+
+  3    BEGIN
+  4    SELECT ENAME,JOB INTO Y,Z FROM EMP WHERE EMPNO=X;
+  5    EXCEPTION WHEN
+  6       NO_DATA_FOUND
+  7    THEN
+  8        Y:=NULL;
+  9        Z:=NULL;
+ 10  END;
+ 11  /
+
+DECLARE
+      VNAME VARCHAR2(20);
+      VJOB VARCHAR2(20);
+    BEGIN
+        GETEMPDETAILS(7839,VNAME,VJOB);
+        DBMS_OUTPUT.PUT_LINE('EMP NAME  : ' || VNAME);
+        DBMS_OUTPUT.PUT_LINE('EMP JOB   : ' || VJOB);
+    END;
 
