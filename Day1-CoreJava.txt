@@ -1,0 +1,434 @@
+
+			Readers are Leaders
+
+		Java Programming Language (not spoken)
+		|	 |		|
+		brand	set of 		communicate
+			instructions		|
+				-------------------------------
+				|	|	|	|
+				listen	speak	read	write	
+				<--concepts-->  <--program--->	
+				ear	1	eye	hand+pencil+paper
+
+	laugh / cry
+		|
+		listen 2/3
+			
+					- with Vishhal
+
+
+
+
+
+	minimum unit of java programming language is "to write a class"
+
+
+				       account <-- table -- DATA LAYER - 1
+
+
+	class BankAccount 		<-- PlainOldJavaObject layer --- 2 
+	{
+		int accountNumber;  	<-- similar to acno of account table
+		String accountHolder;	<-- similar to acholder of account table
+		double accountBalance;	<--- similar to acbalance of account table
+ 
+	}
+
+
+class BankAccount { <== business entities 
+		int accountNumber;  	
+		String accountHolder;	
+		double accountBalance;	
+
+		void withdraw(double amountToWithdraw) 	{
+			accountBalance = accountBalance - amountToWithdraw;
+		}
+		void deposit(double amountToWithdraw)	{
+			accountBalance = accountBalance + amountToWithdraw;
+		}
+ 
+	}
+
+
+Bank.java <-- human readable source code
+==========
+	
+	class BankAccountTest 	{
+	
+	   available	  no return 
+	   to the internet	|    varchar2	arguments passed here if req
+		|		|         |	 |
+		public static void main(String args[]) 	{
+			System.out.println("Hello Banking...");
+		}
+	}
+
+
+	1. compile 
+		javac Bank.java
+			|
+			BankAccountTest.class <-- a separate file is generated
+	2. Run
+		java Bank <-- will give error --cause no such class present
+		java BankAccountTest <-- will run <-- cause it has the main
+
+
+
+
+
+
+
+
+Company		Intel		Sun/Oracle	Hp	 Apple	  IBM	Any
+		|		|		|	  |	  |	|
+CPU		x86		SParc		HpSeries PowerPc  BB	Any
+		|		|		|	 |	  |	|
+O/S		MS-windows	Solaris		HpUx	 Mac	  AIX	Linux
+		|		|		|	 |	  |	|
+compiler   Visual Studio C++	cc1		cc2	 cc3	  cc4	gcc5
+		|
+		First.cpp	YES		YES	YES	YES	YES
+		|ASCII
+compile		First.obj	First.o		X	X	X	X
+		|machine
+linker		First.exe ----> First.out	X	X	X	X
+		|machine
+		You run it
+
+
+
+
+
+Company		Intel		Sun/Oracle	Hp	 Apple	  IBM	Any
+		|		|		|	  |	  |	|
+CPU		x86		SParc		HpSeries PowerPc  BB	Any
+		|		|		|	 |	  |	|
+O/S		MS-windows	Solaris		HpUx	 Mac	  AIX	Linux
+		|		|		|	 |	  |	|
+JRE/JVM		JVM		JVM		JVM	JVM	JVM	JVM
+		|		|JRE		|	|	|	|
+		First.java	|		|	|	|	|
+		|ASCII		|
+compile/javac	First.class ->	First.class ->First.class->	->	->
+		
+interpret/java
+	
+	
+
+
+		BankApplication
+		|getBalance()
+	--------------------------------------------
+	|	|	|	|	|
+	ATM	PC	Visa	Phone	SmartPhone
+		|
+		Browser
+	
+
+
+
+	jdk1.8	or jdk11	or 	jdk14	or	jdk16
+
+
+
+	Naming Conventions
+	----------------------
+
+
+PascalCase	ClassName	DriverManager	GodIsNowHere
+		
+camelCase	variableName	rollNumber,     personalAccountNumber, name
+
+camelCase	methodName	getBalance(),   setLookAndFeel()
+
+ALLCAPS		CONSTANT	PI	SPEED_OF_LIGHT  MAX MIN NORM
+
+allsmall	packages.packages2	java.lang  java.lang.reflect  java.awt
+
+
+
+
+
+
+
+		step1. start cmd prompt ( windows command prompt)
+		step2. mkdir myjava  (make directory)
+		step3. cd myjava  (change directory)
+		step4. notepad Bank.java
+			|
+			class BankAccountTest  {
+			public static void main(String args[])	{
+					System.out.println("Welcome to the world of banking....");
+				}		
+			}
+		step5. javac Bank.java
+		step6* if javac is not running/not working/not found
+		set path="c:\Program Files\Java\jdk1.8.0_211\bin";%path%
+		step7. dir
+		step8. java Bank <-- wont run
+		step9. java BankAccountTest <-- would run/since main is there
+
+
+
+
+
+			
+	Java Features
+	==================
+	
+	1. Simple
+		
+	2. Platform neutral - .class file (not the JVM)
+		PORTABLE/WORA
+
+	3. Object Oriented (OOPS)
+
+	4. Robust 
+		- ability of garbage collection
+		- exception handling
+
+	5. Multithreaded
+
+	6. Secured
+
+	7. Dynamic
+	
+	8. Distributed
+
+
+	@Entity
+	class Ticket
+	{
+		@Id
+		int ticketNumber;
+
+	}
+
+
+				Java 
+				|
+		------------------------------------------	
+		|		|		|
+		JSE		JEE		JME
+		| core java	| enterprise	  micro
+	------------	---------------------------	
+	|		|			|
+lang fundas		WEB			EJB (bean/class/component)
+			|			|	      DB
+oops			|			|	       |	
+packages		Servlet		-----------------------|------------
+exception		JSP		|Spring		|Hibernate	|JMS
+multithreading		|		Session		Entity	     Message
+generics		Angular(client) |		|pk/fk		|
+collection		(html/css/ts) ------------	---------	---------
+file i/o			      |        |	|	|	|	|
+jdbc				Stateless  Stateful	BMP	CMP	SMS	Mail
+|			bookmyshow.com/app	|	persistence	ticket  ticket/PDF
+Adv Java			|sigup	   signin    insert/update/delete
+|				You
+		Ticket | Passenger | Flight | Address 
+Networking
+  socket programming
+RMI
+ Remote method invocation
+
+
+		Patient should be alive ( and in better condition )
+		only then the operation/surgery is successful
+
+		
+
+		5 people
+		|airlines 		physical/mental/emotional/spiritual
+		|			body    + mind   + heart     + soul
+		|
+	--------------------------------------
+	|	|	|	|	|
+	1	2	3	4 	5		DAO 
+			|		|		abstract classes
+			able		able		interfaces
+			|		|		subquery
+			joining		joining		angular compo
+			business	business	spring dao/jdbc
+			|		|
+			banking		insurance
+		
+
+
+	snacks vending machine		vs	snacks shop
+	|					|
+	no shopkeeper				shopkeeper MUST BE HERE
+	|					|
+	1. select the snack
+	2. submit the cash
+	3. dispense the snack
+	4. it will manage the inventory
+
+	5. at the end of the day
+		it will create a
+	computerized report to be 
+	mailed to the supplier
+	
+		
+			Persistence ( store the object into the DB)
+
+		BMP			CMP
+		|			|
+		java developer		ready program - ORM - hibernate
+
+
+java	insert	DB			insert .... flight
+	select				insert .... insurance
+	insert				insert ...  bank
+	insert				insert ...  crop
+	update 				insert .... student
+	delete
+	update
+
+	class Passenger --------> passenger table
+	{
+		userid
+		address
+		name
+		birthdate
+		email
+	}
+	class Ticket ---------> ticket table
+	{
+		id
+		source
+		target
+		cost
+		category
+	}
+	class Payment ------------> payment table
+	{
+		Passenger
+		Ticket
+		amount
+		mode
+	}
+	
+
+
+
+
+
+	Data Types
+	--------------------
+
+
+		Primitive Types			Object Types
+		|					|
+---------------------------------------------	------------------
+|		|	|		|			|
+Integral	Float	character	Boolean			Object
+|		|	     |		|			|				|
+byte  1		float  4   char 2   boolean 1			String (varchar2)
+short 2		double 8		false/true
+int   4
+long  8
+
+				    <-------------------256------------------>
+	byte rollNumber=128;  <--- -127 -126 ... -3 -2 -1 0 1 2 3 4 ... 127--->
+
+				 -32767 .........-3 -2 -1 0 1 2 3  ....32767-->
+
+	short rollNumber=32768
+
+	int rollNumber;  ....
+
+	long rollNumber; 
+
+
+
+	BankAccount baRef = new BankAccount();
+
+
+		
+	stack					heap
+	|					|
+	local variables				free store / DMA
+
+				DATA MEMBER/FIELD AREA:
+				bankAccountNumber
+				 |	bankAccountHolder
+				 |         |		 bankAccountBalance
+				---------------------------------
+				|	|		|	|
+				---------------------------------
+	   +------------------- 34580 <-- memory address of this object
+	   |		
+	+--|----+			METHOD AREA:
+	| 34580	|<--VALUE		setBankAccount(...)
+	+-------+			showBalance()
+	  |				withdraw(.) / deposit(.)
+	 baRef
+  IT IS JUST A REFERENCE
+	TO AN OBJECT
+
+
+		byte b3=120;
+
+	+-------+
+	| 120	| <-- this is a business data/ rollnumber/marks/score
+	+-------+
+	b3
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	Array
+	----------
+		group of variables of the same type
+		stored in consecutive memory location
+		referred by a common name
+
+
+	int score[5]; <-- declaration with size
+
+	int score[] = {10,20,30}; <-- declaration cum initialization
+
+
+
+	BankAccount allAccounts[] = new BankAccount[5];
+
+	allAccounts[0] = new BankAccount();
+	allAccounts[0].setBankAccount(101, "Julie",500000);
+		
+	allAccounts[1] = new BankAccount();
+	allAccounts[1].setBankAccount(102, "Julia",600000);
+				
+
+
+	allAccounts[]			acno     achn	 acbal
+	---------			-------------------------
+	0|	------------------------|	|	|	|	
+	 |1234	|			-------------------------
+	 |      |			1234
+	 |	| 			acno	achn	acbal
+	---------			-------------------------
+	1|9090	----------------------- |	|	|	|
+	 |	|			-------------------------
+	---------			9090
+	2|	|
+	---------
+	3|	|			METHODS
+	---------			------------
+	4|	|			setBankAccount()
+	---------			withdraw() /deposit() /showBankAccount()
+
+		allAccounts[0].showAccount();
+		allAccounts[1].showAccount();
