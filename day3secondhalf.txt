@@ -1,0 +1,1382 @@
+SQL> 
+SQL>  create view turner_view as select DESCRIP,QTY,ACTUALPRICE, ORDERDATE,NAME from product,ITEM,ORD,CUSTOMER,EMP
+  2        WHERE EMP.EMPNO = CUSTOMER.REPID AND
+  3        CUSTOMER.CUSTID = ORD.CUSTID AND
+  4        ORD.ORDID = ITEM.ORDID AND
+  5        ITEM.PRODID = PRODUCT.PRODID
+  6        AND ENAME='TURNER' AND ORD.ORDID=617;
+
+View created.
+
+SQL> select * from turner_view;
+
+DESCRIP                               QTY ACTUALPRICE ORDERDATE                 
+------------------------------ ---------- ----------- ---------                 
+NAME                                                                            
+---------------------------------------------                                   
+ACE TENNIS RACKET I                    50          35 05-FEB-87                 
+K + T SPORTS                                                                    
+                                                                                
+ACE TENNIS RACKET II                  100          45 05-FEB-87                 
+K + T SPORTS                                                                    
+                                                                                
+ACE TENNIS BALLS-3 PACK               500         2.8 05-FEB-87                 
+K + T SPORTS                                                                    
+                                                                                
+
+DESCRIP                               QTY ACTUALPRICE ORDERDATE                 
+------------------------------ ---------- ----------- ---------                 
+NAME                                                                            
+---------------------------------------------                                   
+ACE TENNIS BALLS-6 PACK               500         5.6 05-FEB-87                 
+K + T SPORTS                                                                    
+                                                                                
+ACE TENNIS NET                        500          58 05-FEB-87                 
+K + T SPORTS                                                                    
+                                                                                
+SP TENNIS RACKET                      100          24 05-FEB-87                 
+K + T SPORTS                                                                    
+                                                                                
+
+DESCRIP                               QTY ACTUALPRICE ORDERDATE                 
+------------------------------ ---------- ----------- ---------                 
+NAME                                                                            
+---------------------------------------------                                   
+SP JUNIOR RACKET                      200        12.5 05-FEB-87                 
+K + T SPORTS                                                                    
+                                                                                
+RH: "GUIDE TO TENNIS"                 100         3.4 05-FEB-87                 
+K + T SPORTS                                                                    
+                                                                                
+SB ENERGY BAR-6 PACK                  200         2.4 05-FEB-87                 
+K + T SPORTS                                                                    
+                                                                                
+
+DESCRIP                               QTY ACTUALPRICE ORDERDATE                 
+------------------------------ ---------- ----------- ---------                 
+NAME                                                                            
+---------------------------------------------                                   
+SB VITA SNACK-6 PACK                  300           4 05-FEB-87                 
+K + T SPORTS                                                                    
+                                                                                
+
+10 rows selected.
+
+SQL> set linesize 120;
+SQL> select * from turner_view;
+
+DESCRIP                               QTY ACTUALPRICE ORDERDATE NAME                                                    
+------------------------------ ---------- ----------- --------- ---------------------------------------------           
+ACE TENNIS RACKET I                    50          35 05-FEB-87 K + T SPORTS                                            
+ACE TENNIS RACKET II                  100          45 05-FEB-87 K + T SPORTS                                            
+ACE TENNIS BALLS-3 PACK               500         2.8 05-FEB-87 K + T SPORTS                                            
+ACE TENNIS BALLS-6 PACK               500         5.6 05-FEB-87 K + T SPORTS                                            
+ACE TENNIS NET                        500          58 05-FEB-87 K + T SPORTS                                            
+SP TENNIS RACKET                      100          24 05-FEB-87 K + T SPORTS                                            
+SP JUNIOR RACKET                      200        12.5 05-FEB-87 K + T SPORTS                                            
+RH: "GUIDE TO TENNIS"                 100         3.4 05-FEB-87 K + T SPORTS                                            
+SB ENERGY BAR-6 PACK                  200         2.4 05-FEB-87 K + T SPORTS                                            
+SB VITA SNACK-6 PACK                  300           4 05-FEB-87 K + T SPORTS                                            
+
+10 rows selected.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+A                              TABLE                                                                                    
+AA                             TABLE                                                                                    
+ABC                            TABLE                                                                                    
+ACCMASTER                      TABLE                                                                                    
+ACCOUNT                        TABLE                                                                                    
+ANNO_PRODUCT                   TABLE                                                                                    
+AQ$DEF$_AQCALL                 VIEW                                                                                     
+AQ$DEF$_AQERROR                VIEW                                                                                     
+AQ$_DEF$_AQCALL_F              VIEW                                                                                     
+AQ$_DEF$_AQERROR_F             VIEW                                                                                     
+AQ$_INTERNET_AGENTS            TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+AQ$_INTERNET_AGENT_PRIVS       TABLE                                                                                    
+AQ$_QUEUES                     TABLE                                                                                    
+AQ$_QUEUE_TABLES               TABLE                                                                                    
+AQ$_SCHEDULES                  TABLE                                                                                    
+AUTHORS                        TABLE                                                                                    
+B                              TABLE                                                                                    
+BIDS                           TABLE                                                                                    
+BONUS                          TABLE                                                                                    
+BOOKS                          TABLE                                                                                    
+C                              TABLE                                                                                    
+CATALOG                        SYNONYM                                                                                  
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+CATEGORIES                     TABLE                                                                                    
+CATEGORIES_ITEMS               TABLE                                                                                    
+CDS                            TABLE                                                                                    
+CD_MASTER                      TABLE                                                                                    
+COL                            SYNONYM                                                                                  
+CUBICLE                        TABLE                                                                                    
+CUSTOMER                       TABLE                                                                                    
+CUSTOMER10                     TABLE                                                                                    
+CUSTOMERSUBSCRIPTIONLINK10     TABLE                                                                                    
+DEF$_AQCALL                    TABLE                                                                                    
+DEF$_AQERROR                   TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+DEF$_CALLDEST                  TABLE                                                                                    
+DEF$_DEFAULTDEST               TABLE                                                                                    
+DEF$_DESTINATION               TABLE                                                                                    
+DEF$_ERROR                     TABLE                                                                                    
+DEF$_LOB                       TABLE                                                                                    
+DEF$_ORIGIN                    TABLE                                                                                    
+DEF$_PROPAGATOR                TABLE                                                                                    
+DEF$_PUSHED_TRANSACTIONS       TABLE                                                                                    
+DEPARTMENT                     TABLE                                                                                    
+DEPARTMENT1                    TABLE                                                                                    
+DEPARTMENT10                   TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+DEPARTMENT10_EMPLOYEE10        TABLE                                                                                    
+DEPARTMENT1_EMPLOYEE1          TABLE                                                                                    
+DEPARTMENT_DEPARTMENT          TABLE                                                                                    
+DEPT                           TABLE                                                                                    
+DUMMY                          TABLE                                                                                    
+EMP                            TABLE                                                                                    
+EMP1                           TABLE                                                                                    
+EMP11                          TABLE                                                                                    
+EMP2                           TABLE                                                                                    
+EMP3                           TABLE                                                                                    
+EMPLOYEE                       TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+EMPLOYEE1                      TABLE                                                                                    
+EMPLOYEE10                     TABLE                                                                                    
+FLIGHTS                        TABLE                                                                                    
+HELP                           TABLE                                                                                    
+ITEM                           TABLE                                                                                    
+ITEMS                          TABLE                                                                                    
+LOGIN                          TABLE                                                                                    
+LOGMNRC_DBNAME_UID_MAP         TABLE                                                                                    
+LOGMNRC_GSBA                   TABLE                                                                                    
+LOGMNRC_GSII                   TABLE                                                                                    
+LOGMNRC_GTCS                   TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGMNRC_GTLO                   TABLE                                                                                    
+LOGMNRP_CTAS_PART_MAP          TABLE                                                                                    
+LOGMNRT_MDDL$                  TABLE                                                                                    
+LOGMNR_AGE_SPILL$              TABLE                                                                                    
+LOGMNR_ATTRCOL$                TABLE                                                                                    
+LOGMNR_ATTRIBUTE$              TABLE                                                                                    
+LOGMNR_CCOL$                   TABLE                                                                                    
+LOGMNR_CDEF$                   TABLE                                                                                    
+LOGMNR_COL$                    TABLE                                                                                    
+LOGMNR_COLTYPE$                TABLE                                                                                    
+LOGMNR_DICTIONARY$             TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGMNR_DICTSTATE$              TABLE                                                                                    
+LOGMNR_ENC$                    TABLE                                                                                    
+LOGMNR_ERROR$                  TABLE                                                                                    
+LOGMNR_FILTER$                 TABLE                                                                                    
+LOGMNR_GLOBAL$                 TABLE                                                                                    
+LOGMNR_GT_TAB_INCLUDE$         TABLE                                                                                    
+LOGMNR_GT_USER_INCLUDE$        TABLE                                                                                    
+LOGMNR_GT_XID_INCLUDE$         TABLE                                                                                    
+LOGMNR_ICOL$                   TABLE                                                                                    
+LOGMNR_IND$                    TABLE                                                                                    
+LOGMNR_INDCOMPART$             TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGMNR_INDPART$                TABLE                                                                                    
+LOGMNR_INDSUBPART$             TABLE                                                                                    
+LOGMNR_KOPM$                   TABLE                                                                                    
+LOGMNR_LOB$                    TABLE                                                                                    
+LOGMNR_LOBFRAG$                TABLE                                                                                    
+LOGMNR_LOG$                    TABLE                                                                                    
+LOGMNR_LOGMNR_BUILDLOG         TABLE                                                                                    
+LOGMNR_NTAB$                   TABLE                                                                                    
+LOGMNR_OBJ$                    TABLE                                                                                    
+LOGMNR_OPQTYPE$                TABLE                                                                                    
+LOGMNR_PARAMETER$              TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGMNR_PARTOBJ$                TABLE                                                                                    
+LOGMNR_PROCESSED_LOG$          TABLE                                                                                    
+LOGMNR_PROPS$                  TABLE                                                                                    
+LOGMNR_REFCON$                 TABLE                                                                                    
+LOGMNR_RESTART_CKPT$           TABLE                                                                                    
+LOGMNR_RESTART_CKPT_TXINFO$    TABLE                                                                                    
+LOGMNR_SEED$                   TABLE                                                                                    
+LOGMNR_SESSION$                TABLE                                                                                    
+LOGMNR_SESSION_ACTIONS$        TABLE                                                                                    
+LOGMNR_SESSION_EVOLVE$         TABLE                                                                                    
+LOGMNR_SPILL$                  TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGMNR_SUBCOLTYPE$             TABLE                                                                                    
+LOGMNR_TAB$                    TABLE                                                                                    
+LOGMNR_TABCOMPART$             TABLE                                                                                    
+LOGMNR_TABPART$                TABLE                                                                                    
+LOGMNR_TABSUBPART$             TABLE                                                                                    
+LOGMNR_TS$                     TABLE                                                                                    
+LOGMNR_TYPE$                   TABLE                                                                                    
+LOGMNR_UID$                    TABLE                                                                                    
+LOGMNR_USER$                   TABLE                                                                                    
+LOGSTDBY$APPLY_MILESTONE       TABLE                                                                                    
+LOGSTDBY$APPLY_PROGRESS        TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGSTDBY$EDS_TABLES            TABLE                                                                                    
+LOGSTDBY$EVENTS                TABLE                                                                                    
+LOGSTDBY$FLASHBACK_SCN         TABLE                                                                                    
+LOGSTDBY$HISTORY               TABLE                                                                                    
+LOGSTDBY$PARAMETERS            TABLE                                                                                    
+LOGSTDBY$PLSQL                 TABLE                                                                                    
+LOGSTDBY$SCN                   TABLE                                                                                    
+LOGSTDBY$SKIP                  TABLE                                                                                    
+LOGSTDBY$SKIP_SUPPORT          TABLE                                                                                    
+LOGSTDBY$SKIP_TRANSACTION      TABLE                                                                                    
+MEMBERS                        TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+MVIEW$_ADV_AJG                 TABLE                                                                                    
+MVIEW$_ADV_BASETABLE           TABLE                                                                                    
+MVIEW$_ADV_CLIQUE              TABLE                                                                                    
+MVIEW$_ADV_ELIGIBLE            TABLE                                                                                    
+MVIEW$_ADV_EXCEPTIONS          TABLE                                                                                    
+MVIEW$_ADV_FILTER              TABLE                                                                                    
+MVIEW$_ADV_FILTERINSTANCE      TABLE                                                                                    
+MVIEW$_ADV_FJG                 TABLE                                                                                    
+MVIEW$_ADV_GC                  TABLE                                                                                    
+MVIEW$_ADV_INDEX               TABLE                                                                                    
+MVIEW$_ADV_INFO                TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+MVIEW$_ADV_JOURNAL             TABLE                                                                                    
+MVIEW$_ADV_LEVEL               TABLE                                                                                    
+MVIEW$_ADV_LOG                 TABLE                                                                                    
+MVIEW$_ADV_OUTPUT              TABLE                                                                                    
+MVIEW$_ADV_OWB                 TABLE                                                                                    
+MVIEW$_ADV_PARAMETERS          TABLE                                                                                    
+MVIEW$_ADV_PARTITION           TABLE                                                                                    
+MVIEW$_ADV_PLAN                TABLE                                                                                    
+MVIEW$_ADV_PRETTY              TABLE                                                                                    
+MVIEW$_ADV_ROLLUP              TABLE                                                                                    
+MVIEW$_ADV_SQLDEPEND           TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+MVIEW$_ADV_TEMP                TABLE                                                                                    
+MVIEW$_ADV_WORKLOAD            TABLE                                                                                    
+MVIEW_EVALUATIONS              VIEW                                                                                     
+MVIEW_EXCEPTIONS               VIEW                                                                                     
+MVIEW_FILTER                   VIEW                                                                                     
+MVIEW_FILTERINSTANCE           VIEW                                                                                     
+MVIEW_LOG                      VIEW                                                                                     
+MVIEW_RECOMMENDATIONS          VIEW                                                                                     
+MVIEW_WORKLOAD                 VIEW                                                                                     
+MYDEPT                         TABLE                                                                                    
+MYDEPT1                        TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+MYEMP33                        TABLE                                                                                    
+MYEMP34                        TABLE                                                                                    
+MYEMP35                        TABLE                                                                                    
+MYEMP36                        TABLE                                                                                    
+MYEMP37                        TABLE                                                                                    
+MYEMPLOYEE111                  TABLE                                                                                    
+OL$                            TABLE                                                                                    
+OL$HINTS                       TABLE                                                                                    
+OL$NODES                       TABLE                                                                                    
+ORD                            TABLE                                                                                    
+PRICE                          TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+PRODUCT                        TABLE                                                                                    
+PRODUCTS                       TABLE                                                                                    
+PRODUCT_PRIVS                  VIEW                                                                                     
+PRODUCT_USER_PROFILE           SYNONYM                                                                                  
+PUBLICSYN                      SYNONYM                                                                                  
+REGISTER                       TABLE                                                                                    
+REPCAT$_AUDIT_ATTRIBUTE        TABLE                                                                                    
+REPCAT$_AUDIT_COLUMN           TABLE                                                                                    
+REPCAT$_COLUMN_GROUP           TABLE                                                                                    
+REPCAT$_CONFLICT               TABLE                                                                                    
+REPCAT$_DDL                    TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+REPCAT$_EXCEPTIONS             TABLE                                                                                    
+REPCAT$_EXTENSION              TABLE                                                                                    
+REPCAT$_FLAVORS                TABLE                                                                                    
+REPCAT$_FLAVOR_OBJECTS         TABLE                                                                                    
+REPCAT$_GENERATED              TABLE                                                                                    
+REPCAT$_GROUPED_COLUMN         TABLE                                                                                    
+REPCAT$_INSTANTIATION_DDL      TABLE                                                                                    
+REPCAT$_KEY_COLUMNS            TABLE                                                                                    
+REPCAT$_OBJECT_PARMS           TABLE                                                                                    
+REPCAT$_OBJECT_TYPES           TABLE                                                                                    
+REPCAT$_PARAMETER_COLUMN       TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+REPCAT$_PRIORITY               TABLE                                                                                    
+REPCAT$_PRIORITY_GROUP         TABLE                                                                                    
+REPCAT$_REFRESH_TEMPLATES      TABLE                                                                                    
+REPCAT$_REPCAT                 TABLE                                                                                    
+REPCAT$_REPCATLOG              TABLE                                                                                    
+REPCAT$_REPCOLUMN              TABLE                                                                                    
+REPCAT$_REPGROUP_PRIVS         TABLE                                                                                    
+REPCAT$_REPOBJECT              TABLE                                                                                    
+REPCAT$_REPPROP                TABLE                                                                                    
+REPCAT$_REPSCHEMA              TABLE                                                                                    
+REPCAT$_RESOLUTION             TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+REPCAT$_RESOLUTION_METHOD      TABLE                                                                                    
+REPCAT$_RESOLUTION_STATISTICS  TABLE                                                                                    
+REPCAT$_RESOL_STATS_CONTROL    TABLE                                                                                    
+REPCAT$_RUNTIME_PARMS          TABLE                                                                                    
+REPCAT$_SITES_NEW              TABLE                                                                                    
+REPCAT$_SITE_OBJECTS           TABLE                                                                                    
+REPCAT$_SNAPGROUP              TABLE                                                                                    
+REPCAT$_TEMPLATE_OBJECTS       TABLE                                                                                    
+REPCAT$_TEMPLATE_PARMS         TABLE                                                                                    
+REPCAT$_TEMPLATE_REFGROUPS     TABLE                                                                                    
+REPCAT$_TEMPLATE_SITES         TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+REPCAT$_TEMPLATE_STATUS        TABLE                                                                                    
+REPCAT$_TEMPLATE_TARGETS       TABLE                                                                                    
+REPCAT$_TEMPLATE_TYPES         TABLE                                                                                    
+REPCAT$_USER_AUTHORIZATIONS    TABLE                                                                                    
+REPCAT$_USER_PARM_VALUES       TABLE                                                                                    
+SALES                          VIEW                                                                                     
+SALGRADE                       TABLE                                                                                    
+SONG_ALBUM                     TABLE                                                                                    
+SONG_ARTIST                    TABLE                                                                                    
+SONG_MASTER                    TABLE                                                                                    
+SQLPLUS_PRODUCT_PROFILE        TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+STUDENT                        TABLE                                                                                    
+STUDENT_INFO                   TABLE                                                                                    
+STUDENT_LIST                   TABLE                                                                                    
+SUBSCRIPTION10                 TABLE                                                                                    
+SYSCATALOG                     SYNONYM                                                                                  
+SYSFILES                       SYNONYM                                                                                  
+TAB                            SYNONYM                                                                                  
+TABQUOTAS                      SYNONYM                                                                                  
+TURNER_VIEW                    VIEW                                                                                     
+TX_ORDERS                      TABLE                                                                                    
+TX_PAYMENTS                    TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+TX_PRODUCTS                    TABLE                                                                                    
+USER1                          TABLE                                                                                    
+USERDETAILS                    TABLE                                                                                    
+
+245 rows selected.
+
+SQL> create view sales_view  as select empno,ename,sal,comm,sal+500, sal+comm from emp where job='SALESMAN';
+create view sales_view  as select empno,ename,sal,comm,sal+500, sal+comm from emp where job='SALESMAN'
+                                                          *
+ERROR at line 1:
+ORA-00998: must name this expression with a column alias 
+
+
+SQL> create view sales_view  as select empno,ename,sal,comm,sal+500 as "newsal", sal+comm as "netsal" from emp where job='SALESMAN';
+
+View created.
+
+SQL> select * from sales_view;
+
+     EMPNO ENAME             SAL       COMM     newsal     netsal                                                       
+---------- ---------- ---------- ---------- ---------- ----------                                                       
+      7654 MARTIN           1250       1400       1750       2650                                                       
+      7499 ALLEN            1600        300       2100       1900                                                       
+      7844 TURNER           1500          0       2000       1500                                                       
+      7521 WARD             1250        500       1750       1750                                                       
+
+SQL> update view sales_view set sal=3000 where empno=7654;
+update view sales_view set sal=3000 where empno=7654
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> update sales_view set sal=3000 where empno=7654;
+
+1 row updated.
+
+SQL> select * from sales_view;
+
+     EMPNO ENAME             SAL       COMM     newsal     netsal                                                       
+---------- ---------- ---------- ---------- ---------- ----------                                                       
+      7654 MARTIN           3000       1400       3500       4400                                                       
+      7499 ALLEN            1600        300       2100       1900                                                       
+      7844 TURNER           1500          0       2000       1500                                                       
+      7521 WARD             1250        500       1750       1750                                                       
+
+SQL> update sales_view set newsal=6000 where empno=7654;
+update sales_view set newsal=6000 where empno=7654
+                      *
+ERROR at line 1:
+ORA-00904: "NEWSAL": invalid identifier 
+
+
+SQL> update sales_view set netsal=6000 where empno=7654;
+update sales_view set netsal=6000 where empno=7654
+                      *
+ERROR at line 1:
+ORA-00904: "NETSAL": invalid identifier 
+
+
+SQL> update sales_view set comm=6000 where empno=7654;
+
+1 row updated.
+
+SQL> select * from sales_view;
+
+     EMPNO ENAME             SAL       COMM     newsal     netsal                                                       
+---------- ---------- ---------- ---------- ---------- ----------                                                       
+      7654 MARTIN           3000       6000       3500       9000                                                       
+      7499 ALLEN            1600        300       2100       1900                                                       
+      7844 TURNER           1500          0       2000       1500                                                       
+      7521 WARD             1250        500       1750       1750                                                       
+
+SQL> select empno,ename,sal,comm from emp where job='SALESMAN';
+
+     EMPNO ENAME             SAL       COMM                                                                             
+---------- ---------- ---------- ----------                                                                             
+      7654 MARTIN           3000       6000                                                                             
+      7499 ALLEN            1600        300                                                                             
+      7844 TURNER           1500          0                                                                             
+      7521 WARD             1250        500                                                                             
+
+SQL> update EMP set comm=7000 where empno=7654;
+
+1 row updated.
+
+SQL> select empno,ename,sal,comm from emp where job='SALESMAN';
+
+     EMPNO ENAME             SAL       COMM                                                                             
+---------- ---------- ---------- ----------                                                                             
+      7654 MARTIN           3000       7000                                                                             
+      7499 ALLEN            1600        300                                                                             
+      7844 TURNER           1500          0                                                                             
+      7521 WARD             1250        500                                                                             
+
+SQL> select * from sales_view;
+
+     EMPNO ENAME             SAL       COMM     newsal     netsal                                                       
+---------- ---------- ---------- ---------- ---------- ----------                                                       
+      7654 MARTIN           3000       7000       3500      10000                                                       
+      7499 ALLEN            1600        300       2100       1900                                                       
+      7844 TURNER           1500          0       2000       1500                                                       
+      7521 WARD             1250        500       1750       1750                                                       
+
+SQL> CREATE VIEW PRODVIEW  AS select * from product
+  2  where prodid in
+  3  (select prodid from item
+  4  where ordid in
+  5  (select ordid from ord
+  6   where custid in
+  7  (select custid from customer
+  8   where repid =
+  9  (select empno from emp
+ 10   where ename='&ANYNAME')
+ 11  )
+ 12    group by ordid having max(total) > 40000
+ 13   )
+ 14  )
+ 15  ;
+Enter value for anyname: TURNER
+old  10:  where ename='&ANYNAME')
+new  10:  where ename='TURNER')
+
+View created.
+
+SQL> SELECT * FROM PRODVIEW;
+
+    PRODID DESCRIP                                                                                                      
+---------- ------------------------------                                                                               
+    100860 ACE TENNIS RACKET I                                                                                          
+    100861 ACE TENNIS RACKET II                                                                                         
+    100870 ACE TENNIS BALLS-3 PACK                                                                                      
+    100871 ACE TENNIS BALLS-6 PACK                                                                                      
+    100890 ACE TENNIS NET                                                                                               
+    101860 SP TENNIS RACKET                                                                                             
+    101863 SP JUNIOR RACKET                                                                                             
+    102130 RH: "GUIDE TO TENNIS"                                                                                        
+    200376 SB ENERGY BAR-6 PACK                                                                                         
+    200380 SB VITA SNACK-6 PACK                                                                                         
+
+10 rows selected.
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+A                              TABLE                                                                                    
+AA                             TABLE                                                                                    
+ABC                            TABLE                                                                                    
+ACCMASTER                      TABLE                                                                                    
+ACCOUNT                        TABLE                                                                                    
+ANNO_PRODUCT                   TABLE                                                                                    
+AQ$DEF$_AQCALL                 VIEW                                                                                     
+AQ$DEF$_AQERROR                VIEW                                                                                     
+AQ$_DEF$_AQCALL_F              VIEW                                                                                     
+AQ$_DEF$_AQERROR_F             VIEW                                                                                     
+AQ$_INTERNET_AGENTS            TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+AQ$_INTERNET_AGENT_PRIVS       TABLE                                                                                    
+AQ$_QUEUES                     TABLE                                                                                    
+AQ$_QUEUE_TABLES               TABLE                                                                                    
+AQ$_SCHEDULES                  TABLE                                                                                    
+AUTHORS                        TABLE                                                                                    
+B                              TABLE                                                                                    
+BIDS                           TABLE                                                                                    
+BONUS                          TABLE                                                                                    
+BOOKS                          TABLE                                                                                    
+C                              TABLE                                                                                    
+CATALOG                        SYNONYM                                                                                  
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+CATEGORIES                     TABLE                                                                                    
+CATEGORIES_ITEMS               TABLE                                                                                    
+CDS                            TABLE                                                                                    
+CD_MASTER                      TABLE                                                                                    
+COL                            SYNONYM                                                                                  
+CUBICLE                        TABLE                                                                                    
+CUSTOMER                       TABLE                                                                                    
+CUSTOMER10                     TABLE                                                                                    
+CUSTOMERSUBSCRIPTIONLINK10     TABLE                                                                                    
+DEF$_AQCALL                    TABLE                                                                                    
+DEF$_AQERROR                   TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+DEF$_CALLDEST                  TABLE                                                                                    
+DEF$_DEFAULTDEST               TABLE                                                                                    
+DEF$_DESTINATION               TABLE                                                                                    
+DEF$_ERROR                     TABLE                                                                                    
+DEF$_LOB                       TABLE                                                                                    
+DEF$_ORIGIN                    TABLE                                                                                    
+DEF$_PROPAGATOR                TABLE                                                                                    
+DEF$_PUSHED_TRANSACTIONS       TABLE                                                                                    
+DEPARTMENT                     TABLE                                                                                    
+DEPARTMENT1                    TABLE                                                                                    
+DEPARTMENT10                   TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+DEPARTMENT10_EMPLOYEE10        TABLE                                                                                    
+DEPARTMENT1_EMPLOYEE1          TABLE                                                                                    
+DEPARTMENT_DEPARTMENT          TABLE                                                                                    
+DEPT                           TABLE                                                                                    
+DUMMY                          TABLE                                                                                    
+EMP                            TABLE                                                                                    
+EMP1                           TABLE                                                                                    
+EMP11                          TABLE                                                                                    
+EMP2                           TABLE                                                                                    
+EMP3                           TABLE                                                                                    
+EMPLOYEE                       TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+EMPLOYEE1                      TABLE                                                                                    
+EMPLOYEE10                     TABLE                                                                                    
+FLIGHTS                        TABLE                                                                                    
+HELP                           TABLE                                                                                    
+ITEM                           TABLE                                                                                    
+ITEMS                          TABLE                                                                                    
+LOGIN                          TABLE                                                                                    
+LOGMNRC_DBNAME_UID_MAP         TABLE                                                                                    
+LOGMNRC_GSBA                   TABLE                                                                                    
+LOGMNRC_GSII                   TABLE                                                                                    
+LOGMNRC_GTCS                   TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGMNRC_GTLO                   TABLE                                                                                    
+LOGMNRP_CTAS_PART_MAP          TABLE                                                                                    
+LOGMNRT_MDDL$                  TABLE                                                                                    
+LOGMNR_AGE_SPILL$              TABLE                                                                                    
+LOGMNR_ATTRCOL$                TABLE                                                                                    
+LOGMNR_ATTRIBUTE$              TABLE                                                                                    
+LOGMNR_CCOL$                   TABLE                                                                                    
+LOGMNR_CDEF$                   TABLE                                                                                    
+LOGMNR_COL$                    TABLE                                                                                    
+LOGMNR_COLTYPE$                TABLE                                                                                    
+LOGMNR_DICTIONARY$             TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGMNR_DICTSTATE$              TABLE                                                                                    
+LOGMNR_ENC$                    TABLE                                                                                    
+LOGMNR_ERROR$                  TABLE                                                                                    
+LOGMNR_FILTER$                 TABLE                                                                                    
+LOGMNR_GLOBAL$                 TABLE                                                                                    
+LOGMNR_GT_TAB_INCLUDE$         TABLE                                                                                    
+LOGMNR_GT_USER_INCLUDE$        TABLE                                                                                    
+LOGMNR_GT_XID_INCLUDE$         TABLE                                                                                    
+LOGMNR_ICOL$                   TABLE                                                                                    
+LOGMNR_IND$                    TABLE                                                                                    
+LOGMNR_INDCOMPART$             TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGMNR_INDPART$                TABLE                                                                                    
+LOGMNR_INDSUBPART$             TABLE                                                                                    
+LOGMNR_KOPM$                   TABLE                                                                                    
+LOGMNR_LOB$                    TABLE                                                                                    
+LOGMNR_LOBFRAG$                TABLE                                                                                    
+LOGMNR_LOG$                    TABLE                                                                                    
+LOGMNR_LOGMNR_BUILDLOG         TABLE                                                                                    
+LOGMNR_NTAB$                   TABLE                                                                                    
+LOGMNR_OBJ$                    TABLE                                                                                    
+LOGMNR_OPQTYPE$                TABLE                                                                                    
+LOGMNR_PARAMETER$              TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGMNR_PARTOBJ$                TABLE                                                                                    
+LOGMNR_PROCESSED_LOG$          TABLE                                                                                    
+LOGMNR_PROPS$                  TABLE                                                                                    
+LOGMNR_REFCON$                 TABLE                                                                                    
+LOGMNR_RESTART_CKPT$           TABLE                                                                                    
+LOGMNR_RESTART_CKPT_TXINFO$    TABLE                                                                                    
+LOGMNR_SEED$                   TABLE                                                                                    
+LOGMNR_SESSION$                TABLE                                                                                    
+LOGMNR_SESSION_ACTIONS$        TABLE                                                                                    
+LOGMNR_SESSION_EVOLVE$         TABLE                                                                                    
+LOGMNR_SPILL$                  TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGMNR_SUBCOLTYPE$             TABLE                                                                                    
+LOGMNR_TAB$                    TABLE                                                                                    
+LOGMNR_TABCOMPART$             TABLE                                                                                    
+LOGMNR_TABPART$                TABLE                                                                                    
+LOGMNR_TABSUBPART$             TABLE                                                                                    
+LOGMNR_TS$                     TABLE                                                                                    
+LOGMNR_TYPE$                   TABLE                                                                                    
+LOGMNR_UID$                    TABLE                                                                                    
+LOGMNR_USER$                   TABLE                                                                                    
+LOGSTDBY$APPLY_MILESTONE       TABLE                                                                                    
+LOGSTDBY$APPLY_PROGRESS        TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+LOGSTDBY$EDS_TABLES            TABLE                                                                                    
+LOGSTDBY$EVENTS                TABLE                                                                                    
+LOGSTDBY$FLASHBACK_SCN         TABLE                                                                                    
+LOGSTDBY$HISTORY               TABLE                                                                                    
+LOGSTDBY$PARAMETERS            TABLE                                                                                    
+LOGSTDBY$PLSQL                 TABLE                                                                                    
+LOGSTDBY$SCN                   TABLE                                                                                    
+LOGSTDBY$SKIP                  TABLE                                                                                    
+LOGSTDBY$SKIP_SUPPORT          TABLE                                                                                    
+LOGSTDBY$SKIP_TRANSACTION      TABLE                                                                                    
+MEMBERS                        TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+MVIEW$_ADV_AJG                 TABLE                                                                                    
+MVIEW$_ADV_BASETABLE           TABLE                                                                                    
+MVIEW$_ADV_CLIQUE              TABLE                                                                                    
+MVIEW$_ADV_ELIGIBLE            TABLE                                                                                    
+MVIEW$_ADV_EXCEPTIONS          TABLE                                                                                    
+MVIEW$_ADV_FILTER              TABLE                                                                                    
+MVIEW$_ADV_FILTERINSTANCE      TABLE                                                                                    
+MVIEW$_ADV_FJG                 TABLE                                                                                    
+MVIEW$_ADV_GC                  TABLE                                                                                    
+MVIEW$_ADV_INDEX               TABLE                                                                                    
+MVIEW$_ADV_INFO                TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+MVIEW$_ADV_JOURNAL             TABLE                                                                                    
+MVIEW$_ADV_LEVEL               TABLE                                                                                    
+MVIEW$_ADV_LOG                 TABLE                                                                                    
+MVIEW$_ADV_OUTPUT              TABLE                                                                                    
+MVIEW$_ADV_OWB                 TABLE                                                                                    
+MVIEW$_ADV_PARAMETERS          TABLE                                                                                    
+MVIEW$_ADV_PARTITION           TABLE                                                                                    
+MVIEW$_ADV_PLAN                TABLE                                                                                    
+MVIEW$_ADV_PRETTY              TABLE                                                                                    
+MVIEW$_ADV_ROLLUP              TABLE                                                                                    
+MVIEW$_ADV_SQLDEPEND           TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+MVIEW$_ADV_TEMP                TABLE                                                                                    
+MVIEW$_ADV_WORKLOAD            TABLE                                                                                    
+MVIEW_EVALUATIONS              VIEW                                                                                     
+MVIEW_EXCEPTIONS               VIEW                                                                                     
+MVIEW_FILTER                   VIEW                                                                                     
+MVIEW_FILTERINSTANCE           VIEW                                                                                     
+MVIEW_LOG                      VIEW                                                                                     
+MVIEW_RECOMMENDATIONS          VIEW                                                                                     
+MVIEW_WORKLOAD                 VIEW                                                                                     
+MYDEPT                         TABLE                                                                                    
+MYDEPT1                        TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+MYEMP33                        TABLE                                                                                    
+MYEMP34                        TABLE                                                                                    
+MYEMP35                        TABLE                                                                                    
+MYEMP36                        TABLE                                                                                    
+MYEMP37                        TABLE                                                                                    
+MYEMPLOYEE111                  TABLE                                                                                    
+OL$                            TABLE                                                                                    
+OL$HINTS                       TABLE                                                                                    
+OL$NODES                       TABLE                                                                                    
+ORD                            TABLE                                                                                    
+PRICE                          TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+PRODUCT                        TABLE                                                                                    
+PRODUCTS                       TABLE                                                                                    
+PRODUCT_PRIVS                  VIEW                                                                                     
+PRODUCT_USER_PROFILE           SYNONYM                                                                                  
+PRODVIEW                       VIEW                                                                                     
+PUBLICSYN                      SYNONYM                                                                                  
+REGISTER                       TABLE                                                                                    
+REPCAT$_AUDIT_ATTRIBUTE        TABLE                                                                                    
+REPCAT$_AUDIT_COLUMN           TABLE                                                                                    
+REPCAT$_COLUMN_GROUP           TABLE                                                                                    
+REPCAT$_CONFLICT               TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+REPCAT$_DDL                    TABLE                                                                                    
+REPCAT$_EXCEPTIONS             TABLE                                                                                    
+REPCAT$_EXTENSION              TABLE                                                                                    
+REPCAT$_FLAVORS                TABLE                                                                                    
+REPCAT$_FLAVOR_OBJECTS         TABLE                                                                                    
+REPCAT$_GENERATED              TABLE                                                                                    
+REPCAT$_GROUPED_COLUMN         TABLE                                                                                    
+REPCAT$_INSTANTIATION_DDL      TABLE                                                                                    
+REPCAT$_KEY_COLUMNS            TABLE                                                                                    
+REPCAT$_OBJECT_PARMS           TABLE                                                                                    
+REPCAT$_OBJECT_TYPES           TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+REPCAT$_PARAMETER_COLUMN       TABLE                                                                                    
+REPCAT$_PRIORITY               TABLE                                                                                    
+REPCAT$_PRIORITY_GROUP         TABLE                                                                                    
+REPCAT$_REFRESH_TEMPLATES      TABLE                                                                                    
+REPCAT$_REPCAT                 TABLE                                                                                    
+REPCAT$_REPCATLOG              TABLE                                                                                    
+REPCAT$_REPCOLUMN              TABLE                                                                                    
+REPCAT$_REPGROUP_PRIVS         TABLE                                                                                    
+REPCAT$_REPOBJECT              TABLE                                                                                    
+REPCAT$_REPPROP                TABLE                                                                                    
+REPCAT$_REPSCHEMA              TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+REPCAT$_RESOLUTION             TABLE                                                                                    
+REPCAT$_RESOLUTION_METHOD      TABLE                                                                                    
+REPCAT$_RESOLUTION_STATISTICS  TABLE                                                                                    
+REPCAT$_RESOL_STATS_CONTROL    TABLE                                                                                    
+REPCAT$_RUNTIME_PARMS          TABLE                                                                                    
+REPCAT$_SITES_NEW              TABLE                                                                                    
+REPCAT$_SITE_OBJECTS           TABLE                                                                                    
+REPCAT$_SNAPGROUP              TABLE                                                                                    
+REPCAT$_TEMPLATE_OBJECTS       TABLE                                                                                    
+REPCAT$_TEMPLATE_PARMS         TABLE                                                                                    
+REPCAT$_TEMPLATE_REFGROUPS     TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+REPCAT$_TEMPLATE_SITES         TABLE                                                                                    
+REPCAT$_TEMPLATE_STATUS        TABLE                                                                                    
+REPCAT$_TEMPLATE_TARGETS       TABLE                                                                                    
+REPCAT$_TEMPLATE_TYPES         TABLE                                                                                    
+REPCAT$_USER_AUTHORIZATIONS    TABLE                                                                                    
+REPCAT$_USER_PARM_VALUES       TABLE                                                                                    
+SALES                          VIEW                                                                                     
+SALES_VIEW                     VIEW                                                                                     
+SALGRADE                       TABLE                                                                                    
+SONG_ALBUM                     TABLE                                                                                    
+SONG_ARTIST                    TABLE                                                                                    
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+SONG_MASTER                    TABLE                                                                                    
+SQLPLUS_PRODUCT_PROFILE        TABLE                                                                                    
+STUDENT                        TABLE                                                                                    
+STUDENT_INFO                   TABLE                                                                                    
+STUDENT_LIST                   TABLE                                                                                    
+SUBSCRIPTION10                 TABLE                                                                                    
+SYSCATALOG                     SYNONYM                                                                                  
+SYSFILES                       SYNONYM                                                                                  
+TAB                            SYNONYM                                                                                  
+TABQUOTAS                      SYNONYM                                                                                  
+TURNER_VIEW                    VIEW                                                                                     
+
+TNAME                          TABTYPE  CLUSTERID                                                                       
+------------------------------ ------- ----------                                                                       
+TX_ORDERS                      TABLE                                                                                    
+TX_PAYMENTS                    TABLE                                                                                    
+TX_PRODUCTS                    TABLE                                                                                    
+USER1                          TABLE                                                                                    
+USERDETAILS                    TABLE                                                                                    
+
+247 rows selected.
+
+SQL> CREATE VIEW DD AS select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='&tname';
+Enter value for tname: MYEMP36
+old   2: from user_constraints where table_name='&tname'
+new   2: from user_constraints where table_name='MYEMP36'
+
+View created.
+
+SQL> SELECT * FROM DD;
+
+CONSTRAINT_NAME                C SEARCH_CONDITION                                                                       
+------------------------------ - --------------------------------------------------------------------------------       
+STATUS                                                                                                                  
+--------                                                                                                                
+SYS_C0013581                   C "ENAME" IS NOT NULL                                                                    
+ENABLED                                                                                                                 
+                                                                                                                        
+SYS_C0013582                   R                                                                                        
+ENABLED                                                                                                                 
+                                                                                                                        
+
+SQL> SELECT * FROM DD;
+
+CONSTRAINT_NAME                C SEARCH_CONDITION                                                                       
+------------------------------ - --------------------------------------------------------------------------------       
+STATUS                                                                                                                  
+--------                                                                                                                
+SYS_C0013581                   C "ENAME" IS NOT NULL                                                                    
+ENABLED                                                                                                                 
+                                                                                                                        
+SYS_C0013582                   R                                                                                        
+ENABLED                                                                                                                 
+                                                                                                                        
+
+SQL> SELECT * FROM DD;
+
+CONSTRAINT_NAME                C SEARCH_CONDITION                                                                       
+------------------------------ - --------------------------------------------------------------------------------       
+STATUS                                                                                                                  
+--------                                                                                                                
+SYS_C0013581                   C "ENAME" IS NOT NULL                                                                    
+ENABLED                                                                                                                 
+                                                                                                                        
+SYS_C0013582                   R                                                                                        
+ENABLED                                                                                                                 
+                                                                                                                        
+
+SQL> SELECT USER_VIEWS;
+SELECT USER_VIEWS
+                *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT USER_VIEW;
+SELECT USER_VIEW
+               *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> DESC USER_VIEWS;
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ VIEW_NAME                                                         NOT NULL VARCHAR2(30)
+ TEXT_LENGTH                                                                NUMBER
+ TEXT                                                                       LONG
+ TYPE_TEXT_LENGTH                                                           NUMBER
+ TYPE_TEXT                                                                  VARCHAR2(4000)
+ OID_TEXT_LENGTH                                                            NUMBER
+ OID_TEXT                                                                   VARCHAR2(4000)
+ VIEW_TYPE_OWNER                                                            VARCHAR2(30)
+ VIEW_TYPE                                                                  VARCHAR2(30)
+ SUPERVIEW_NAME                                                             VARCHAR2(30)
+ EDITIONING_VIEW                                                            VARCHAR2(1)
+ READ_ONLY                                                                  VARCHAR2(1)
+
+SQL> SELECT TEXT FROM USER_VIEWS WHERE VIEW_NAME='DD';
+
+TEXT                                                                                                                    
+--------------------------------------------------------------------------------                                        
+select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status                                                          
+from user_constra                                                                                                       
+                                                                                                                        
+
+SQL> SELECT TEXT FROM USER_VIEWS WHERE VIEW_NAME='TURNER_VIEW';
+
+TEXT                                                                                                                    
+--------------------------------------------------------------------------------                                        
+select DESCRIP,QTY,ACTUALPRICE, ORDERDATE,NAME from product,ITEM,ORD,CUSTOMER,EM                                        
+
+SQL> SELECT * FROM USER_VIEWS WHERE VIEW_NAME='TURNER_VIEW';
+
+VIEW_NAME                      TEXT_LENGTH                                                                              
+------------------------------ -----------                                                                              
+TEXT                                                                             TYPE_TEXT_LENGTH                       
+-------------------------------------------------------------------------------- ----------------                       
+TYPE_TEXT                                                                                                               
+------------------------------------------------------------------------------------------------------------------------
+OID_TEXT_LENGTH                                                                                                         
+---------------                                                                                                         
+OID_TEXT                                                                                                                
+------------------------------------------------------------------------------------------------------------------------
+VIEW_TYPE_OWNER                VIEW_TYPE                      SUPERVIEW_NAME                 E R                        
+------------------------------ ------------------------------ ------------------------------ - -                        
+TURNER_VIEW                            274                                                                              
+
+VIEW_NAME                      TEXT_LENGTH                                                                              
+------------------------------ -----------                                                                              
+TEXT                                                                             TYPE_TEXT_LENGTH                       
+-------------------------------------------------------------------------------- ----------------                       
+TYPE_TEXT                                                                                                               
+------------------------------------------------------------------------------------------------------------------------
+OID_TEXT_LENGTH                                                                                                         
+---------------                                                                                                         
+OID_TEXT                                                                                                                
+------------------------------------------------------------------------------------------------------------------------
+VIEW_TYPE_OWNER                VIEW_TYPE                      SUPERVIEW_NAME                 E R                        
+------------------------------ ------------------------------ ------------------------------ - -                        
+select DESCRIP,QTY,ACTUALPRICE, ORDERDATE,NAME from product,ITEM,ORD,CUSTOMER,EM                                        
+
+VIEW_NAME                      TEXT_LENGTH                                                                              
+------------------------------ -----------                                                                              
+TEXT                                                                             TYPE_TEXT_LENGTH                       
+-------------------------------------------------------------------------------- ----------------                       
+TYPE_TEXT                                                                                                               
+------------------------------------------------------------------------------------------------------------------------
+OID_TEXT_LENGTH                                                                                                         
+---------------                                                                                                         
+OID_TEXT                                                                                                                
+------------------------------------------------------------------------------------------------------------------------
+VIEW_TYPE_OWNER                VIEW_TYPE                      SUPERVIEW_NAME                 E R                        
+------------------------------ ------------------------------ ------------------------------ - -                        
+                                                                                                                        
+
+VIEW_NAME                      TEXT_LENGTH                                                                              
+------------------------------ -----------                                                                              
+TEXT                                                                             TYPE_TEXT_LENGTH                       
+-------------------------------------------------------------------------------- ----------------                       
+TYPE_TEXT                                                                                                               
+------------------------------------------------------------------------------------------------------------------------
+OID_TEXT_LENGTH                                                                                                         
+---------------                                                                                                         
+OID_TEXT                                                                                                                
+------------------------------------------------------------------------------------------------------------------------
+VIEW_TYPE_OWNER                VIEW_TYPE                      SUPERVIEW_NAME                 E R                        
+------------------------------ ------------------------------ ------------------------------ - -                        
+                                                                                                                        
+
+VIEW_NAME                      TEXT_LENGTH                                                                              
+------------------------------ -----------                                                                              
+TEXT                                                                             TYPE_TEXT_LENGTH                       
+-------------------------------------------------------------------------------- ----------------                       
+TYPE_TEXT                                                                                                               
+------------------------------------------------------------------------------------------------------------------------
+OID_TEXT_LENGTH                                                                                                         
+---------------                                                                                                         
+OID_TEXT                                                                                                                
+------------------------------------------------------------------------------------------------------------------------
+VIEW_TYPE_OWNER                VIEW_TYPE                      SUPERVIEW_NAME                 E R                        
+------------------------------ ------------------------------ ------------------------------ - -                        
+                                                                                                                        
+
+VIEW_NAME                      TEXT_LENGTH                                                                              
+------------------------------ -----------                                                                              
+TEXT                                                                             TYPE_TEXT_LENGTH                       
+-------------------------------------------------------------------------------- ----------------                       
+TYPE_TEXT                                                                                                               
+------------------------------------------------------------------------------------------------------------------------
+OID_TEXT_LENGTH                                                                                                         
+---------------                                                                                                         
+OID_TEXT                                                                                                                
+------------------------------------------------------------------------------------------------------------------------
+VIEW_TYPE_OWNER                VIEW_TYPE                      SUPERVIEW_NAME                 E R                        
+------------------------------ ------------------------------ ------------------------------ - -                        
+                                                                                             N N                        
+
+VIEW_NAME                      TEXT_LENGTH                                                                              
+------------------------------ -----------                                                                              
+TEXT                                                                             TYPE_TEXT_LENGTH                       
+-------------------------------------------------------------------------------- ----------------                       
+TYPE_TEXT                                                                                                               
+------------------------------------------------------------------------------------------------------------------------
+OID_TEXT_LENGTH                                                                                                         
+---------------                                                                                                         
+OID_TEXT                                                                                                                
+------------------------------------------------------------------------------------------------------------------------
+VIEW_TYPE_OWNER                VIEW_TYPE                      SUPERVIEW_NAME                 E R                        
+------------------------------ ------------------------------ ------------------------------ - -                        
+                                                                                                                        
+
+SQL> SELECT TEXT FROM USER_VIEWS WHERE VIEW_NAME='DD';
+
+TEXT                                                                                                                    
+--------------------------------------------------------------------------------                                        
+select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status                                                          
+from user_constra                                                                                                       
+                                                                                                                        
+
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> BEGIN
+  2     DBMS_OUTPUT.PUT_LINE('WELCOME TO THE WORLD OF PLSQL');
+  3  END;
+  4  /
+
+PL/SQL procedure successfully completed.
+
+SQL> SET SERVEROUTPUT ON
+SQL> 
+SQL> /
+WELCOME TO THE WORLD OF PLSQL                                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> BEGIN
+  2         DBMS_OUTPUT.PUT_LINE('-- Fund Transfer In Progress --');
+  3  
+  4  update account set acbalance=acbalance-3000 where acno=101;
+  5         DBMS_OUTPUT.PUT_LINE('Debiting 3000 from the source account...');
+  6  
+  7  update account set acbalance=acbalance+3000 where acno=102;
+  8         DBMS_OUTPUT.PUT_LINE('Credited 3000 to the beneficiary account...');
+  9  
+ 10  commit;
+ 11  END;
+ 12          /
+-- Fund Transfer In Progress --                                                                                         
+Debiting 3000 from the source account...                                                                                
+Credited 3000 to the beneficiary account...                                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                                                              
+---------- -------------------- ----------                                                                              
+       101 jack                      54000                                                                              
+       102 smith                     63000                                                                              
+       103 peter                     63000                                                                              
+       104 julie                     50000                                                                              
+
+SQL> BEGIN
+  2         DBMS_OUTPUT.PUT_LINE('-- Fund Transfer In Progress --');
+  3  
+  4  update account set acbalance=acbalance-3000 where acno=101;
+  5         DBMS_OUTPUT.PUT_LINE('Debiting 3000 from the source account...');
+  6  
+  7  update account set acbalance=acbalance+3000 where acno=102;
+  8         DBMS_OUTPUT.PUT_LINE('Credited 3000 to the beneficiary account...');
+  9  
+ 10  commit;
+ 11  END;
+ 12          /
+-- Fund Transfer In Progress --                                                                                         
+Debiting 3000 from the source account...                                                                                
+Credited 3000 to the beneficiary account...                                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                                                              
+---------- -------------------- ----------                                                                              
+       101 jack                      51000                                                                              
+       102 smith                     66000                                                                              
+       103 peter                     63000                                                                              
+       104 julie                     50000                                                                              
+
+SQL> BEGIN
+  2         DBMS_OUTPUT.PUT_LINE('-- Fund Transfer In Progress --');
+  3  
+  4  update account set acbalance=acbalance-3000 where acno=&source;
+  5         DBMS_OUTPUT.PUT_LINE('Debiting 3000 from the source account...');
+  6  
+  7  update account set acbalance=acbalance+3000 where acno=&target;
+  8         DBMS_OUTPUT.PUT_LINE('Credited 3000 to the beneficiary account...');
+  9  
+ 10  commit;
+ 11  END;
+ 12          /
+Enter value for source: 103
+old   4: update account set acbalance=acbalance-3000 where acno=&source;
+new   4: update account set acbalance=acbalance-3000 where acno=103;
+Enter value for target: 101
+old   7: update account set acbalance=acbalance+3000 where acno=&target;
+new   7: update account set acbalance=acbalance+3000 where acno=101;
+-- Fund Transfer In Progress --                                                                                         
+Debiting 3000 from the source account...                                                                                
+Credited 3000 to the beneficiary account...                                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                                                              
+---------- -------------------- ----------                                                                              
+       101 jack                      54000                                                                              
+       102 smith                     66000                                                                              
+       103 peter                     60000                                                                              
+       104 julie                     50000                                                                              
+
+SQL> BEGIN
+  2         DBMS_OUTPUT.PUT_LINE('-- Fund Transfer In Progress --');
+  3  select * from account where acno=101;
+  4  update account set acbalance=acbalance-3000 where acno=101;
+  5         DBMS_OUTPUT.PUT_LINE('Debiting 3000 from the source account...');
+  6  
+  7  select * from account where acno=102;
+  8  update account set acbalance=acbalance+3000 where acno=102;
+  9         DBMS_OUTPUT.PUT_LINE('Credited 3000 to the beneficiary account...');
+ 10  
+ 11  commit;
+ 12  END;
+ 13  /
+select * from account where acno=101;
+*
+ERROR at line 3:
+ORA-06550: line 3, column 1: 
+PLS-00428: an INTO clause is expected in this SELECT statement 
+ORA-06550: line 7, column 1: 
+PLS-00428: an INTO clause is expected in this SELECT statement 
+
+
+SQL> declare
+  2  
+  3  sourceAccount number:=&source;
+  4  targetAccount number:=&target;
+  5  sourceBalance number;
+  6  amountToTransfer number:=&TransferAmount;
+  7  BEGIN
+  8         DBMS_OUTPUT.PUT_LINE('-- Fund Transfer In Progress --');
+  9  select acbalance INTO sourceBalance from account where acno=sourceAccount;
+ 10  
+ 11  if sourceBalance > amountToTransfer
+ 12  then
+ 13  update account set acbalance=acbalance-amountToTransfer where acno=sourceAccount;
+ 14         DBMS_OUTPUT.PUT_LINE('Debiting 3000 from the source account...');
+ 15  
+ 16  
+ 17  update account set acbalance=acbalance+amountToTransfer where acno=targetAccount;
+ 18         DBMS_OUTPUT.PUT_LINE('Credited 3000 to the beneficiary account...');
+ 19  commit;
+ 20  DBMS_OUTPUT.PUT_LINE('-- Funds Transferred --');
+ 21  else
+ 22  DBMS_OUTPUT.PUT_LINE('Insufficient funds at source');
+ 23  end if;
+ 24  
+ 25  END;
+ 26          /
+Enter value for source: 101
+old   3: sourceAccount number:=&source;
+new   3: sourceAccount number:=101;
+Enter value for target: 102
+old   4: targetAccount number:=&target;
+new   4: targetAccount number:=102;
+Enter value for transferamount: 4500
+old   6: amountToTransfer number:=&TransferAmount;
+new   6: amountToTransfer number:=4500;
+-- Fund Transfer In Progress --                                                                                         
+Debiting 3000 from the source account...                                                                                
+Credited 3000 to the beneficiary account...                                                                             
+-- Funds Transferred --                                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                                                              
+---------- -------------------- ----------                                                                              
+       101 jack                      49500                                                                              
+       102 smith                     70500                                                                              
+       103 peter                     60000                                                                              
+       104 julie                     50000                                                                              
+
+SQL> declare
+  2  
+  3  sourceAccount number:=&source;
+  4  targetAccount number:=&target;
+  5  sourceBalance number;
+  6  amountToTransfer number:=&TransferAmount;
+  7  BEGIN
+  8         DBMS_OUTPUT.PUT_LINE('-- Fund Transfer In Progress --');
+  9  select acbalance INTO sourceBalance from account where acno=sourceAccount;
+ 10  
+ 11  if sourceBalance > amountToTransfer
+ 12  then
+ 13  update account set acbalance=acbalance-amountToTransfer where acno=sourceAccount;
+ 14         DBMS_OUTPUT.PUT_LINE('Debiting '||amountToTransfer||' from the source account...');
+ 15  
+ 16  update account set acbalance=acbalance+amountToTransfer where acno=targetAccount;
+ 17         DBMS_OUTPUT.PUT_LINE('Credited '||amountToTransfer||' to the beneficiary account...');
+ 18  commit;
+ 19  DBMS_OUTPUT.PUT_LINE('-- Funds Transferred --');
+ 20  else
+ 21  DBMS_OUTPUT.PUT_LINE('Insufficient funds at source');
+ 22  end if;
+ 23  
+ 24  END;
+ 25  /
+Enter value for source: 103
+old   3: sourceAccount number:=&source;
+new   3: sourceAccount number:=103;
+Enter value for target: 104
+old   4: targetAccount number:=&target;
+new   4: targetAccount number:=104;
+Enter value for transferamount: 5000
+old   6: amountToTransfer number:=&TransferAmount;
+new   6: amountToTransfer number:=5000;
+-- Fund Transfer In Progress --                                                                                         
+Debiting 5000 from the source account...                                                                                
+Credited 5000 to the beneficiary account...                                                                             
+-- Funds Transferred --                                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                                                              
+---------- -------------------- ----------                                                                              
+       101 jack                      49500                                                                              
+       102 smith                     70500                                                                              
+       103 peter                     55000                                                                              
+       104 julie                     55000                                                                              
+
+SQL> declare
+  2  
+  3  sourceAccount number:=&source;
+  4  targetAccount number:=&target;
+  5  sourceBalance number;
+  6  amountToTransfer number:=&TransferAmount;
+  7  BEGIN
+  8         DBMS_OUTPUT.PUT_LINE('-- Fund Transfer In Progress --');
+  9  select acbalance INTO sourceBalance from account where acno=sourceAccount;
+ 10  
+ 11  if sourceBalance > amountToTransfer
+ 12  then
+ 13  update account set acbalance=acbalance-amountToTransfer where acno=sourceAccount;
+ 14         DBMS_OUTPUT.PUT_LINE('Debiting '||amountToTransfer||' from the source account...');
+ 15  
+ 16  update account set acbalance=acbalance+amountToTransfer where acno=targetAccount;
+ 17         DBMS_OUTPUT.PUT_LINE('Credited '||amountToTransfer||' to the beneficiary account...');
+ 18  commit;
+ 19  DBMS_OUTPUT.PUT_LINE('-- Funds Transferred --');
+ 20  else
+ 21  DBMS_OUTPUT.PUT_LINE('Insufficient funds at source');
+ 22  end if;
+ 23  
+ 24  END;
+ 25  /
+Enter value for source: 103
+old   3: sourceAccount number:=&source;
+new   3: sourceAccount number:=103;
+Enter value for target: 104
+old   4: targetAccount number:=&target;
+new   4: targetAccount number:=104;
+Enter value for transferamount: 3000
+old   6: amountToTransfer number:=&TransferAmount;
+new   6: amountToTransfer number:=3000;
+-- Fund Transfer In Progress --                                                                                         
+Debiting 3000 from the source account...                                                                                
+Credited 3000 to the beneficiary account...                                                                             
+-- Funds Transferred --                                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                                                              
+---------- -------------------- ----------                                                                              
+       101 jack                      49500                                                                              
+       102 smith                     70500                                                                              
+       103 peter                     52000                                                                              
+       104 julie                     58000                                                                              
+
+SQL> declare
+  2  
+  3  sourceAccount number:=&source;
+  4  targetAccount number:=&target;
+  5  sourceBalance number;
+  6  amountToTransfer number:=&TransferAmount;
+  7  BEGIN
+  8         DBMS_OUTPUT.PUT_LINE('-- Fund Transfer In Progress --');
+  9  select acbalance INTO sourceBalance from account where acno=sourceAccount;
+ 10  
+ 11  if sourceBalance > amountToTransfer
+ 12  then
+ 13  update account set acbalance=acbalance-amountToTransfer where acno=sourceAccount;
+ 14         DBMS_OUTPUT.PUT_LINE('Debiting '||amountToTransfer||' from the source account...');
+ 15  
+ 16  update account set acbalance=acbalance+amountToTransfer where acno=targetAccount;
+ 17         DBMS_OUTPUT.PUT_LINE('Credited '||amountToTransfer||' to the beneficiary account...');
+ 18  commit;
+ 19  DBMS_OUTPUT.PUT_LINE('-- Funds Transferred --');
+ 20  else
+ 21  DBMS_OUTPUT.PUT_LINE('Insufficient funds at source');
+ 22  end if;
+ 23  
+ 24  END;
+ 25  /
+Enter value for source: 103
+old   3: sourceAccount number:=&source;
+new   3: sourceAccount number:=103;
+Enter value for target: 104
+old   4: targetAccount number:=&target;
+new   4: targetAccount number:=104;
+Enter value for transferamount: 55000
+old   6: amountToTransfer number:=&TransferAmount;
+new   6: amountToTransfer number:=55000;
+-- Fund Transfer In Progress --                                                                                         
+Insufficient funds at source                                                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                                                              
+---------- -------------------- ----------                                                                              
+       101 jack                      49500                                                                              
+       102 smith                     70500                                                                              
+       103 peter                     52000                                                                              
+       104 julie                     58000                                                                              
+
+SQL> exit

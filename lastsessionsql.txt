@@ -1,0 +1,122 @@
+SQL> 
+SQL> create or replace procedure fundTransfer(sourceAccount number,targetAccount number,amountToTransfer number)
+  2  as
+  3  sourceBalance number;
+  4  BEGIN
+  5         DBMS_OUTPUT.PUT_LINE('-- Fund Transfer In Progress --');
+  6  select acbalance INTO sourceBalance from account where acno=sourceAccount;
+  7  
+  8  if sourceBalance > amountToTransfer
+  9  then
+ 10  update account set acbalance=acbalance-amountToTransfer where acno=sourceAccount;
+ 11         DBMS_OUTPUT.PUT_LINE('Debiting '||amountToTransfer||' from the source account...');
+ 12  
+ 13  update account set acbalance=acbalance+amountToTransfer where acno=targetAccount;
+ 14         DBMS_OUTPUT.PUT_LINE('Credited '||amountToTransfer||' to the beneficiary account...');
+ 15  commit;
+ 16  DBMS_OUTPUT.PUT_LINE('-- Funds Transferred --');
+ 17  else
+ 18  DBMS_OUTPUT.PUT_LINE('Insufficient funds at source');
+ 19  end if;
+ 20  
+ 21  END;
+ 22          /
+
+Procedure created.
+
+SQL> declare
+  2  
+  3  
+  4  .
+SQL> 
+SQL> begin
+  2    fundTransfer(101,102,4444);
+  3  end;
+  4  /
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                      
+---------- -------------------- ----------                                      
+       101 jack                      45056                                      
+       102 smith                     74944                                      
+       103 peter                     52000                                      
+       104 julie                     58000                                      
+
+SQL> begin
+  2     fundTransfer(103,104,5555);
+  3     fundTransfer(101,102,3333);
+  4     fundTransfer(102,104,4444);
+  5  end;
+  6  /
+-- Fund Transfer In Progress --                                                 
+Debiting 5555 from the source account...                                        
+Credited 5555 to the beneficiary account...                                     
+-- Funds Transferred --                                                         
+-- Fund Transfer In Progress --                                                 
+Debiting 3333 from the source account...                                        
+Credited 3333 to the beneficiary account...                                     
+-- Funds Transferred --                                                         
+-- Fund Transfer In Progress --                                                 
+Debiting 4444 from the source account...                                        
+Credited 4444 to the beneficiary account...                                     
+-- Funds Transferred --                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                      
+---------- -------------------- ----------                                      
+       101 jack                      41723                                      
+       102 smith                     73833                                      
+       103 peter                     46445                                      
+       104 julie                     67999                                      
+
+SQL> update account set acbalance=50000;
+
+4 rows updated.
+
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                      
+---------- -------------------- ----------                                      
+       101 jack                      50000                                      
+       102 smith                     50000                                      
+       103 peter                     50000                                      
+       104 julie                     50000                                      
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 
+SQL> begin
+  2     fundTransfer(101,102,6000);
+  3     fundTransfer(103,104,8000);
+  4  end;
+  5  /
+-- Fund Transfer In Progress --                                                 
+Debiting 6000 from the source account...                                        
+Credited 6000 to the beneficiary account...                                     
+-- Funds Transferred --                                                         
+-- Fund Transfer In Progress --                                                 
+Debiting 8000 from the source account...                                        
+Credited 8000 to the beneficiary account...                                     
+-- Funds Transferred --                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from account;
+
+      ACNO ACHOLDER              ACBALANCE                                      
+---------- -------------------- ----------                                      
+       101 jack                      44000                                      
+       102 smith                     56000                                      
+       103 peter                     42000                                      
+       104 julie                     58000                                      
+
+SQL> exit

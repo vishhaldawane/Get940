@@ -1,0 +1,3068 @@
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNUMBER                                 NOT NULL NUMBER(10)
+ EMPLOYEENAME                                       VARCHAR2(20 CHAR)
+ CUBICLE_ID_FK                                      NUMBER(10)
+
+SQL> desc myemployee;
+ERROR:
+ORA-04043: object myemployee does not exist 
+
+
+SQL> create table myemployee
+  2  (
+  3     empno number,
+  4     ename  varchar2(10),
+  5     gender char(1),
+  6     birthdate date,
+  7     age number(3),
+  8     desg varchar2(10),
+  9     salary number(12,2)
+ 10  );
+
+Table created.
+
+SQL> desc myemployee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER
+ ENAME                                              VARCHAR2(10)
+ GENDER                                             CHAR(1)
+ BIRTHDATE                                          DATE
+ AGE                                                NUMBER(3)
+ DESG                                               VARCHAR2(10)
+ SALARY                                             NUMBER(12,2)
+
+SQL> alter table myemployee rename birthdate hiredate;
+alter table myemployee rename birthdate hiredate
+                              *
+ERROR at line 1:
+ORA-14155: missing PARTITION or SUBPARTITION keyword 
+
+
+SQL> alter table myemployee rename column birthdate hiredate;
+alter table myemployee rename column birthdate hiredate
+                                               *
+ERROR at line 1:
+ORA-00946: missing TO keyword 
+
+
+SQL> alter table myemployee rename column birthdate to hiredate;
+
+Table altered.
+
+SQL> desc myemployee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER
+ ENAME                                              VARCHAR2(10)
+ GENDER                                             CHAR(1)
+ HIREDATE                                           DATE
+ AGE                                                NUMBER(3)
+ DESG                                               VARCHAR2(10)
+ SALARY                                             NUMBER(12,2)
+
+SQL> alter table myemployee modify column hiredate varchar2(10);
+alter table myemployee modify column hiredate varchar2(10)
+                                              *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> alter table myemployee modify hiredate varchar2(10);
+
+Table altered.
+
+SQL> desc myemployee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER
+ ENAME                                              VARCHAR2(10)
+ GENDER                                             CHAR(1)
+ HIREDATE                                           VARCHAR2(10)
+ AGE                                                NUMBER(3)
+ DESG                                               VARCHAR2(10)
+ SALARY                                             NUMBER(12,2)
+
+SQL> alter table myemployee modify hiredate date;
+
+Table altered.
+
+SQL> desc myemployee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER
+ ENAME                                              VARCHAR2(10)
+ GENDER                                             CHAR(1)
+ HIREDATE                                           DATE
+ AGE                                                NUMBER(3)
+ DESG                                               VARCHAR2(10)
+ SALARY                                             NUMBER(12,2)
+
+SQL> insert into myemployee values (7839,'KING','F','12-Jan-1990',23,'PRESIDENT',5000);
+
+1 row created.
+
+SQL> insert into myemployee values (7839,'QUEEN','M','12-DEC-1991',27,'AVP',8000);
+
+1 row created.
+
+SQL> SELECT * FROM MYEMPLOYEE;
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+      7839 KING       F 12-JAN-90         23 PRESIDENT        5000              
+      7839 QUEEN      M 12-DEC-91         27 AVP              8000              
+
+SQL> insert into myemployee values (&EMPNO,'&ENAME','&GENDER','&JOINING',&AGE,'&DESG',&SALARY);
+Enter value for empno: 7754
+Enter value for ename: MARTIN
+Enter value for gender: M
+Enter value for joining: 10-JUL-1991
+Enter value for age: 20
+Enter value for desg: MANAGER
+Enter value for salary: 3000
+old   1: insert into myemployee values (&EMPNO,'&ENAME','&GENDER','&JOINING',&AGE,'&DESG',&SALARY)
+new   1: insert into myemployee values (7754,'MARTIN','M','10-JUL-1991',20,'MANAGER',3000)
+
+1 row created.
+
+SQL> /
+Enter value for empno: 7543
+Enter value for ename: SMITH
+Enter value for gender: M
+Enter value for joining: 30-JAN-1992
+Enter value for age: 21
+Enter value for desg: CLERK
+Enter value for salary: 3500
+old   1: insert into myemployee values (&EMPNO,'&ENAME','&GENDER','&JOINING',&AGE,'&DESG',&SALARY)
+new   1: insert into myemployee values (7543,'SMITH','M','30-JAN-1992',21,'CLERK',3500)
+
+1 row created.
+
+SQL> SELECT * FROM MYEMPLOYEE;
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+      7839 KING       F 12-JAN-90         23 PRESIDENT        5000              
+      7839 QUEEN      M 12-DEC-91         27 AVP              8000              
+      7754 MARTIN     M 10-JUL-91         20 MANAGER          3000              
+      7543 SMITH      M 30-JAN-92         21 CLERK            3500              
+
+SQL> /
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+      7839 KING       F 12-JAN-90         23 PRESIDENT        5000              
+      7839 QUEEN      M 12-DEC-91         27 AVP              8000              
+      7754 MARTIN     M 10-JUL-91         20 MANAGER          3000              
+      7543 SMITH      M 30-JAN-92         21 CLERK            3500              
+
+SQL> /
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+      7839 KING       F 12-JAN-90         23 PRESIDENT        5000              
+      7839 QUEEN      M 12-DEC-91         27 AVP              8000              
+      7754 MARTIN     M 10-JUL-91         20 MANAGER          3000              
+      7543 SMITH      M 30-JAN-92         21 CLERK            3500              
+
+SQL> /
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+      7839 KING       F 12-JAN-90         23 PRESIDENT        5000              
+      7839 QUEEN      M 12-DEC-91         27 AVP              8000              
+      7754 MARTIN     M 10-JUL-91         20 MANAGER          3000              
+      7543 SMITH      M 30-JAN-92         21 CLERK            3500              
+
+SQL> select  * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+A                              TABLE                                            
+AA                             TABLE                                            
+ACCMASTER                      TABLE                                            
+ANNO_PRODUCT                   TABLE                                            
+AQ$DEF$_AQCALL                 VIEW                                             
+AQ$DEF$_AQERROR                VIEW                                             
+AQ$_DEF$_AQCALL_F              VIEW                                             
+AQ$_DEF$_AQERROR_F             VIEW                                             
+AQ$_INTERNET_AGENTS            TABLE                                            
+AQ$_INTERNET_AGENT_PRIVS       TABLE                                            
+AQ$_QUEUES                     TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+AQ$_QUEUE_TABLES               TABLE                                            
+AQ$_SCHEDULES                  TABLE                                            
+AUTHORS                        TABLE                                            
+B                              TABLE                                            
+BIDS                           TABLE                                            
+BONUS                          TABLE                                            
+BOOKS                          TABLE                                            
+C                              TABLE                                            
+CATALOG                        SYNONYM                                          
+CATEGORIES                     TABLE                                            
+CATEGORIES_ITEMS               TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+CDS                            TABLE                                            
+CD_MASTER                      TABLE                                            
+COL                            SYNONYM                                          
+CUBICLE                        TABLE                                            
+CUSTOMER                       TABLE                                            
+CUSTOMER10                     TABLE                                            
+CUSTOMERSUBSCRIPTIONLINK10     TABLE                                            
+DEF$_AQCALL                    TABLE                                            
+DEF$_AQERROR                   TABLE                                            
+DEF$_CALLDEST                  TABLE                                            
+DEF$_DEFAULTDEST               TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+DEF$_DESTINATION               TABLE                                            
+DEF$_ERROR                     TABLE                                            
+DEF$_LOB                       TABLE                                            
+DEF$_ORIGIN                    TABLE                                            
+DEF$_PROPAGATOR                TABLE                                            
+DEF$_PUSHED_TRANSACTIONS       TABLE                                            
+DEPARTMENT                     TABLE                                            
+DEPARTMENT1                    TABLE                                            
+DEPARTMENT10                   TABLE                                            
+DEPARTMENT10_EMPLOYEE10        TABLE                                            
+DEPARTMENT1_EMPLOYEE1          TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+DEPARTMENT_DEPARTMENT          TABLE                                            
+DEPT                           TABLE                                            
+DUMMY                          TABLE                                            
+EMP                            TABLE                                            
+EMP1                           TABLE                                            
+EMP2                           TABLE                                            
+EMP3                           TABLE                                            
+EMPLOYEE                       TABLE                                            
+EMPLOYEE1                      TABLE                                            
+EMPLOYEE10                     TABLE                                            
+FLIGHTS                        TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+HELP                           TABLE                                            
+ITEM                           TABLE                                            
+ITEMS                          TABLE                                            
+LOGIN                          TABLE                                            
+LOGMNRC_DBNAME_UID_MAP         TABLE                                            
+LOGMNRC_GSBA                   TABLE                                            
+LOGMNRC_GSII                   TABLE                                            
+LOGMNRC_GTCS                   TABLE                                            
+LOGMNRC_GTLO                   TABLE                                            
+LOGMNRP_CTAS_PART_MAP          TABLE                                            
+LOGMNRT_MDDL$                  TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_AGE_SPILL$              TABLE                                            
+LOGMNR_ATTRCOL$                TABLE                                            
+LOGMNR_ATTRIBUTE$              TABLE                                            
+LOGMNR_CCOL$                   TABLE                                            
+LOGMNR_CDEF$                   TABLE                                            
+LOGMNR_COL$                    TABLE                                            
+LOGMNR_COLTYPE$                TABLE                                            
+LOGMNR_DICTIONARY$             TABLE                                            
+LOGMNR_DICTSTATE$              TABLE                                            
+LOGMNR_ENC$                    TABLE                                            
+LOGMNR_ERROR$                  TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_FILTER$                 TABLE                                            
+LOGMNR_GLOBAL$                 TABLE                                            
+LOGMNR_GT_TAB_INCLUDE$         TABLE                                            
+LOGMNR_GT_USER_INCLUDE$        TABLE                                            
+LOGMNR_GT_XID_INCLUDE$         TABLE                                            
+LOGMNR_ICOL$                   TABLE                                            
+LOGMNR_IND$                    TABLE                                            
+LOGMNR_INDCOMPART$             TABLE                                            
+LOGMNR_INDPART$                TABLE                                            
+LOGMNR_INDSUBPART$             TABLE                                            
+LOGMNR_KOPM$                   TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_LOB$                    TABLE                                            
+LOGMNR_LOBFRAG$                TABLE                                            
+LOGMNR_LOG$                    TABLE                                            
+LOGMNR_LOGMNR_BUILDLOG         TABLE                                            
+LOGMNR_NTAB$                   TABLE                                            
+LOGMNR_OBJ$                    TABLE                                            
+LOGMNR_OPQTYPE$                TABLE                                            
+LOGMNR_PARAMETER$              TABLE                                            
+LOGMNR_PARTOBJ$                TABLE                                            
+LOGMNR_PROCESSED_LOG$          TABLE                                            
+LOGMNR_PROPS$                  TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_REFCON$                 TABLE                                            
+LOGMNR_RESTART_CKPT$           TABLE                                            
+LOGMNR_RESTART_CKPT_TXINFO$    TABLE                                            
+LOGMNR_SEED$                   TABLE                                            
+LOGMNR_SESSION$                TABLE                                            
+LOGMNR_SESSION_ACTIONS$        TABLE                                            
+LOGMNR_SESSION_EVOLVE$         TABLE                                            
+LOGMNR_SPILL$                  TABLE                                            
+LOGMNR_SUBCOLTYPE$             TABLE                                            
+LOGMNR_TAB$                    TABLE                                            
+LOGMNR_TABCOMPART$             TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGMNR_TABPART$                TABLE                                            
+LOGMNR_TABSUBPART$             TABLE                                            
+LOGMNR_TS$                     TABLE                                            
+LOGMNR_TYPE$                   TABLE                                            
+LOGMNR_UID$                    TABLE                                            
+LOGMNR_USER$                   TABLE                                            
+LOGSTDBY$APPLY_MILESTONE       TABLE                                            
+LOGSTDBY$APPLY_PROGRESS        TABLE                                            
+LOGSTDBY$EDS_TABLES            TABLE                                            
+LOGSTDBY$EVENTS                TABLE                                            
+LOGSTDBY$FLASHBACK_SCN         TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+LOGSTDBY$HISTORY               TABLE                                            
+LOGSTDBY$PARAMETERS            TABLE                                            
+LOGSTDBY$PLSQL                 TABLE                                            
+LOGSTDBY$SCN                   TABLE                                            
+LOGSTDBY$SKIP                  TABLE                                            
+LOGSTDBY$SKIP_SUPPORT          TABLE                                            
+LOGSTDBY$SKIP_TRANSACTION      TABLE                                            
+MEMBERS                        TABLE                                            
+MVIEW$_ADV_AJG                 TABLE                                            
+MVIEW$_ADV_BASETABLE           TABLE                                            
+MVIEW$_ADV_CLIQUE              TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+MVIEW$_ADV_ELIGIBLE            TABLE                                            
+MVIEW$_ADV_EXCEPTIONS          TABLE                                            
+MVIEW$_ADV_FILTER              TABLE                                            
+MVIEW$_ADV_FILTERINSTANCE      TABLE                                            
+MVIEW$_ADV_FJG                 TABLE                                            
+MVIEW$_ADV_GC                  TABLE                                            
+MVIEW$_ADV_INDEX               TABLE                                            
+MVIEW$_ADV_INFO                TABLE                                            
+MVIEW$_ADV_JOURNAL             TABLE                                            
+MVIEW$_ADV_LEVEL               TABLE                                            
+MVIEW$_ADV_LOG                 TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+MVIEW$_ADV_OUTPUT              TABLE                                            
+MVIEW$_ADV_OWB                 TABLE                                            
+MVIEW$_ADV_PARAMETERS          TABLE                                            
+MVIEW$_ADV_PARTITION           TABLE                                            
+MVIEW$_ADV_PLAN                TABLE                                            
+MVIEW$_ADV_PRETTY              TABLE                                            
+MVIEW$_ADV_ROLLUP              TABLE                                            
+MVIEW$_ADV_SQLDEPEND           TABLE                                            
+MVIEW$_ADV_TEMP                TABLE                                            
+MVIEW$_ADV_WORKLOAD            TABLE                                            
+MVIEW_EVALUATIONS              VIEW                                             
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+MVIEW_EXCEPTIONS               VIEW                                             
+MVIEW_FILTER                   VIEW                                             
+MVIEW_FILTERINSTANCE           VIEW                                             
+MVIEW_LOG                      VIEW                                             
+MVIEW_RECOMMENDATIONS          VIEW                                             
+MVIEW_WORKLOAD                 VIEW                                             
+MYDEPT1                        TABLE                                            
+MYEMPLOYEE                     TABLE                                            
+OL$                            TABLE                                            
+OL$HINTS                       TABLE                                            
+OL$NODES                       TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+ORD                            TABLE                                            
+PRICE                          TABLE                                            
+PRODUCT                        TABLE                                            
+PRODUCTS                       TABLE                                            
+PRODUCT_PRIVS                  VIEW                                             
+PRODUCT_USER_PROFILE           SYNONYM                                          
+PUBLICSYN                      SYNONYM                                          
+REGISTER                       TABLE                                            
+REPCAT$_AUDIT_ATTRIBUTE        TABLE                                            
+REPCAT$_AUDIT_COLUMN           TABLE                                            
+REPCAT$_COLUMN_GROUP           TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_CONFLICT               TABLE                                            
+REPCAT$_DDL                    TABLE                                            
+REPCAT$_EXCEPTIONS             TABLE                                            
+REPCAT$_EXTENSION              TABLE                                            
+REPCAT$_FLAVORS                TABLE                                            
+REPCAT$_FLAVOR_OBJECTS         TABLE                                            
+REPCAT$_GENERATED              TABLE                                            
+REPCAT$_GROUPED_COLUMN         TABLE                                            
+REPCAT$_INSTANTIATION_DDL      TABLE                                            
+REPCAT$_KEY_COLUMNS            TABLE                                            
+REPCAT$_OBJECT_PARMS           TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_OBJECT_TYPES           TABLE                                            
+REPCAT$_PARAMETER_COLUMN       TABLE                                            
+REPCAT$_PRIORITY               TABLE                                            
+REPCAT$_PRIORITY_GROUP         TABLE                                            
+REPCAT$_REFRESH_TEMPLATES      TABLE                                            
+REPCAT$_REPCAT                 TABLE                                            
+REPCAT$_REPCATLOG              TABLE                                            
+REPCAT$_REPCOLUMN              TABLE                                            
+REPCAT$_REPGROUP_PRIVS         TABLE                                            
+REPCAT$_REPOBJECT              TABLE                                            
+REPCAT$_REPPROP                TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_REPSCHEMA              TABLE                                            
+REPCAT$_RESOLUTION             TABLE                                            
+REPCAT$_RESOLUTION_METHOD      TABLE                                            
+REPCAT$_RESOLUTION_STATISTICS  TABLE                                            
+REPCAT$_RESOL_STATS_CONTROL    TABLE                                            
+REPCAT$_RUNTIME_PARMS          TABLE                                            
+REPCAT$_SITES_NEW              TABLE                                            
+REPCAT$_SITE_OBJECTS           TABLE                                            
+REPCAT$_SNAPGROUP              TABLE                                            
+REPCAT$_TEMPLATE_OBJECTS       TABLE                                            
+REPCAT$_TEMPLATE_PARMS         TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+REPCAT$_TEMPLATE_REFGROUPS     TABLE                                            
+REPCAT$_TEMPLATE_SITES         TABLE                                            
+REPCAT$_TEMPLATE_STATUS        TABLE                                            
+REPCAT$_TEMPLATE_TARGETS       TABLE                                            
+REPCAT$_TEMPLATE_TYPES         TABLE                                            
+REPCAT$_USER_AUTHORIZATIONS    TABLE                                            
+REPCAT$_USER_PARM_VALUES       TABLE                                            
+SALES                          VIEW                                             
+SALGRADE                       TABLE                                            
+SONG_ALBUM                     TABLE                                            
+SONG_ARTIST                    TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+SONG_MASTER                    TABLE                                            
+SQLPLUS_PRODUCT_PROFILE        TABLE                                            
+STUDENT                        TABLE                                            
+STUDENT_INFO                   TABLE                                            
+STUDENT_LIST                   TABLE                                            
+SUBSCRIPTION10                 TABLE                                            
+SYSCATALOG                     SYNONYM                                          
+SYSFILES                       SYNONYM                                          
+TAB                            SYNONYM                                          
+TABQUOTAS                      SYNONYM                                          
+TX_ORDERS                      TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+TX_PAYMENTS                    TABLE                                            
+TX_PRODUCTS                    TABLE                                            
+USER1                          TABLE                                            
+USERDETAILS                    TABLE                                            
+
+235 rows selected.
+
+SQL> desc myjack;
+ERROR:
+ORA-04043: object myjack does not exist 
+
+
+SQL> insert into myemployee values (&EMPNO,'&ENAME','&GENDER','&JOINING',&AGE,'&DESG',&SALARY);
+Enter value for empno: 8890
+Enter value for ename: JACK
+Enter value for gender: M
+Enter value for joining: 01-FEB-1992
+Enter value for age: 22
+Enter value for desg: SALESMAN
+Enter value for salary: 123456789
+old   1: insert into myemployee values (&EMPNO,'&ENAME','&GENDER','&JOINING',&AGE,'&DESG',&SALARY)
+new   1: insert into myemployee values (8890,'JACK','M','01-FEB-1992',22,'SALESMAN',123456789)
+
+1 row created.
+
+SQL> SELECT * FROM MYEMPLOYEE;
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+      7839 KING       F 12-JAN-90         23 PRESIDENT        5000              
+      7839 QUEEN      M 12-DEC-91         27 AVP              8000              
+      7754 MARTIN     M 10-JUL-91         20 MANAGER          3000              
+      7543 SMITH      M 30-JAN-92         21 CLERK            3500              
+      8890 JACK       M 01-FEB-92         22 SALESMAN    123456789              
+
+SQL> insert into myemployee values (7839,'QUEEN','M','12-DEC-1991',27,'AVP',1234567890);
+
+1 row created.
+
+SQL> SELECT * FROM MYEMPLOYEE;
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+      7839 KING       F 12-JAN-90         23 PRESIDENT        5000              
+      7839 QUEEN      M 12-DEC-91         27 AVP              8000              
+      7754 MARTIN     M 10-JUL-91         20 MANAGER          3000              
+      7543 SMITH      M 30-JAN-92         21 CLERK            3500              
+      8890 JACK       M 01-FEB-92         22 SALESMAN    123456789              
+      7839 QUEEN      M 12-DEC-91         27 AVP        1234567890              
+
+6 rows selected.
+
+SQL> insert into myemployee values (7839,'KING','F','12-Jan-1990',23,'PRESIDENT',12345678901);
+insert into myemployee values (7839,'KING','F','12-Jan-1990',23,'PRESIDENT',12345678901)
+                                                                            *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column 
+
+
+SQL> ALTER TABLE MYEMPLOYEE MODIFY SALARY NUMBER(14,2);
+
+Table altered.
+
+SQL> insert into myemployee values (7839,'KING','F','12-Jan-1990',23,'PRESIDENT',123456789012);
+
+1 row created.
+
+SQL> insert into myemployee values (7839,'KING','F','12-Jan-1990',23,'PRESIDENT',1234567890123);
+insert into myemployee values (7839,'KING','F','12-Jan-1990',23,'PRESIDENT',1234567890123)
+                                                                            *
+ERROR at line 1:
+ORA-01438: value larger than specified precision allowed for this column 
+
+
+SQL> SELECT * FROM MYEMPLOYEE;
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+      7839 KING       F 12-JAN-90         23 PRESIDENT        5000              
+      7839 QUEEN      M 12-DEC-91         27 AVP              8000              
+      7754 MARTIN     M 10-JUL-91         20 MANAGER          3000              
+      7543 SMITH      M 30-JAN-92         21 CLERK            3500              
+      8890 JACK       M 01-FEB-92         22 SALESMAN    123456789              
+      7839 QUEEN      M 12-DEC-91         27 AVP        1234567890              
+      7839 KING       F 12-JAN-90         23 PRESIDENT  1.2346E+11              
+
+7 rows selected.
+
+SQL> ALTER TABLE MYEMPLOYEE MODIFY SALARY NUMBER(10,2);
+ALTER TABLE MYEMPLOYEE MODIFY SALARY NUMBER(10,2)
+                              *
+ERROR at line 1:
+ORA-01440: column to be modified must be empty to decrease precision or scale 
+
+
+SQL> insert into myemployee (EMPNO,ENAME) values (1839,'JOHN');
+
+1 row created.
+
+SQL> insert into myemployee (GENDER,EMPNO,ENAME) values ('F',1829,'JANE');
+
+1 row created.
+
+SQL> SELECT * FROM MYEMPLOYEE;
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+      7839 KING       F 12-JAN-90         23 PRESIDENT        5000              
+      7839 QUEEN      M 12-DEC-91         27 AVP              8000              
+      7754 MARTIN     M 10-JUL-91         20 MANAGER          3000              
+      7543 SMITH      M 30-JAN-92         21 CLERK            3500              
+      8890 JACK       M 01-FEB-92         22 SALESMAN    123456789              
+      7839 QUEEN      M 12-DEC-91         27 AVP        1234567890              
+      7839 KING       F 12-JAN-90         23 PRESIDENT  1.2346E+11              
+      1839 JOHN                                                                 
+      1829 JANE       F                                                         
+
+9 rows selected.
+
+SQL> insert all
+  2       into myemployee (EMPNO,ENAME) values (12129,'John1')
+  3       into myemployee (EMPNO,ENAME) values (13129,'John2')
+  4       into myemployee (EMPNO,ENAME) values (14129,'John3')
+  5  select 1 from dual;
+
+3 rows created.
+
+SQL> select * from myemployee;
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+      7839 KING       F 12-JAN-90         23 PRESIDENT        5000              
+      7839 QUEEN      M 12-DEC-91         27 AVP              8000              
+      7754 MARTIN     M 10-JUL-91         20 MANAGER          3000              
+      7543 SMITH      M 30-JAN-92         21 CLERK            3500              
+      8890 JACK       M 01-FEB-92         22 SALESMAN    123456789              
+      7839 QUEEN      M 12-DEC-91         27 AVP        1234567890              
+      7839 KING       F 12-JAN-90         23 PRESIDENT  1.2346E+11              
+      1839 JOHN                                                                 
+      1829 JANE       F                                                         
+     12129 John1                                                                
+     13129 John2                                                                
+
+     EMPNO ENAME      G HIREDATE         AGE DESG           SALARY              
+---------- ---------- - --------- ---------- ---------- ----------              
+     14129 John3                                                                
+
+12 rows selected.
+
+SQL> select 1 from dual;
+
+         1                                                                      
+----------                                                                      
+         1                                                                      
+
+SQL> select 100+200 from dept;
+
+   100+200                                                                      
+----------                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+
+SQL> select 100+200 from emp;
+
+   100+200                                                                      
+----------                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+
+   100+200                                                                      
+----------                                                                      
+       300                                                                      
+       300                                                                      
+       300                                                                      
+
+14 rows selected.
+
+SQL> select empno from emp;
+
+     EMPNO                                                                      
+----------                                                                      
+      7369                                                                      
+      7499                                                                      
+      7521                                                                      
+      7566                                                                      
+      7654                                                                      
+      7698                                                                      
+      7782                                                                      
+      7788                                                                      
+      7839                                                                      
+      7844                                                                      
+      7876                                                                      
+
+     EMPNO                                                                      
+----------                                                                      
+      7900                                                                      
+      7902                                                                      
+      7934                                                                      
+
+14 rows selected.
+
+SQL> select 1 from emp;
+
+         1                                                                      
+----------                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+
+         1                                                                      
+----------                                                                      
+         1                                                                      
+         1                                                                      
+         1                                                                      
+
+14 rows selected.
+
+SQL> select 12 from emp;
+
+        12                                                                      
+----------                                                                      
+        12                                                                      
+        12                                                                      
+        12                                                                      
+        12                                                                      
+        12                                                                      
+        12                                                                      
+        12                                                                      
+        12                                                                      
+        12                                                                      
+        12                                                                      
+        12                                                                      
+
+        12                                                                      
+----------                                                                      
+        12                                                                      
+        12                                                                      
+        12                                                                      
+
+14 rows selected.
+
+SQL> select * from dual;
+
+D                                                                               
+-                                                                               
+X                                                                               
+
+SQL> desc dual;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DUMMY                                              VARCHAR2(1)
+
+SQL> 
+SQL> select to_number('123') from dual;
+
+TO_NUMBER('123')                                                                
+----------------                                                                
+             123                                                                
+
+SQL> select to_number(sal) from myemployee;
+select to_number(sal) from myemployee
+                 *
+ERROR at line 1:
+ORA-00904: "SAL": invalid identifier 
+
+
+SQL> select to_number(salary) from myemployee;
+
+TO_NUMBER(SALARY)                                                               
+-----------------                                                               
+             5000                                                               
+             8000                                                               
+             3000                                                               
+             3500                                                               
+        123456789                                                               
+       1234567890                                                               
+       1.2346E+11                                                               
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+
+TO_NUMBER(SALARY)                                                               
+-----------------                                                               
+                                                                                
+
+12 rows selected.
+
+SQL> set numw 20;
+SQL> select salary from myemployee;
+
+              SALARY                                                            
+--------------------                                                            
+                5000                                                            
+                8000                                                            
+                3000                                                            
+                3500                                                            
+           123456789                                                            
+          1234567890                                                            
+        123456789012                                                            
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+
+              SALARY                                                            
+--------------------                                                            
+                                                                                
+
+12 rows selected.
+
+SQL> select * from myemployee;
+
+               EMPNO ENAME      G HIREDATE                   AGE DESG           
+-------------------- ---------- - --------- -------------------- ----------     
+              SALARY                                                            
+--------------------                                                            
+                7839 KING       F 12-JAN-90                   23 PRESIDENT      
+                5000                                                            
+                                                                                
+                7839 QUEEN      M 12-DEC-91                   27 AVP            
+                8000                                                            
+                                                                                
+                7754 MARTIN     M 10-JUL-91                   20 MANAGER        
+                3000                                                            
+                                                                                
+
+               EMPNO ENAME      G HIREDATE                   AGE DESG           
+-------------------- ---------- - --------- -------------------- ----------     
+              SALARY                                                            
+--------------------                                                            
+                7543 SMITH      M 30-JAN-92                   21 CLERK          
+                3500                                                            
+                                                                                
+                8890 JACK       M 01-FEB-92                   22 SALESMAN       
+           123456789                                                            
+                                                                                
+                7839 QUEEN      M 12-DEC-91                   27 AVP            
+          1234567890                                                            
+                                                                                
+
+               EMPNO ENAME      G HIREDATE                   AGE DESG           
+-------------------- ---------- - --------- -------------------- ----------     
+              SALARY                                                            
+--------------------                                                            
+                7839 KING       F 12-JAN-90                   23 PRESIDENT      
+        123456789012                                                            
+                                                                                
+                1839 JOHN                                                       
+                                                                                
+                                                                                
+                1829 JANE       F                                               
+                                                                                
+                                                                                
+
+               EMPNO ENAME      G HIREDATE                   AGE DESG           
+-------------------- ---------- - --------- -------------------- ----------     
+              SALARY                                                            
+--------------------                                                            
+               12129 John1                                                      
+                                                                                
+                                                                                
+               13129 John2                                                      
+                                                                                
+                                                                                
+               14129 John3                                                      
+                                                                                
+                                                                                
+
+12 rows selected.
+
+SQL> set numw 15;
+SQL> select * from myemployee;
+
+          EMPNO ENAME      G HIREDATE              AGE DESG                     
+--------------- ---------- - --------- --------------- ----------               
+         SALARY                                                                 
+---------------                                                                 
+           7839 KING       F 12-JAN-90              23 PRESIDENT                
+           5000                                                                 
+                                                                                
+           7839 QUEEN      M 12-DEC-91              27 AVP                      
+           8000                                                                 
+                                                                                
+           7754 MARTIN     M 10-JUL-91              20 MANAGER                  
+           3000                                                                 
+                                                                                
+
+          EMPNO ENAME      G HIREDATE              AGE DESG                     
+--------------- ---------- - --------- --------------- ----------               
+         SALARY                                                                 
+---------------                                                                 
+           7543 SMITH      M 30-JAN-92              21 CLERK                    
+           3500                                                                 
+                                                                                
+           8890 JACK       M 01-FEB-92              22 SALESMAN                 
+      123456789                                                                 
+                                                                                
+           7839 QUEEN      M 12-DEC-91              27 AVP                      
+     1234567890                                                                 
+                                                                                
+
+          EMPNO ENAME      G HIREDATE              AGE DESG                     
+--------------- ---------- - --------- --------------- ----------               
+         SALARY                                                                 
+---------------                                                                 
+           7839 KING       F 12-JAN-90              23 PRESIDENT                
+   123456789012                                                                 
+                                                                                
+           1839 JOHN                                                            
+                                                                                
+                                                                                
+           1829 JANE       F                                                    
+                                                                                
+                                                                                
+
+          EMPNO ENAME      G HIREDATE              AGE DESG                     
+--------------- ---------- - --------- --------------- ----------               
+         SALARY                                                                 
+---------------                                                                 
+          12129 John1                                                           
+                                                                                
+                                                                                
+          13129 John2                                                           
+                                                                                
+                                                                                
+          14129 John3                                                           
+                                                                                
+                                                                                
+
+12 rows selected.
+
+SQL> set numw 12;
+SQL> select * from myemployee;
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+        7839 KING       F 12-JAN-90           23 PRESIDENT          5000        
+        7839 QUEEN      M 12-DEC-91           27 AVP                8000        
+        7754 MARTIN     M 10-JUL-91           20 MANAGER            3000        
+        7543 SMITH      M 30-JAN-92           21 CLERK              3500        
+        8890 JACK       M 01-FEB-92           22 SALESMAN      123456789        
+        7839 QUEEN      M 12-DEC-91           27 AVP          1234567890        
+        7839 KING       F 12-JAN-90           23 PRESIDENT  123456789012        
+        1839 JOHN                                                               
+        1829 JANE       F                                                       
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+       14129 John3                                                              
+
+12 rows selected.
+
+SQL>  insert into myemployee (EMPNO,ENAME) values (&empnumber,'&empname');
+Enter value for empnumber: 4545
+Enter value for empname: johny
+old   1:  insert into myemployee (EMPNO,ENAME) values (&empnumber,'&empname')
+new   1:  insert into myemployee (EMPNO,ENAME) values (4545,'johny')
+
+1 row created.
+
+SQL> select * from myemployee;
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+        7839 KING       F 12-JAN-90           23 PRESIDENT          5000        
+        7839 QUEEN      M 12-DEC-91           27 AVP                8000        
+        7754 MARTIN     M 10-JUL-91           20 MANAGER            3000        
+        7543 SMITH      M 30-JAN-92           21 CLERK              3500        
+        8890 JACK       M 01-FEB-92           22 SALESMAN      123456789        
+        7839 QUEEN      M 12-DEC-91           27 AVP          1234567890        
+        7839 KING       F 12-JAN-90           23 PRESIDENT  123456789012        
+        1839 JOHN                                                               
+        1829 JANE       F                                                       
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+       14129 John3                                                              
+        4545 johny                                                              
+
+13 rows selected.
+
+SQL>  insert into myemployee (EMPNO,ENAME) values (1212,'&empname');
+Enter value for empname: JACKSON
+old   1:  insert into myemployee (EMPNO,ENAME) values (1212,'&empname')
+new   1:  insert into myemployee (EMPNO,ENAME) values (1212,'JACKSON')
+
+1 row created.
+
+SQL> select * from myemployee;
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+        7839 KING       F 12-JAN-90           23 PRESIDENT          5000        
+        7839 QUEEN      M 12-DEC-91           27 AVP                8000        
+        7754 MARTIN     M 10-JUL-91           20 MANAGER            3000        
+        7543 SMITH      M 30-JAN-92           21 CLERK              3500        
+        8890 JACK       M 01-FEB-92           22 SALESMAN      123456789        
+        7839 QUEEN      M 12-DEC-91           27 AVP          1234567890        
+        7839 KING       F 12-JAN-90           23 PRESIDENT  123456789012        
+        1839 JOHN                                                               
+        1829 JANE       F                                                       
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> rename myemployee to myemployee111;
+
+Table renamed.
+
+SQL> select * from myemployee;
+select * from myemployee
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from myemployee111;
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+        7839 KING       F 12-JAN-90           23 PRESIDENT          5000        
+        7839 QUEEN      M 12-DEC-91           27 AVP                8000        
+        7754 MARTIN     M 10-JUL-91           20 MANAGER            3000        
+        7543 SMITH      M 30-JAN-92           21 CLERK              3500        
+        8890 JACK       M 01-FEB-92           22 SALESMAN      123456789        
+        7839 QUEEN      M 12-DEC-91           27 AVP          1234567890        
+        7839 KING       F 12-JAN-90           23 PRESIDENT  123456789012        
+        1839 JOHN                                                               
+        1829 JANE       F                                                       
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> create table myemp222 select * from myemployee111;
+create table myemp222 select * from myemployee111
+                      *
+ERROR at line 1:
+ORA-00922: missing or invalid option 
+
+
+SQL> create table myemp222 as select * from myemployee111;
+
+Table created.
+
+SQL> select * from myemp222;
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+        7839 KING       F 12-JAN-90           23 PRESIDENT          5000        
+        7839 QUEEN      M 12-DEC-91           27 AVP                8000        
+        7754 MARTIN     M 10-JUL-91           20 MANAGER            3000        
+        7543 SMITH      M 30-JAN-92           21 CLERK              3500        
+        8890 JACK       M 01-FEB-92           22 SALESMAN      123456789        
+        7839 QUEEN      M 12-DEC-91           27 AVP          1234567890        
+        7839 KING       F 12-JAN-90           23 PRESIDENT  123456789012        
+        1839 JOHN                                                               
+        1829 JANE       F                                                       
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> truncate table myemp222;
+
+Table truncated.
+
+SQL> desc myemp222;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER
+ ENAME                                              VARCHAR2(10)
+ GENDER                                             CHAR(1)
+ HIREDATE                                           DATE
+ AGE                                                NUMBER(3)
+ DESG                                               VARCHAR2(10)
+ SALARY                                             NUMBER(14,2)
+
+SQL> select * from myemp222;
+
+no rows selected
+
+SQL> drop table myemp222;
+
+Table dropped.
+
+SQL> alter table myemployee111
+  2  add email varchar2(20);
+
+Table altered.
+
+SQL> select * from myemployee111;
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        7839 KING       F 12-JAN-90           23 PRESIDENT          5000        
+                                                                                
+                                                                                
+        7839 QUEEN      M 12-DEC-91           27 AVP                8000        
+                                                                                
+                                                                                
+        7754 MARTIN     M 10-JUL-91           20 MANAGER            3000        
+                                                                                
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        7543 SMITH      M 30-JAN-92           21 CLERK              3500        
+                                                                                
+                                                                                
+        8890 JACK       M 01-FEB-92           22 SALESMAN      123456789        
+                                                                                
+                                                                                
+        7839 QUEEN      M 12-DEC-91           27 AVP          1234567890        
+                                                                                
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        7839 KING       F 12-JAN-90           23 PRESIDENT  123456789012        
+                                                                                
+                                                                                
+        1839 JOHN                                                               
+                                                                                
+                                                                                
+        1829 JANE       F                                                       
+                                                                                
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+       12129 John1                                                              
+                                                                                
+                                                                                
+       13129 John2                                                              
+                                                                                
+                                                                                
+       14129 John3                                                              
+                                                                                
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        4545 johny                                                              
+                                                                                
+                                                                                
+        1212 JACKSON                                                            
+                                                                                
+                                                                                
+
+14 rows selected.
+
+SQL> select empno,ename,emnail from myemployee111;
+select empno,ename,emnail from myemployee111
+                   *
+ERROR at line 1:
+ORA-00904: "EMNAIL": invalid identifier 
+
+
+SQL> select empno,ename,email from myemployee111;
+
+       EMPNO ENAME      EMAIL                                                   
+------------ ---------- --------------------                                    
+        7839 KING                                                               
+        7839 QUEEN                                                              
+        7754 MARTIN                                                             
+        7543 SMITH                                                              
+        8890 JACK                                                               
+        7839 QUEEN                                                              
+        7839 KING                                                               
+        1839 JOHN                                                               
+        1829 JANE                                                               
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      EMAIL                                                   
+------------ ---------- --------------------                                    
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL>   allview              hr(abc)  system(abc)   sysdba  scott
+SP2-0734: unknown command beginning "allview   ..." - rest of line ignored.
+SQL> select empno,ename,email from myemployee111;
+
+       EMPNO ENAME      EMAIL                                                   
+------------ ---------- --------------------                                    
+        7839 KING                                                               
+        7839 QUEEN                                                              
+        7754 MARTIN                                                             
+        7543 SMITH                                                              
+        8890 JACK                                                               
+        7839 QUEEN                                                              
+        7839 KING                                                               
+        1839 JOHN                                                               
+        1829 JANE                                                               
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      EMAIL                                                   
+------------ ---------- --------------------                                    
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> update myemploye111 set email='king@gmail.com' where empno=7839;
+update myemploye111 set email='king@gmail.com' where empno=7839
+       *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> update myemployee111 set email='king@gmail.com' where empno=7839;
+
+4 rows updated.
+
+SQL> select empno,ename,email from myemployee111;
+
+       EMPNO ENAME      EMAIL                                                   
+------------ ---------- --------------------                                    
+        7839 KING       king@gmail.com                                          
+        7839 QUEEN      king@gmail.com                                          
+        7754 MARTIN                                                             
+        7543 SMITH                                                              
+        8890 JACK                                                               
+        7839 QUEEN      king@gmail.com                                          
+        7839 KING       king@gmail.com                                          
+        1839 JOHN                                                               
+        1829 JANE                                                               
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      EMAIL                                                   
+------------ ---------- --------------------                                    
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> update myemploye111 set email='martin@gmail.com' where empno=7754;
+update myemploye111 set email='martin@gmail.com' where empno=7754
+       *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> update myemployee111 set email='martin@gmail.com' where empno=7754;
+
+1 row updated.
+
+SQL> select empno,ename,email from myemployee111;
+
+       EMPNO ENAME      EMAIL                                                   
+------------ ---------- --------------------                                    
+        7839 KING       king@gmail.com                                          
+        7839 QUEEN      king@gmail.com                                          
+        7754 MARTIN     martin@gmail.com                                        
+        7543 SMITH                                                              
+        8890 JACK                                                               
+        7839 QUEEN      king@gmail.com                                          
+        7839 KING       king@gmail.com                                          
+        1839 JOHN                                                               
+        1829 JANE                                                               
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      EMAIL                                                   
+------------ ---------- --------------------                                    
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> select empno,ename,email,job from myemployee111;
+select empno,ename,email,job from myemployee111
+                         *
+ERROR at line 1:
+ORA-00904: "JOB": invalid identifier 
+
+
+SQL> select empno,ename,email,salary from myemployee111;
+
+       EMPNO ENAME      EMAIL                      SALARY                       
+------------ ---------- -------------------- ------------                       
+        7839 KING       king@gmail.com               5000                       
+        7839 QUEEN      king@gmail.com               8000                       
+        7754 MARTIN     martin@gmail.com             3000                       
+        7543 SMITH                                   3500                       
+        8890 JACK                               123456789                       
+        7839 QUEEN      king@gmail.com         1234567890                       
+        7839 KING       king@gmail.com       123456789012                       
+        1839 JOHN                                                               
+        1829 JANE                                                               
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      EMAIL                      SALARY                       
+------------ ---------- -------------------- ------------                       
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> update myemployee111 set email='king@gmail.com',sal=8888 where empno=7839;
+update myemployee111 set email='king@gmail.com',sal=8888 where empno=7839
+                                                *
+ERROR at line 1:
+ORA-00904: "SAL": invalid identifier 
+
+
+SQL> update myemployee111 set email='king@gmail.com',salary=8888 where empno=7839;
+
+4 rows updated.
+
+SQL> select empno,ename,email,salary from myemployee111;
+
+       EMPNO ENAME      EMAIL                      SALARY                       
+------------ ---------- -------------------- ------------                       
+        7839 KING       king@gmail.com               8888                       
+        7839 QUEEN      king@gmail.com               8888                       
+        7754 MARTIN     martin@gmail.com             3000                       
+        7543 SMITH                                   3500                       
+        8890 JACK                               123456789                       
+        7839 QUEEN      king@gmail.com               8888                       
+        7839 KING       king@gmail.com               8888                       
+        1839 JOHN                                                               
+        1829 JANE                                                               
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      EMAIL                      SALARY                       
+------------ ---------- -------------------- ------------                       
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> create table emp11 as select * from myemployee111;
+
+Table created.
+
+SQL> select * from emp11;
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        7839 KING       F 12-JAN-90           23 PRESIDENT          8888        
+king@gmail.com                                                                  
+                                                                                
+        7839 QUEEN      M 12-DEC-91           27 AVP                8888        
+king@gmail.com                                                                  
+                                                                                
+        7754 MARTIN     M 10-JUL-91           20 MANAGER            3000        
+martin@gmail.com                                                                
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        7543 SMITH      M 30-JAN-92           21 CLERK              3500        
+                                                                                
+                                                                                
+        8890 JACK       M 01-FEB-92           22 SALESMAN      123456789        
+                                                                                
+                                                                                
+        7839 QUEEN      M 12-DEC-91           27 AVP                8888        
+king@gmail.com                                                                  
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        7839 KING       F 12-JAN-90           23 PRESIDENT          8888        
+king@gmail.com                                                                  
+                                                                                
+        1839 JOHN                                                               
+                                                                                
+                                                                                
+        1829 JANE       F                                                       
+                                                                                
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+       12129 John1                                                              
+                                                                                
+                                                                                
+       13129 John2                                                              
+                                                                                
+                                                                                
+       14129 John3                                                              
+                                                                                
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        4545 johny                                                              
+                                                                                
+                                                                                
+        1212 JACKSON                                                            
+                                                                                
+                                                                                
+
+14 rows selected.
+
+SQL> delete from emp11;
+
+14 rows deleted.
+
+SQL> select * from emp11;
+
+no rows selected
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from emp11;
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        7839 KING       F 12-JAN-90           23 PRESIDENT          8888        
+king@gmail.com                                                                  
+                                                                                
+        7839 QUEEN      M 12-DEC-91           27 AVP                8888        
+king@gmail.com                                                                  
+                                                                                
+        7754 MARTIN     M 10-JUL-91           20 MANAGER            3000        
+martin@gmail.com                                                                
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        7543 SMITH      M 30-JAN-92           21 CLERK              3500        
+                                                                                
+                                                                                
+        8890 JACK       M 01-FEB-92           22 SALESMAN      123456789        
+                                                                                
+                                                                                
+        7839 QUEEN      M 12-DEC-91           27 AVP                8888        
+king@gmail.com                                                                  
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        7839 KING       F 12-JAN-90           23 PRESIDENT          8888        
+king@gmail.com                                                                  
+                                                                                
+        1839 JOHN                                                               
+                                                                                
+                                                                                
+        1829 JANE       F                                                       
+                                                                                
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+       12129 John1                                                              
+                                                                                
+                                                                                
+       13129 John2                                                              
+                                                                                
+                                                                                
+       14129 John3                                                              
+                                                                                
+                                                                                
+
+       EMPNO ENAME      G HIREDATE           AGE DESG             SALARY        
+------------ ---------- - --------- ------------ ---------- ------------        
+EMAIL                                                                           
+--------------------                                                            
+        4545 johny                                                              
+                                                                                
+                                                                                
+        1212 JACKSON                                                            
+                                                                                
+                                                                                
+
+14 rows selected.
+
+SQL> select empno,ename,email,salary from myemployee111;
+
+       EMPNO ENAME      EMAIL                      SALARY                       
+------------ ---------- -------------------- ------------                       
+        7839 KING       king@gmail.com               8888                       
+        7839 QUEEN      king@gmail.com               8888                       
+        7754 MARTIN     martin@gmail.com             3000                       
+        7543 SMITH                                   3500                       
+        8890 JACK                               123456789                       
+        7839 QUEEN      king@gmail.com               8888                       
+        7839 KING       king@gmail.com               8888                       
+        1839 JOHN                                                               
+        1829 JANE                                                               
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME      EMAIL                      SALARY                       
+------------ ---------- -------------------- ------------                       
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> ALTER TABLE MYEMPLOYEE111 DROP COLUMN EMAIL;
+
+Table altered.
+
+SQL> select empno,ename,email,salary from myemployee111;
+select empno,ename,email,salary from myemployee111
+                   *
+ERROR at line 1:
+ORA-00904: "EMAIL": invalid identifier 
+
+
+SQL> select empno,ename,salary from myemployee111;
+
+       EMPNO ENAME            SALARY                                            
+------------ ---------- ------------                                            
+        7839 KING               8888                                            
+        7839 QUEEN              8888                                            
+        7754 MARTIN             3000                                            
+        7543 SMITH              3500                                            
+        8890 JACK          123456789                                            
+        7839 QUEEN              8888                                            
+        7839 KING               8888                                            
+        1839 JOHN                                                               
+        1829 JANE                                                               
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME            SALARY                                            
+------------ ---------- ------------                                            
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> ALTER TABLE MYEMPLOYEE111 ADD EMAIL VARCHAR2(20);
+
+Table altered.
+
+SQL> DESC MYEMPLOYEE111;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                              NUMBER
+ ENAME                                              VARCHAR2(10)
+ GENDER                                             CHAR(1)
+ HIREDATE                                           DATE
+ AGE                                                NUMBER(3)
+ DESG                                               VARCHAR2(10)
+ SALARY                                             NUMBER(14,2)
+ EMAIL                                              VARCHAR2(20)
+
+SQL> ALTER TABLE MYEMPLOYEE111 RENAME EMAIL TO MYEMAIL;
+ALTER TABLE MYEMPLOYEE111 RENAME EMAIL TO MYEMAIL
+                                 *
+ERROR at line 1:
+ORA-14155: missing PARTITION or SUBPARTITION keyword 
+
+
+SQL> ALTER TABLE MYEMPLOYEE111 RENAME COLUMN EMAIL TO MYEMAIL;
+
+Table altered.
+
+SQL> ALTER TABLE MYEMPLOYEE111 MODIFY EMAIL VARCHAR2(30);
+ALTER TABLE MYEMPLOYEE111 MODIFY EMAIL VARCHAR2(30)
+                                 *
+ERROR at line 1:
+ORA-00904: "EMAIL": invalid identifier 
+
+
+SQL> ALTER TABLE MYEMPLOYEE111 MODIFY MYEMAIL VARCHAR2(30);
+
+Table altered.
+
+SQL> ALTER TABLE MYEMPLOYEE111 DROP COLUMN MYEMAIL;
+
+Table altered.
+
+SQL> select empno,ename,email,salary from myemployee111;
+select empno,ename,email,salary from myemployee111
+                   *
+ERROR at line 1:
+ORA-00904: "EMAIL": invalid identifier 
+
+
+SQL> select empno,ename,salary from myemployee111;
+
+       EMPNO ENAME            SALARY                                            
+------------ ---------- ------------                                            
+        7839 KING               8888                                            
+        7839 QUEEN              8888                                            
+        7754 MARTIN             3000                                            
+        7543 SMITH              3500                                            
+        8890 JACK          123456789                                            
+        7839 QUEEN              8888                                            
+        7839 KING               8888                                            
+        1839 JOHN                                                               
+        1829 JANE                                                               
+       12129 John1                                                              
+       13129 John2                                                              
+
+       EMPNO ENAME            SALARY                                            
+------------ ---------- ------------                                            
+       14129 John3                                                              
+        4545 johny                                                              
+        1212 JACKSON                                                            
+
+14 rows selected.
+
+SQL> 
+SQL> create table MYEMP33
+  2      (
+  3         empno number primary key
+  4         ename  varchar2(10) not null,
+  5         EMAIL  varchar2(10) unique,
+  6         gender char(1) default 'F',
+  7         HIREDATE date check (hiredate > '12-Jan-2020'),
+  8         age number(3) check (age between 18 and 58),
+  9         desg varchar2(10) check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 10         salary number(12,2) CHECK (SALARY > 5000)
+ 11     );
+       ename  varchar2(10) not null,
+       *
+ERROR at line 4:
+ORA-00907: missing right parenthesis 
+
+
+SQL> 
+SQL> 
+SQL> create table MYEMP33
+  2      (
+  3         empno number primary key,
+  4         ename  varchar2(10) not null,
+  5         EMAIL  varchar2(10) unique,
+  6         gender char(1) default 'F',
+  7         HIREDATE date check (hiredate > '12-Jan-2020'),
+  8         age number(3) check (age between 18 and 58),
+  9         desg varchar2(10) check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 10         salary number(12,2) CHECK (SALARY > 5000)
+ 11     );
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> insert into myemp33 values (&EMPNO,'&ENAME','&email','&GENDER','&JOINING',&urAge,'&DESG',&SALARY);
+Enter value for empno: 
+Enter value for ename: 
+Enter value for email: 
+Enter value for gender: 
+Enter value for joining: 
+Enter value for urage: 
+Enter value for desg: 
+Enter value for salary: 
+old   1: insert into myemp33 values (&EMPNO,'&ENAME','&email','&GENDER','&JOINING',&urAge,'&DESG',&SALARY)
+new   1: insert into myemp33 values (,'','','','',,'',)
+insert into myemp33 values (,'','','','',,'',)
+                            *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> 
+SQL> insert into myemp33 values (&EMPNO,'&ENAME','&email','&GENDER','&JOINING',&urAge,'&DESG',&SALARY);
+Enter value for empno: 
+Enter value for ename: 
+Enter value for email: 
+Enter value for gender: 
+Enter value for joining: 
+Enter value for urage: 
+Enter value for desg: 
+Enter value for salary: 
+old   1: insert into myemp33 values (&EMPNO,'&ENAME','&email','&GENDER','&JOINING',&urAge,'&DESG',&SALARY)
+new   1: insert into myemp33 values (,'','','','',,'',)
+insert into myemp33 values (,'','','','',,'',)
+                            *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> 
+SQL> insert into myemp33 values (&EMPNO,'&ENAME','&email','&GENDER','&JOINING',&urAge,'&DESG',&SALARY);
+Enter value for empno: 7839
+Enter value for ename: KING
+Enter value for email: king@gmail.com
+Enter value for gender: M
+Enter value for joining: 12-Jan-2021
+Enter value for urage: 23
+Enter value for desg: MANAGER
+Enter value for salary: 6000
+old   1: insert into myemp33 values (&EMPNO,'&ENAME','&email','&GENDER','&JOINING',&urAge,'&DESG',&SALARY)
+new   1: insert into myemp33 values (7839,'KING','king@gmail.com','M','12-Jan-2021',23,'MANAGER',6000)
+insert into myemp33 values (7839,'KING','king@gmail.com','M','12-Jan-2021',23,'MANAGER',6000)
+                                        *
+ERROR at line 1:
+ORA-12899: value too large for column "SYSTEM"."MYEMP33"."EMAIL" (actual: 14, 
+maximum: 10) 
+
+
+SQL> ALTER TABLE MYEMP33 MODIFY EMAIL VARCHAR2(20);
+
+Table altered.
+
+SQL> insert into myemp33 values (&EMPNO,'&ENAME','&email','&GENDER','&JOINING',&urAge,'&DESG',&SALARY);
+Enter value for empno: 7839
+Enter value for ename: king
+Enter value for email: king@gmail.com
+Enter value for gender: M
+Enter value for joining: 12-Jan-2021
+Enter value for urage: 22
+Enter value for desg: MANAGER
+Enter value for salary: 60000
+old   1: insert into myemp33 values (&EMPNO,'&ENAME','&email','&GENDER','&JOINING',&urAge,'&DESG',&SALARY)
+new   1: insert into myemp33 values (7839,'king','king@gmail.com','M','12-Jan-2021',22,'MANAGER',60000)
+
+1 row created.
+
+SQL> SELECT * FROM MYEMP33;
+
+       EMPNO ENAME      EMAIL                G HIREDATE           AGE DESG      
+------------ ---------- -------------------- - --------- ------------ ----------
+      SALARY                                                                    
+------------                                                                    
+        7839 king       king@gmail.com       M 12-JAN-21           22 MANAGER   
+       60000                                                                    
+                                                                                
+
+SQL> insert into myemp33 values (1234,'Queen','queen@gmail.com','F','12-Jan-2021',22,'CLERK',7000);
+
+1 row created.
+
+SQL> SELECT * FROM MYEMP33;
+
+       EMPNO ENAME      EMAIL                G HIREDATE           AGE DESG      
+------------ ---------- -------------------- - --------- ------------ ----------
+      SALARY                                                                    
+------------                                                                    
+        7839 king       king@gmail.com       M 12-JAN-21           22 MANAGER   
+       60000                                                                    
+                                                                                
+        1234 Queen      queen@gmail.com      F 12-JAN-21           22 CLERK     
+        7000                                                                    
+                                                                                
+
+SQL> insert into myemp33 values (1235,'Queen','queen@gmail.com','F','12-Jan-2021',22,'CLERK',7000);
+insert into myemp33 values (1235,'Queen','queen@gmail.com','F','12-Jan-2021',22,'CLERK',7000)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C0013561) violated 
+
+
+SQL> insert into myemp33 values (1235,'Queen','queen1@gmail.com','F','12-Jan-2021',22,'CLERK',7000);
+
+1 row created.
+
+SQL> insert into myemp33 values (1235,'Queen','queen3@gmail.com','F','12-Jan-2021',22,'CLERK',7000);
+insert into myemp33 values (1235,'Queen','queen3@gmail.com','F','12-Jan-2021',22,'CLERK',7000)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C0013560) violated 
+
+
+SQL> insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2019',22,'CLERK',7000);
+insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2019',22,'CLERK',7000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C0013556) violated 
+
+
+SQL> insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2021',12,'CLERK',7000);
+insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2021',12,'CLERK',7000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C0013557) violated 
+
+
+SQL> insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2021',32,'director',7000);
+insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2021',32,'director',7000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C0013558) violated 
+
+
+SQL> insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2021',32,'CLERK',4000);
+insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2021',32,'CLERK',4000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C0013559) violated 
+
+
+SQL> insert into myemp33 values (1236,null,'queen3@gmail.com','F','12-Jan-2021',32,'CLERK',6000);
+insert into myemp33 values (1236,null,'queen3@gmail.com','F','12-Jan-2021',32,'CLERK',6000)
+                                 *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SYSTEM"."MYEMP33"."ENAME") 
+
+
+SQL> insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2021',32,'CLERK',4000);
+insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2021',32,'CLERK',4000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C0013559) violated 
+
+
+SQL> insert into myemp33 values (1236,'Queen','queen3@gmail.com','F','12-Jan-2021',32,'CLERK',5400);
+
+1 row created.
+
+SQL> SELECT * FROM MYEMP33;
+
+       EMPNO ENAME      EMAIL                G HIREDATE           AGE DESG      
+------------ ---------- -------------------- - --------- ------------ ----------
+      SALARY                                                                    
+------------                                                                    
+        7839 king       king@gmail.com       M 12-JAN-21           22 MANAGER   
+       60000                                                                    
+                                                                                
+        1234 Queen      queen@gmail.com      F 12-JAN-21           22 CLERK     
+        7000                                                                    
+                                                                                
+        1235 Queen      queen1@gmail.com     F 12-JAN-21           22 CLERK     
+        7000                                                                    
+                                                                                
+
+       EMPNO ENAME      EMAIL                G HIREDATE           AGE DESG      
+------------ ---------- -------------------- - --------- ------------ ----------
+      SALARY                                                                    
+------------                                                                    
+        1236 Queen      queen3@gmail.com     F 12-JAN-21           32 CLERK     
+        5400                                                                    
+                                                                                
+
+SQL> insert into myemp33 (empno,ename,email,hiredate,age,desg,salary) values (1234,'Queen','queen@gmail.com','12-Jan-2021',22,'CLERK',7000);
+insert into myemp33 (empno,ename,email,hiredate,age,desg,salary) values (1234,'Queen','queen@gmail.com','12-Jan-2021',22,'CLERK',7000)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C0013560) violated 
+
+
+SQL> insert into myemp33 (empno,ename,email,hiredate,age,desg,salary) values (2234,'Queen2','queen22@gmail.com','12-Jan-2021',22,'CLERK',7000);
+
+1 row created.
+
+SQL> select * from myemp33;
+
+       EMPNO ENAME      EMAIL                G HIREDATE           AGE DESG      
+------------ ---------- -------------------- - --------- ------------ ----------
+      SALARY                                                                    
+------------                                                                    
+        7839 king       king@gmail.com       M 12-JAN-21           22 MANAGER   
+       60000                                                                    
+                                                                                
+        1234 Queen      queen@gmail.com      F 12-JAN-21           22 CLERK     
+        7000                                                                    
+                                                                                
+        1235 Queen      queen1@gmail.com     F 12-JAN-21           22 CLERK     
+        7000                                                                    
+                                                                                
+
+       EMPNO ENAME      EMAIL                G HIREDATE           AGE DESG      
+------------ ---------- -------------------- - --------- ------------ ----------
+      SALARY                                                                    
+------------                                                                    
+        1236 Queen      queen3@gmail.com     F 12-JAN-21           32 CLERK     
+        5400                                                                    
+                                                                                
+        2234 Queen2     queen22@gmail.com    F 12-JAN-21           22 CLERK     
+        7000                                                                    
+                                                                                
+
+SQL> create table MYEMP34
+  2      (
+  3         empno number primary key,
+  4         ename  varchar2(10) not null,
+  5         EMAIL  varchar2(20) unique check (email like '%@%.%'),
+  6         gender char(1) default 'F',
+  7         HIREDATE date check (hiredate > '12-Jan-2020'),
+  8         age number(3) check (age between 18 and 58),
+  9         desg varchar2(10) check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 10         salary number(12,2) CHECK (SALARY > 5000)
+ 11     );
+
+Table created.
+
+SQL> insert into myemp34 (empno,ename,email,hiredate,age,desg,salary) values (2234,'Queen2','queen22gmail.com','12-Jan-2021',22,'CLERK',7000);
+insert into myemp34 (empno,ename,email,hiredate,age,desg,salary) values (2234,'Queen2','queen22gmail.com','12-Jan-2021',22,'CLERK',7000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C0013563) violated 
+
+
+SQL> insert into myemp34 (empno,ename,email,hiredate,age,desg,salary) values (2234,'Queen2','queen22@gmail','12-Jan-2021',22,'CLERK',7000);
+insert into myemp34 (empno,ename,email,hiredate,age,desg,salary) values (2234,'Queen2','queen22@gmail','12-Jan-2021',22,'CLERK',7000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C0013563) violated 
+
+
+SQL> insert into myemp34 (empno,ename,email,hiredate,age,desg,salary) values (2234,'Queen2','queen22@gmail.com','12-Jan-2021',22,'CLERK',7000);
+
+1 row created.
+
+SQL> insert into myemp34 (empno,ename,email,hiredate,age,desg,salary) values (1234,'Queen2','a@b.c','12-Jan-2021',22,'CLERK',7000);
+
+1 row created.
+
+SQL> create table MYEMP35
+  2      (
+  3         empno number,
+  4         ename  varchar2(10) ,
+  5         EMAIL  varchar2(20) ,
+  6         gender char(1) ,
+  7         HIREDATE date,
+  8         age number(3) ,
+  9         desg varchar2(10),
+ 10         salary number(12,2),
+ 11         comm number(10,2),
+ 12         primary key (empno),
+ 13         ename not null,
+ 14         gender default 'F',
+ 15         unique(email),
+ 16         check (hiredate > '12-Jan-2020'),
+ 17         check (age between 18 and 58),
+ 18         check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 19         CHECK (SALARY > 5000)
+ 20         check (salary > comm)
+ 21     );
+       ename not null,
+       *
+ERROR at line 13:
+ORA-00957: duplicate column name 
+
+
+SQL> 
+SQL> 
+SQL> 
+SQL> create table MYEMP35
+  2      (
+  3         empno number,
+  4         ename  varchar2(10) ,
+  5         EMAIL  varchar2(20) ,
+  6         gender char(1) ,
+  7         HIREDATE date,
+  8         age number(3) ,
+  9         desg varchar2(10),
+ 10         salary number(12,2),
+ 11         comm number(10,2),
+ 12         primary key (empno),
+ 13         not null (ename),
+ 14         gender default 'F',
+ 15         unique(email),
+ 16         check (hiredate > '12-Jan-2020'),
+ 17         check (age between 18 and 58),
+ 18         check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 19         CHECK (SALARY > 5000)
+ 20         check (salary > comm)
+ 21     );
+       not null (ename),
+       *
+ERROR at line 13:
+ORA-00904: : invalid identifier 
+
+
+SQL> create table MYEMP35
+  2      (
+  3         empno number,
+  4         ename  varchar2(10) not null,
+  5         EMAIL  varchar2(20) ,
+  6         gender char(1) ,
+  7         HIREDATE date,
+  8         age number(3) ,
+  9         desg varchar2(10),
+ 10         salary number(12,2),
+ 11         comm number(10,2),
+ 12         primary key (empno),
+ 13         gender default 'F',
+ 14         unique(email),
+ 15         check (hiredate > '12-Jan-2020'),
+ 16         check (age between 18 and 58),
+ 17         check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 18         CHECK (SALARY > 5000)
+ 19         check (salary > comm)
+ 20     );
+       gender default 'F',
+       *
+ERROR at line 13:
+ORA-00957: duplicate column name 
+
+
+SQL> create table MYEMP35
+  2      (
+  3         empno number,
+  4         ename  varchar2(10) not null,
+  5         EMAIL  varchar2(20) ,
+  6         gender char(1) ,
+  7         HIREDATE date,
+  8         age number(3) ,
+  9         desg varchar2(10),
+ 10         salary number(12,2),
+ 11         comm number(10,2),
+ 12         primary key (empno),
+ 13         default gender 'F',
+ 14         unique(email),
+ 15         check (hiredate > '12-Jan-2020'),
+ 16         check (age between 18 and 58),
+ 17         check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 18         CHECK (SALARY > 5000)
+ 19         check (salary > comm)
+ 20     );
+       default gender 'F',
+       *
+ERROR at line 13:
+ORA-00904: : invalid identifier 
+
+
+SQL> 
+SQL> create table MYEMP35
+  2      (
+  3         empno number,
+  4         ename  varchar2(10) not null,
+  5         EMAIL  varchar2(20) ,
+  6         gender char(1) default gender 'F',
+  7         HIREDATE date,
+  8         age number(3) ,
+  9         desg varchar2(10),
+ 10         salary number(12,2),
+ 11         comm number(10,2),
+ 12         primary key (empno),
+ 13         check gender in ('M','F','T'),
+ 14         unique(email),
+ 15         check (hiredate > '12-Jan-2020'),
+ 16         check (age between 18 and 58),
+ 17         check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 18         CHECK (SALARY > 5000)
+ 19         check (salary > comm)
+ 20     );
+       gender char(1) default gender 'F',
+                              *
+ERROR at line 6:
+ORA-00984: column not allowed here 
+
+
+SQL> 
+SQL> create table MYEMP35
+  2      (
+  3         empno number,
+  4         ename  varchar2(10) not null,
+  5         EMAIL  varchar2(20) ,
+  6         gender char(1) default 'F',
+  7         HIREDATE date,
+  8         age number(3) ,
+  9         desg varchar2(10),
+ 10         salary number(12,2),
+ 11         comm number(10,2),
+ 12         primary key (empno),
+ 13         check gender in ('M','F','T'),
+ 14         unique(email),
+ 15         check (hiredate > '12-Jan-2020'),
+ 16         check (age between 18 and 58),
+ 17         check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 18         CHECK (SALARY > 5000)
+ 19         check (salary > comm)
+ 20     );
+       check gender in ('M','F','T'),
+             *
+ERROR at line 13:
+ORA-00906: missing left parenthesis 
+
+
+SQL> create table MYEMP35
+  2      (
+  3         empno number,
+  4         ename  varchar2(10) not null,
+  5         EMAIL  varchar2(20) ,
+  6         gender char(1) default 'F',
+  7         HIREDATE date,
+  8         age number(3) ,
+  9         desg varchar2(10),
+ 10         salary number(12,2),
+ 11         comm number(10,2),
+ 12         primary key (empno),
+ 13         check (gender in ('M','F','T')),
+ 14         unique(email),
+ 15         check (hiredate > '12-Jan-2020'),
+ 16         check (age between 18 and 58),
+ 17         check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 18         CHECK (SALARY > 5000)
+ 19         check (salary > comm)
+ 20     );
+       check (salary > comm)
+       *
+ERROR at line 19:
+ORA-00907: missing right parenthesis 
+
+
+SQL> create table MYEMP35
+  2      (
+  3         empno number,
+  4         ename  varchar2(10) not null,
+  5         EMAIL  varchar2(20) ,
+  6         gender char(1) default 'F',
+  7         HIREDATE date,
+  8         age number(3) ,
+  9         desg varchar2(10),
+ 10         salary number(12,2),
+ 11         comm number(10,2),
+ 12         primary key (empno),
+ 13         check (gender in ('M','F','T')),
+ 14         unique(email),
+ 15         check (hiredate > '12-Jan-2020'),
+ 16         check (age between 18 and 58),
+ 17         check (desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')),
+ 18         CHECK (SALARY > 5000),
+ 19         check (salary > comm)
+ 20     );
+
+Table created.
+
+SQL>     insert into myemp35 values (1234,'Queen','queen@gmail.com','F','12-Jan-2021',22,'CLERK',7000,700);
+
+1 row created.
+
+SQL> select * from myemp35;
+
+       EMPNO ENAME      EMAIL                G HIREDATE           AGE DESG      
+------------ ---------- -------------------- - --------- ------------ ----------
+      SALARY         COMM                                                       
+------------ ------------                                                       
+        1234 Queen      queen@gmail.com      F 12-JAN-21           22 CLERK     
+        7000          700                                                       
+                                                                                
+
+SQL>     insert into myemp35 values (1234,'Queen','queen@gmail.com','F','12-Jan-2021',22,'CLERK',7000,8000);
+    insert into myemp35 values (1234,'Queen','queen@gmail.com','F','12-Jan-2021',22,'CLERK',7000,8000)
+*
+ERROR at line 1:
+ORA-02290: check constraint (SYSTEM.SYS_C0013576) violated 
+
+
+SQL>     insert into myemp35 values (1234,'Queen','queen@gmail.com','F','12-Jan-2021',22,'CLERK',7000,800);
+    insert into myemp35 values (1234,'Queen','queen@gmail.com','F','12-Jan-2021',22,'CLERK',7000,800)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C0013577) violated 
+
+
+SQL>     insert into myemp35 values (1234,'Queen','queen1@gmail.com','F','12-Jan-2021',22,'CLERK',7000,800);
+    insert into myemp35 values (1234,'Queen','queen1@gmail.com','F','12-Jan-2021',22,'CLERK',7000,800)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C0013577) violated 
+
+
+SQL>     insert into myemp35 values (1231,'Queen','queen1@gmail.com','F','12-Jan-2021',22,'CLERK',7000,800);
+
+1 row created.
+
+SQL> select * from myemp35;
+
+       EMPNO ENAME      EMAIL                G HIREDATE           AGE DESG      
+------------ ---------- -------------------- - --------- ------------ ----------
+      SALARY         COMM                                                       
+------------ ------------                                                       
+        1234 Queen      queen@gmail.com      F 12-JAN-21           22 CLERK     
+        7000          700                                                       
+                                                                                
+        1231 Queen      queen1@gmail.com     F 12-JAN-21           22 CLERK     
+        7000          800                                                       
+                                                                                
+
+SQL> desc user_constraints;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OWNER                                              VARCHAR2(30)
+ CONSTRAINT_NAME                           NOT NULL VARCHAR2(30)
+ CONSTRAINT_TYPE                                    VARCHAR2(1)
+ TABLE_NAME                                NOT NULL VARCHAR2(30)
+ SEARCH_CONDITION                                   LONG
+ R_OWNER                                            VARCHAR2(30)
+ R_CONSTRAINT_NAME                                  VARCHAR2(30)
+ DELETE_RULE                                        VARCHAR2(9)
+ STATUS                                             VARCHAR2(8)
+ DEFERRABLE                                         VARCHAR2(14)
+ DEFERRED                                           VARCHAR2(9)
+ VALIDATED                                          VARCHAR2(13)
+ GENERATED                                          VARCHAR2(14)
+ BAD                                                VARCHAR2(3)
+ RELY                                               VARCHAR2(4)
+ LAST_CHANGE                                        DATE
+ INDEX_OWNER                                        VARCHAR2(30)
+ INDEX_NAME                                         VARCHAR2(30)
+ INVALID                                            VARCHAR2(7)
+ VIEW_RELATED                                       VARCHAR2(14)
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP35';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013570                   C                                                
+"ENAME" IS NOT NULL                                                             
+ENABLED                                                                         
+                                                                                
+SYS_C0013571                   C                                                
+gender in ('M','F','T')                                                         
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+SYS_C0013572                   C                                                
+hiredate > '12-Jan-2020'                                                        
+ENABLED                                                                         
+                                                                                
+SYS_C0013573                   C                                                
+age between 18 and 58                                                           
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+ENABLED                                                                         
+                                                                                
+SYS_C0013574                   C                                                
+desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')                              
+ENABLED                                                                         
+                                                                                
+SYS_C0013575                   C                                                
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SALARY > 5000                                                                   
+ENABLED                                                                         
+                                                                                
+SYS_C0013576                   C                                                
+salary > comm                                                                   
+ENABLED                                                                         
+                                                                                
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013577                   P                                                
+                                                                                
+ENABLED                                                                         
+                                                                                
+SYS_C0013578                   U                                                
+                                                                                
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+
+9 rows selected.
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,trim(SEARCH_CONDITION),status
+  2  from user_constraints where table_name='MYEMP35';
+select CONSTRAINT_NAME,CONSTRAINT_TYPE,trim(SEARCH_CONDITION),status
+                                            *
+ERROR at line 1:
+ORA-00932: inconsistent datatypes: expected NUMBER got LONG 
+
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP35';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013570                   C                                                
+"ENAME" IS NOT NULL                                                             
+ENABLED                                                                         
+                                                                                
+SYS_C0013571                   C                                                
+gender in ('M','F','T')                                                         
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+SYS_C0013572                   C                                                
+hiredate > '12-Jan-2020'                                                        
+ENABLED                                                                         
+                                                                                
+SYS_C0013573                   C                                                
+age between 18 and 58                                                           
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+ENABLED                                                                         
+                                                                                
+SYS_C0013574                   C                                                
+desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')                              
+ENABLED                                                                         
+                                                                                
+SYS_C0013575                   C                                                
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SALARY > 5000                                                                   
+ENABLED                                                                         
+                                                                                
+SYS_C0013576                   C                                                
+salary > comm                                                                   
+ENABLED                                                                         
+                                                                                
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013577                   P                                                
+                                                                                
+ENABLED                                                                         
+                                                                                
+SYS_C0013578                   U                                                
+                                                                                
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+
+9 rows selected.
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP35';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013570                   C                                                
+"ENAME" IS NOT NULL                                                             
+ENABLED                                                                         
+                                                                                
+SYS_C0013571                   C                                                
+gender in ('M','F','T')                                                         
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+SYS_C0013572                   C                                                
+hiredate > '12-Jan-2020'                                                        
+ENABLED                                                                         
+                                                                                
+SYS_C0013573                   C                                                
+age between 18 and 58                                                           
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+ENABLED                                                                         
+                                                                                
+SYS_C0013574                   C                                                
+desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')                              
+ENABLED                                                                         
+                                                                                
+SYS_C0013575                   C                                                
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SALARY > 5000                                                                   
+ENABLED                                                                         
+                                                                                
+SYS_C0013576                   C                                                
+salary > comm                                                                   
+ENABLED                                                                         
+                                                                                
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013577                   P                                                
+                                                                                
+ENABLED                                                                         
+                                                                                
+SYS_C0013578                   U                                                
+                                                                                
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+
+9 rows selected.
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='myemp35';
+
+no rows selected
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP35';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013570                   C                                                
+"ENAME" IS NOT NULL                                                             
+ENABLED                                                                         
+                                                                                
+SYS_C0013571                   C                                                
+gender in ('M','F','T')                                                         
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+SYS_C0013572                   C                                                
+hiredate > '12-Jan-2020'                                                        
+ENABLED                                                                         
+                                                                                
+SYS_C0013573                   C                                                
+age between 18 and 58                                                           
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+ENABLED                                                                         
+                                                                                
+SYS_C0013574                   C                                                
+desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')                              
+ENABLED                                                                         
+                                                                                
+SYS_C0013575                   C                                                
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SALARY > 5000                                                                   
+ENABLED                                                                         
+                                                                                
+SYS_C0013576                   C                                                
+salary > comm                                                                   
+ENABLED                                                                         
+                                                                                
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013577                   P                                                
+                                                                                
+ENABLED                                                                         
+                                                                                
+SYS_C0013578                   U                                                
+                                                                                
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+
+9 rows selected.
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP35' where constraint_name='SYS_C0013575';
+from user_constraints where table_name='MYEMP35' where constraint_name='SYS_C0013575'
+                                                 *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP35' and constraint_name='SYS_C0013575';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013575                   C                                                
+SALARY > 5000                                                                   
+ENABLED                                                                         
+                                                                                
+
+SQL> alter table myemp35
+  2  modify constraint SYS_C0013575 check (sal>6000);
+modify constraint SYS_C0013575 check (sal>6000)
+                               *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> alter table myemp35
+  2  modify constraint SYS_C0013575 check (salary>6000);
+modify constraint SYS_C0013575 check (salary>6000)
+                               *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> alter table myemp35
+  2  modify constraint SYS_C0013575 (check salary>6000);
+modify constraint SYS_C0013575 (check salary>6000)
+                               *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> alter table myemp35
+  2  modify constraint SYS_C0013575 check salary>6000;
+modify constraint SYS_C0013575 check salary>6000
+                               *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> alter table myemp35
+  2  modify constraint SYS_C0013575 check (salary>6000);
+modify constraint SYS_C0013575 check (salary>6000)
+                               *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> alter table myemp35
+  2  modify constraint SYS_C0013575 check(salary>6000);
+modify constraint SYS_C0013575 check(salary>6000)
+                               *
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> alter table myemp35
+  2  add constraint sal_gt_6k check(salary>6000);
+
+Table altered.
+
+SQL> alter table myemp35
+  2  drop constraint SYS_C0013575;
+
+Table altered.
+
+SQL> alter table myemp35
+  2  rename constraint SYS_C0013577 to empno_pk;
+
+Table altered.
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP35';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013570                   C                                                
+"ENAME" IS NOT NULL                                                             
+ENABLED                                                                         
+                                                                                
+SYS_C0013571                   C                                                
+gender in ('M','F','T')                                                         
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+SYS_C0013572                   C                                                
+hiredate > '12-Jan-2020'                                                        
+ENABLED                                                                         
+                                                                                
+SYS_C0013573                   C                                                
+age between 18 and 58                                                           
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+ENABLED                                                                         
+                                                                                
+SYS_C0013574                   C                                                
+desg in ('MANAGER','SALESMAN','CLERK','PRESIDENT')                              
+ENABLED                                                                         
+                                                                                
+SYS_C0013576                   C                                                
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+salary > comm                                                                   
+ENABLED                                                                         
+                                                                                
+EMPNO_PK                       P                                                
+                                                                                
+ENABLED                                                                         
+                                                                                
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013578                   U                                                
+                                                                                
+ENABLED                                                                         
+                                                                                
+SAL_GT_6K                      C                                                
+salary>6000                                                                     
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+
+9 rows selected.
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP35' and constraint_name='EMPNO_PK';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+EMPNO_PK                       P                                                
+                                                                                
+ENABLED                                                                         
+                                                                                
+
+SQL> ALTER TABLE MYEMP33 DISABLE CONSTRAINT EMPNO_PK;
+ALTER TABLE MYEMP33 DISABLE CONSTRAINT EMPNO_PK
+*
+ERROR at line 1:
+ORA-02431: cannot disable constraint (EMPNO_PK) - no such constraint 
+
+
+SQL> ALTER TABLE MYEMP35 DISABLE CONSTRAINT EMPNO_PK;
+
+Table altered.
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP35' and constraint_name='EMPNO_PK';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+EMPNO_PK                       P                                                
+                                                                                
+DISABLED                                                                        
+                                                                                
+
+SQL> ALTER TABLE MYEMP35 ENABLE PRIMARY KEY;
+
+Table altered.
+
+SQL> from user_constraints where table_name='MYEMP35' and constraint_name='EMPNO_PK';
+SP2-0734: unknown command beginning "from user_..." - rest of line ignored.
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP35' and constraint_name='EMPNO_PK';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+EMPNO_PK                       P                                                
+                                                                                
+ENABLED                                                                         
+                                                                                
+
+SQL> CREATE TABLE MYDEPT
+  2  (
+  3  DEPTNO NUMBER PRIMARY KEY,
+  4  DNAME VARCHAR2(20),
+  5  LOC VARCHAR2(10)
+  6  );
+
+Table created.
+
+SQL> DESC USER_CONSTRAINTS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OWNER                                              VARCHAR2(30)
+ CONSTRAINT_NAME                           NOT NULL VARCHAR2(30)
+ CONSTRAINT_TYPE                                    VARCHAR2(1)
+ TABLE_NAME                                NOT NULL VARCHAR2(30)
+ SEARCH_CONDITION                                   LONG
+ R_OWNER                                            VARCHAR2(30)
+ R_CONSTRAINT_NAME                                  VARCHAR2(30)
+ DELETE_RULE                                        VARCHAR2(9)
+ STATUS                                             VARCHAR2(8)
+ DEFERRABLE                                         VARCHAR2(14)
+ DEFERRED                                           VARCHAR2(9)
+ VALIDATED                                          VARCHAR2(13)
+ GENERATED                                          VARCHAR2(14)
+ BAD                                                VARCHAR2(3)
+ RELY                                               VARCHAR2(4)
+ LAST_CHANGE                                        DATE
+ INDEX_OWNER                                        VARCHAR2(30)
+ INDEX_NAME                                         VARCHAR2(30)
+ INVALID                                            VARCHAR2(7)
+ VIEW_RELATED                                       VARCHAR2(14)
+
+SQL> INSERT INTO MYDEPT VALUES (10,'CODING','NY');
+
+1 row created.
+
+SQL> INSERT INTO MYDEPT VALUES (20,'TESTING','ND');
+
+1 row created.
+
+SQL> INSERT INTO MYDEPT VALUES (30,'QMS','MUMBAI');
+
+1 row created.
+
+SQL> SELECT * FROM MYDEPT;
+
+      DEPTNO DNAME                LOC                                           
+------------ -------------------- ----------                                    
+          10 CODING               NY                                            
+          20 TESTING              ND                                            
+          30 QMS                  MUMBAI                                        
+
+SQL>     create table MYEMP36
+  2      (
+  3         empno number,
+  4         ename  varchar2(10) not null,
+  5         DNO NUMBER REFERENCES MYDEPT
+  6     );
+
+Table created.
+
+SQL> INSERT INTO MYEMP36 VALUES (11,'JACK',10);
+
+1 row created.
+
+SQL> INSERT INTO MYEMP36 VALUES (12,'JANE',10);
+
+1 row created.
+
+SQL> INSERT INTO MYEMP36 VALUES (13,'JULIE',40);
+INSERT INTO MYEMP36 VALUES (13,'JULIE',40)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C0013582) violated - parent key not 
+found 
+
+
+SQL> INSERT INTO MYEMP36 VALUES (13,'JULIE',30);
+
+1 row created.
+
+SQL> INSERT INTO MYEMP36 VALUES (14,'JULIA',20);
+
+1 row created.
+
+SQL> SELECT * FROM MYDEPT;
+
+      DEPTNO DNAME                LOC                                           
+------------ -------------------- ----------                                    
+          10 CODING               NY                                            
+          20 TESTING              ND                                            
+          30 QMS                  MUMBAI                                        
+
+SQL> SELECT * FROM MYEMP36;
+
+       EMPNO ENAME               DNO                                            
+------------ ---------- ------------                                            
+          11 JACK                 10                                            
+          12 JANE                 10                                            
+          13 JULIE                30                                            
+          14 JULIA                20                                            
+
+SQL>   create table MYEMP37
+  2      (
+  3         empno number,
+  4         ename  varchar2(10) not null,
+  5         SAL NUMBER,
+  6         DNO NUMBER,
+  7         PRIMARY KEY (EMPNO),
+  8         FOREIGN KEY ( DNO) REFERENCES MYDEPT(DEPTNO)
+  9     );
+
+Table created.
+
+SQL> INSERT INTO MYEMP37 VALUES (1,'JACK',555,10);
+
+1 row created.
+
+SQL> INSERT INTO MYEMP37 VALUES (1,'JACK',555,50);
+INSERT INTO MYEMP37 VALUES (1,'JACK',555,50)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C0013584) violated 
+
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP36';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013581                   C                                                
+"ENAME" IS NOT NULL                                                             
+ENABLED                                                                         
+                                                                                
+SYS_C0013582                   R                                                
+                                                                                
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+
+SQL> select CONSTRAINT_NAME,CONSTRAINT_TYPE,SEARCH_CONDITION,status
+  2  from user_constraints where table_name='MYEMP37';
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+SYS_C0013583                   C                                                
+"ENAME" IS NOT NULL                                                             
+ENABLED                                                                         
+                                                                                
+SYS_C0013584                   P                                                
+                                                                                
+ENABLED                                                                         
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+STATUS                                                                          
+--------                                                                        
+                                                                                
+SYS_C0013585                   R                                                
+                                                                                
+ENABLED                                                                         
+                                                                                
+
+SQL> INSERT INTO MYEMP37 VALUES (2,'JACK',555,50);
+INSERT INTO MYEMP37 VALUES (2,'JACK',555,50)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C0013585) violated - parent key not 
+found 
+
+
+SQL> SELECT * FROM MYDEPT;
+
+      DEPTNO DNAME                LOC                                           
+------------ -------------------- ----------                                    
+          10 CODING               NY                                            
+          20 TESTING              ND                                            
+          30 QMS                  MUMBAI                                        
+
+SQL> SELECT * FROM MYEMP36;
+
+       EMPNO ENAME               DNO                                            
+------------ ---------- ------------                                            
+          11 JACK                 10                                            
+          12 JANE                 10                                            
+          13 JULIE                30                                            
+          14 JULIA                20                                            
+
+SQL> INSERT INTO MYEMP36 VALUES (15,'JULIA',30);
+
+1 row created.
+
+SQL> INSERT INTO MYEMP36 VALUES (17,'JULI',20);
+
+1 row created.
+
+SQL> SELECT * FROM MYEMP36;
+
+       EMPNO ENAME               DNO                                            
+------------ ---------- ------------                                            
+          11 JACK                 10                                            
+          12 JANE                 10                                            
+          13 JULIE                30                                            
+          14 JULIA                20                                            
+          15 JULIA                30                                            
+          17 JULI                 20                                            
+
+6 rows selected.
+
+SQL> INSERT INTO MYEMP36 VALUES (18,'JULEE',NULL);
+
+1 row created.
+
+SQL> SELECT * FROM MYEMP36;
+
+       EMPNO ENAME               DNO                                            
+------------ ---------- ------------                                            
+          11 JACK                 10                                            
+          12 JANE                 10                                            
+          13 JULIE                30                                            
+          14 JULIA                20                                            
+          15 JULIA                30                                            
+          17 JULI                 20                                            
+          18 JULEE                                                              
+
+7 rows selected.
+
+SQL> exit
