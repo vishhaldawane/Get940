@@ -1,10 +1,34 @@
+import java.time.LocalDate;
+
+
 public class AbstractionTest {
 	public static void main(String[] args) {
-
+	
 		Student.setCollegeName("SRM College"); //shared data member
 		Employee.setCompanyName("LTI");
-		Employee e1 = new Employee('F', 22 ,"Julia",103,89.0f,89.0f,70.0f,95.0f,86.0f,85.0f,2222,"Java Developer",25000);
+		Employee e1 = new Employee('F', 21 ,"Julia",103,89.0f,89.0f,70.0f,95.0f,86.0f,85.0f,2222,"Java Developer",25000);
+		e1.pan.setPanNumber("JULPE1234T");
+		e1.pan.setPanHolderName("Julia Dsouza");
+		e1.pan.setFatherName("Peter Dsouza");
+		e1.pan.setDateOfBirth(LocalDate.of(2000, 12, 25));
+		e1.pan.setIssuedBy("Govt. Of India");
 		e1.showEmployee();
+		
+		Employee e2 = new Employee('M', 22 ,"King",104,79.0f,87.0f,77.0f,92.0f,86.0f,85.0f,2233,"Tester",27000);
+		e2.pan.setPanNumber("KIER6734w");
+		e2.pan.setPanHolderName("King Dmello");
+		e2.pan.setFatherName("Martin Dmello");
+		e2.pan.setDateOfBirth(LocalDate.of(2000, 07, 06));
+		e2.pan.setIssuedBy("Govt. Of India");
+		e2.showEmployee();
+		
+		Employee e3 = new Employee('M', 23 ,"Smith",105,79.0f,87.0f,70.0f,97.0f,86.0f,85.0f,2244,"Quality Associate",35000);
+		e3.pan.setPanNumber("SMIPO1234Q");
+		e3.pan.setPanHolderName("Smith Dcunha");
+		e3.pan.setFatherName("Adam Dcunha");
+		e3.pan.setDateOfBirth(LocalDate.of(2001, 01, 10));
+		e3.pan.setIssuedBy("Govt. Of India");
+		e3.showEmployee();
 		
 		if(e1 instanceof Person) {
 			System.out.println("Yes e1 is a Person");
@@ -17,6 +41,7 @@ public class AbstractionTest {
 		if(e1 instanceof Employee) {
 			System.out.println("Ofcourse, e1 is an Employee");
 		}
+		
 		
 	/*	Student.setCollegeName("SRM College"); //shared data member 
 		
@@ -67,11 +92,84 @@ class Ticket
 				//is same as of the implicit
 }
 
+class PanCard
+{
+	private String panNumber;
+	private LocalDate dateOfBirth;
+	private String panHolderName;
+	private String fatherName;
+	private String issuedBy;
+	
+	public PanCard() {
+		
+	}
+	
+	public PanCard(String panNumber, LocalDate dateOfBirth, String panHolderName, String fatherName, String issuedBy) {
+		super();
+		this.panNumber = panNumber;
+		this.dateOfBirth = dateOfBirth;
+		this.panHolderName = panHolderName;
+		this.fatherName = fatherName;
+		this.issuedBy = issuedBy;
+	}
+	
+	public String getPanNumber() {
+		return panNumber;
+	}
+
+	public void setPanNumber(String panNumber) {
+		this.panNumber = panNumber;
+	}
+
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getPanHolderName() {
+		return panHolderName;
+	}
+
+	public void setPanHolderName(String panHolderName) {
+		this.panHolderName = panHolderName;
+	}
+
+	public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+	public String getIssuedBy() {
+		return issuedBy;
+	}
+
+	public void setIssuedBy(String issuedBy) {
+		this.issuedBy = issuedBy;
+	}
+
+	void showPanCard() {
+		
+		System.out.println("PAN Number     : "+panNumber);
+		System.out.println("Date of Birth  : "+dateOfBirth);
+		System.out.println("PanHolder Name : "+panHolderName);
+		System.out.println("Father's Name  : "+fatherName);
+		System.out.println("Issued By      : "+issuedBy);
+		System.out.println("===================================");
+	}
+	
+}
 class Person
 {
 	private char gender;
 	private int age;
 	private String name;
+	PanCard pan = new PanCard(); //"JULPD4532A",LocalDate.of(2001, 12, 25),"Julia Dsouza","Peter Dsouza","Govt.Of India");
 	
 	Person() {
 		System.out.println("Person ctor...");
@@ -115,7 +213,7 @@ class Person
 		System.out.println("Age    : "+age);
 		System.out.println("Name   : "+name);
 		System.out.println("--------------");
-		
+		pan.showPanCard();
 	}
 }
 class A
@@ -162,7 +260,7 @@ class Student extends Person
 		super.showPerson(); //print gender,age and name
 		System.out.println("RollNo : "+rollNumber);
 		System.out.println("College: "+collegeName);
-		System.out.println("College: "+collegeName.hashCode());
+	//	System.out.println("College: "+collegeName.hashCode());
 		System.out.println("--------------------");
 		System.out.println("Phy    : "+phy);
 		System.out.println("Chem   : "+chem);
@@ -222,7 +320,6 @@ class Employee extends Student
 		this.desg = desg;
 		this.basic = basic;
 	}
-
 
 	void showEmployee() {
 		super.showStudent(); //print gender,age and name
