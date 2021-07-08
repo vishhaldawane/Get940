@@ -1,7 +1,24 @@
 public class AbstractionTest {
 	public static void main(String[] args) {
+
+		Student.setCollegeName("SRM College"); //shared data member
+		Employee.setCompanyName("LTI");
+		Employee e1 = new Employee('F', 22 ,"Julia",103,89.0f,89.0f,70.0f,95.0f,86.0f,85.0f,2222,"Java Developer",25000);
+		e1.showEmployee();
 		
-		Student.setCollegeName("SRM College"); //shared data member 
+		if(e1 instanceof Person) {
+			System.out.println("Yes e1 is a Person");
+		}
+		
+		if(e1 instanceof Student) {
+			System.out.println("Yes e1 is a Student too");
+		}
+		
+		if(e1 instanceof Employee) {
+			System.out.println("Ofcourse, e1 is an Employee");
+		}
+		
+	/*	Student.setCollegeName("SRM College"); //shared data member 
 		
 		Student s1 = new Student('F', 21,"Julie",101,99.0f,99.0f,90.0f,90.0f,86.0f,85.0f);
 		s1.showStudent();
@@ -13,6 +30,7 @@ public class AbstractionTest {
 		Student s3 = new Student('F', 22 ,"Sonia",103,89.0f,89.0f,70.0f,95.0f,86.0f,85.0f);
 		s3.showStudent();
 
+		*/
 		
 	//	Kite k1 = new Kite("Red","Akash",50);
 //		k1.showKite();
@@ -62,7 +80,7 @@ class Person
 	//mutator
 	/*void set*/
 	Person(char g, int a, String n) {
-		System.out.println("Person(char,int,String) ctor...");
+		System.out.println("Person(...) ctor...");
 		if(g=='M' || g=='F' || g=='T')
 			gender=g;
 		else {
@@ -130,6 +148,7 @@ class Student extends Person
 	Student(char g, int a, String n, int rollNumber, float phy, float chem, float maths, float eng1,
 			float eng2, float eng3) {
 		super(g, a, n); //invoke nearest super class ctor
+		System.out.println("Student(....) ctor...");
 		this.rollNumber = rollNumber;
 		
 		this.phy = phy;
@@ -179,6 +198,50 @@ class Student extends Person
 			grade='E';
 		else if(perc<35)
 			grade='F';
+	}
+	
+}
+
+class Employee extends Student 
+{
+	private int employeeNumber;
+	private String desg;
+	private float basic;	private float pf;	private float net;
+	private static String companyName;
+	
+	static void setCompanyName(String cn) {
+		System.out.println("Setting companyName...");
+		companyName = cn;
+	}
+	
+	public Employee(char g, int a, String n, int rollNumber, float phy, float chem, float maths, float eng1, float eng2,
+			float eng3, int employeeNumber, String desg, float basic) {
+		super(g, a, n, rollNumber, phy, chem, maths, eng1, eng2, eng3);
+		System.out.println("Employee(....) ctor...");
+		this.employeeNumber = employeeNumber;
+		this.desg = desg;
+		this.basic = basic;
+	}
+
+
+	void showEmployee() {
+		super.showStudent(); //print gender,age and name
+		System.out.println("EmpNo  : "+employeeNumber);
+		System.out.println("Company: "+companyName);
+		System.out.println("Desg   : "+desg);
+		System.out.println("--------------------");
+		calculateNet();
+		System.out.println("Basic  : "+basic);
+		System.out.println("PF     : "+pf);
+		System.out.println("Net    : "+net);
+		System.out.println("====================");
+	}
+	private void calculateNet() {
+		calculatePf(); 
+		net = basic - pf;
+	}
+	private void calculatePf() {
+		pf = basic * 10/100;
 	}
 	
 }
