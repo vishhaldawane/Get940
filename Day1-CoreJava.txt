@@ -411,13 +411,14 @@ long  8
 	allAccounts[1] = new BankAccount();
 	allAccounts[1].setBankAccount(102, "Julia",600000);
 				
-
-
+5 references to BankAccount		
+	|				<--BankAccount----------->
 	allAccounts[]			acno     achn	 acbal
 	---------			-------------------------
 	0|	------------------------|	|	|	|	
 	 |1234	|			-------------------------
 	 |      |			1234
+	 |	|			<--BankAccount----------->
 	 |	| 			acno	achn	acbal
 	---------			-------------------------
 	1|9090	----------------------- |	|	|	|
@@ -432,3 +433,654 @@ long  8
 
 		allAccounts[0].showAccount();
 		allAccounts[1].showAccount();
+
+
+
+
+	Procedure Oriented Programming System = POPS
+
+	functions <--- data  | hair cutting in a saloon
+	cutting() <--- size/style
+	enteringIntoLocalTain() <----- seat
+	top to bottom approach
+
+
+	Object Oriented Programming System = OOPS
+
+	data <--- functions
+	size/style <-- cutting()
+	bottom to top approach
+	seat <--- enteringIntoExpressTain()
+
+
+	
+
+			panCard	
+
+	bankName	bankAddress	accountHolderAddress
+				creditLimit
+	interestRate				accountHolderEmail
+				bankBalance
+	accountHolderName			accountHolderMobileNumber
+
+		bankAccountNumber	maturityYear
+
+				overdraftLimit		ifscCode
+
+	birthdate		branchCode
+
+		fixedDepositInterestRate	emi	loanDate   loanAmt
+
+	creditCardInterestRate		loanAccountNumber
+
+
+	void changeAddressOfCustomer(String newAddress)
+	{
+		accountHolderAddress = newAddress;
+		accountHolderName = newAddress;
+	}
+	void withdraw(float amt)
+	{
+		bankBalance = bankBalance-amt;
+		loanAmt = loanAmt + amt; // out of contract
+		
+	}
+	void printBankAccount() 
+	{
+		
+	}
+		the function is behaving out of contract
+
+contract of a class = association of data with its concerned functions
+
+
+
+
+	Cloth <--> Tailor => Shirt
+	|	    |
+	data   activities
+	|
+	Customer
+	|
+	Intention
+				Algorithm		
+
+		1. measuring the requirement 
+
+			measuring tape + measure()
+			|		  |
+			body		 paper + pencil
+
+			paper is initialized with 1,2, 3,4,5,6,...12 numbers
+						  |    |
+						36(38) 16(18) -- insert/update/select
+			(very imp numbers )
+
+		2. making a "cutting diagram" on the cloth
+				specialChalk to mark on the cloth
+				scale 
+
+			refer the paper (very often) - read only
+
+
+		3. start cutting the cloth as per the "cutting diagram"
+
+			scissors - once its over ==> cloth pieces
+
+
+		4. collect logical pieces to stitch together
+
+			needle + thread + stitching maching
+			scissors 
+
+		5. shirt is ready to deliver
+
+
+
+
+
+		cloth + specialChalk
+
+
+
+		accessor  and mutator
+
+		
+		0 1 2 3 4 5 6 7 8 9 10 11
+		--------------------------
+		| | |38 | |18 | || | | | |
+		--------------------------
+
+
+
+			takeMeasure()  writeMeasurements()
+
+				readMeasurements()
+
+		cuttingAsPerDiagram()	drawDiagramAsPerMeasurements()
+
+				stitchingLogicalPieces()
+
+
+
+
+		class  Measure
+		{
+			measureTape + paper (mutation) + pencil
+			  +
+			takeMeasure() 
+			writeMeasurements()
+		}
+
+		class Diagram
+		{
+			chalk + cloth +   paper(readonly)
+			readMeasurements()
+			drawDiagramAsPerMeasurements()
+		}
+	
+		class Cutter
+		{
+			cloth pieces + scissor
+			cuttingAsPerDiagram()
+		}
+		class Stitcher
+		{
+			logical pieces + needle + thread
+			stitching machine
+
+			stitchIt() 
+		}
+
+
+
+
+
+	acno		acno			acno		acno
+	acbal		acbal			acbal		acbal
+	acholder	acholder		acholder	acholder 55 days
+			interest		overdraft	creditlimit
+	interest	maturityyear				interestrate 40%
+	SavingsAccount	FixeDepositAccount  CurrentAccount 	CreditAccount
+						100000
+
+			
+
+
+
+
+
+
+
+
+
+		blackboard + chalk + duster
+
+		whiteboard + markerPen + duster
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	AtmEngineer*
+	|
+	AtmMAchine is an object for us
+	 |	|
+	 |	EndUser*
+	 |
+-----------------------
+|		|
+data		function
+|		|
+cash		withdraw()
+totalCash	X
+ <-- private
+numberOfHits	X
+ <-- private
+		dipTheCard() -> lockCard() <-- private
+				->loggingInUser()  <-- private
+					-> printItOnPaper() <-- private
+						presentTheMenu()
+			
+
+
+	OOPS Features
+	===============
+
+	1. Abstraction (what is your father? : he is in police)
+		it is the "What is ? " part of an object
+		it hides the complexity of an object
+		and provides the simple accessible functions to use it
+
+		a. data abstraction ( hide the data )
+		b. procedural abstraction ( hide the data )
+
+	2. Encapsulation (how is it? : police profile : 
+		-it is the "How is it ? " part of an object
+		-it is the complexity of an object
+		-it provides all the data + contractual functions 
+		for end users as well as the overall architecture	
+
+	3. Polymoprhism 
+		ability of a business entity to have multiple forms
+
+			compile time polymorphism <== is a wrong term
+
+			a. class extension
+			
+	d.diagnose(); //compile time awareness
+	s.diagnose();//compile time awareness
+	h.disgnose();//compile time awareness
+
+	Doctor d = new Doctor();
+	d.diagnose(); //compile time awareness of Doctor's diagnose
+	d = new Surgeon();
+	d.diagnose(); //compile time awareness of Doctor's diagnose
+	d = new HeartSurgeon();
+	d.diagnose(); //compile time awareness of Doctor's diagnose
+
+				Doctor
+				  |diagnose(){ ENT }
+			-----------------------
+			|	
+		    Surgeon
+			|diagnose(){ ENT + CTSCAN}
+		----------------------------------
+		|		|		|
+	HeartSurgeon	 NeuroSurgeon	OrthoSurgeon
+	diagnose(){ ENT +CTSCAN + MRI + 2DECHO + CARDIOGRAPH }
+
+			b. compile time binding- early
+ 
+				- function overloading
+					a. data type
+					b. number of arguments
+					c. sequence of data types
+					
+				Person p = new Person();
+				p.setPerson('M');
+				p.setPerson(23);
+				p.setPerson("Julie");
+
+			c. runtime binding - polymorphism
+
+				"runtime polymorphism" - invalid term
+			
+
+	4. Inheritance
+
+		ability to "acquire properties" from existing business entities
+
+		DERIVATION			IMPLEMENTATION	
+		|				|
+		|				Animal
+		|				| eatFood(); //declared
+		|				Mammal
+		|				| giveBirth(); //declared
+		Person				Human
+		| 				| think(); //declared
+		|				|
+		Student				Person
+		|				| talk(){}
+		Employee			Student
+						 study() { }
+
+			a. single level
+
+			b. multi level
+
+			c. multiple level
+
+			d. hierrchical level
+
+		class Person
+		{
+			gender age name
+			ctrs
+			show
+		}
+		class Student extends Person [ inherits all the content of Person ]
+		{
+			gender age name + roll phy chem maths eng1 eng2 eng3 total per grade
+		}
+
+
+	Person p = new Person();
+	Student s = new Student();
+					<-------Person---------->
+					gender   age     name
+					-------------------------
+					| M	| 22	|Peter	|
+					-------------------------
+		+-----------------------100
+		|				Person() Person(...)
+		100				showPerson()
+		p
+
+				<----------------------Student--------------------------->
+				<-------Person---------->
+				gender   age     name   |roll cn  p  c  m   e1 e2 e3  t  p  g
+				--------------------------------------------------------------
+				| M	| 22	|Peter	|   | 8 |   |  |  |  |  |  |  |  |  |
+ 				--------------------------------------------------------------
+		+---------------100			      
+		|					     
+		100
+		s1
+
+
+			<----------------------Student--------------------------->
+				<-------Person---------->
+				gender   age     name   |roll cn  p  c  m   e1 e2 e3  t  p  g
+				--------------------------------------------------------------
+				| M	| 22	|Peter	|   | 8 |   |  |  |  |  |  |  |  |  |
+ 				--------------------------------------------------------------
+		+---------------200			      
+		|					     
+		200
+		s2
+
+				<----------------------Student--------------------------->
+				<-------Person---------->
+				gender   age     name   |roll cn  p  c  m   e1 e2 e3  t  p  g
+				--------------------------------------------------------------
+				| M	| 22	|Peter	|   | 8 |   |  |  |  |  |  |  |  |  |
+ 				--------------------------------------------------------------
+		+---------------300			      
+		|					     
+		300
+		s3
+
+			String pool SRM COllege
+				    |	
+				    8
+=================================================================
+
+But what if the collegeName is declared as static?
+
+
+			String pool collegeName
+					|
+				   "SRM COllege"
+				    |	
+				    8
+
+
+				<----------------------Student--------------------------->
+				<-------Person---------->
+				gender   age     name   |roll p  c  m  e1 e2 e3  t  p  g
+				--------------------------------------------------------------
+				| M	| 22	|Peter	|   |  |  |  |  |  |  |  |  |  |
+ 				--------------------------------------------------------------
+		+---------------100			      
+		|					     
+		100
+		s1
+
+
+			<----------------------Student--------------------------->
+				<-------Person---------->
+				gender   age     name   |roll p  c  m   e1 e2 e3  t  p  g
+				--------------------------------------------------------------
+				| M	| 22	|Peter	|   |  |  |  |  |  |  |  |  |  |  |
+ 				--------------------------------------------------------------
+		+---------------200			      
+		|					     
+		200
+		s2
+
+				<----------------------Student--------------------------->
+				<-------Person---------->
+				gender   age     name   |roll p  c  m e1 e2 e3  t  p  g
+				--------------------------------------------------------------
+				| M	| 22	|Peter	|   |  |  |  |  |  |  |  |  |  |  |
+ 				--------------------------------------------------------------
+		+---------------300			      
+		|					     
+		300
+		s3
+
+
+	Person p = new Person();  age birthdate gender
+	Student s = new Student(); marks grade 
+	Employee e = new Employee(); salary, desg, dept
+	|
+	|		--apply	--------->
+	A				B	
+
+
+	super()   - a call to the nearest super class constructor	
+			from a constructor
+		  - must be the first line in the child class ctor
+
+	super.		- a call to the nearest super class method/function
+			from any other function
+			- can be anywhere in the child class method
+
+
+
+
+
+
+	5. Object communication
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
+	Object = state + behaviour
+		 |	   |
+	object=	data	functions
+
+
+	savingsAccount's = balance <==  withdraw() / deposit()
+	object
+
+
+
+	class 				Object
+	|				|
+	.java file/text file		running memory entity
+	|				|
+	class BankAccount		BankAccount ba = new BankAccount()	()
+	{
+	    data + functions		stack + heap diagram
+					|	  data + functions	
+	}				ba
+	|				|
+	design of an "object"		instance of a "class"
+	|				|
+	LOGICAL	TEXT 	-> JVM	->	PHYSICAL IN THE MEMORY
+	
+
+
+
+		Person p1. ...
+
+
+		p1.set(...peter) -- we want to invoke this once
+		p1.show
+		p1.set(...smith) -- invoked again
+		p1.show
+		
+
+		so lets bypass this set method
+		and focus on Constructor 
+
+
+
+	Constructor 
+
+		- it has the same name as of the "enclosing class"
+
+		- it is invoked during the instantiation process
+	
+		- if the constructor invocation is successful, then
+		  the new keyword is also successful.
+		- if the constructor failed/terminated/throws exceptions
+		  then the new keyword would also fail
+
+		- constuctor has no return type
+
+		- but it can take arguments/parameters, hence it can be
+			overloaded
+
+		- every class is provided with 
+			an implicit/default ctor/implicit no-arg ctor
+
+		- this implicit/default ctor is NOT provided, if the
+		developer provides any explicit ctor
+
+		-either you can have implicit or explict, but not both
+
+		- the purpose of ctor is to initialize teh
+		  state of an object
+
+		- it is invoked ONCE per object
+
+		- once the object is created, then
+		the ctor can never be called for that object
+
+		Data type	Object Reference
+			|	|
+			Person p1 = new Person();
+				    |	  |
+				    |	  constructor 
+				    |
+				allocator of java 	
+				to allocate gender,age and name in heap
+				|
+	if the constructor is failed/terminated/exception thrown from it
+	then the allocator will rollback the data(gender,age,name)
+
+
+	
+
+
+	class Human extends Mammal <--Whole
+	{
+		Heart h = new Heart(); //hasA <-- part
+
+	}
+
+	class Car extends LandVehicle <-- whole
+	{
+		Wheel w[] = new Wheel[4]; <-- hasA <-- part of a car (mandate)
+
+	}
+	class Microwave extends Machine
+	{
+		HeatingCoil ht = new HeatingCoil();
+
+	}
+	class WashingMachine extends Machine
+	{
+		WashingTub wt = new WashingTub();
+
+	}
+			   Association 
+				|		
+		----------------------------------
+			|	|	|	|
+			isA	hasA	usesA	producesA
+			<structural>	<-functional->
+
+
+				Person
+				| gender,age,name
+				| PanCard <-hasA
+				| Tea prepareTea(TeaPowder tp, Sugar s, Milk m, Water w, GasStove gs,Pot p)          
+			--------+
+			| isA
+		     Student
+			| rollno,marks
+			| MarkSheet <-hasA
+			| Notes  study(NoteBook nb, Pen p)
+		--------+
+		| isA
+		| 
+	    Employee
+		|empno,salary
+		|SalarySlip <-hasA
+		|Project  prepareProject(Computer c, CaseStudy cs)		
+		|
+	----------------------------
+			|
+			SoftwareEmployee
+			
+
+
+
+
+		50 question
+		|
+	-------------------------------------
+	|	|	|		|		
+	oracle  java   html/css/js    angular
+	|	|	|		|
+	15	15	10		10 = 50
+		|
+	---------------------------------
+	|	|	|	|	|
+	3	3	3	3	3
+	basic	oops	ex	coll	jdbc
+
+	75
+
+		25 easy
+		15 intermediate
+		10 difficult
+	
+
+		"dont know" <==  dont know
+
+		exam	  |	SME	|	project
+		MCQ		interact	perform
+		8.30		1hour		day/night
+		18:00
+		
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
