@@ -1,10 +1,39 @@
+public class AbstractionTest {
+	public static void main(String[] args) {
+		
+		Student.setCollegeName("SRM College"); //shared data member 
+		
+		Student s1 = new Student('F', 21,"Julie",101,99.0f,99.0f,90.0f,90.0f,86.0f,85.0f);
+		s1.showStudent();
+		
+		Student s2 = new Student('F', 20, "Robert",102,89.0f,89.0f,80.0f,90.0f,76.0f,75.0f);
+		s2.showStudent();
+
+		
+		Student s3 = new Student('F', 22 ,"Sonia",103,89.0f,89.0f,70.0f,95.0f,86.0f,85.0f);
+		s3.showStudent();
+
+		
+	//	Kite k1 = new Kite("Red","Akash",50);
+//		k1.showKite();
+	}
+}
 class Kite
 {
-	void flyKite() {
-		
+	String color;
+	String owner;
+	int length;
+	
+//local c o l assigned to global color,owner and length
+	Kite(String color, String owner, int length) { 
+		this.color=color;//The assignment to variable color has no effect
+		this.owner=owner;
+		this.length=length;
 	}
-	void kiteFight() {
-		
+	void showKite() {
+		System.out.println("Kite color  : "+color);
+		System.out.println("Kite owner  : "+owner);
+		System.out.println("Kite length : "+length);
 	}
 }
 
@@ -84,16 +113,25 @@ class B extends A
 class Student extends Person
 {
 	private int rollNumber;
+	
 	private float phy;	private float chem;
 	private float maths;	private float eng1;
 	private float eng2;		private float eng3;
 	private float total;	private float perc;
 	private char grade;
+
+	private static String collegeName;
+	
+	static void setCollegeName(String cn) {
+		System.out.println("Setting collegeName...");
+		collegeName = cn;
+	}
 	
 	Student(char g, int a, String n, int rollNumber, float phy, float chem, float maths, float eng1,
 			float eng2, float eng3) {
 		super(g, a, n); //invoke nearest super class ctor
 		this.rollNumber = rollNumber;
+		
 		this.phy = phy;
 		this.chem = chem;
 		this.maths = maths;
@@ -104,6 +142,8 @@ class Student extends Person
 	void showStudent() {
 		super.showPerson(); //print gender,age and name
 		System.out.println("RollNo : "+rollNumber);
+		System.out.println("College: "+collegeName);
+		System.out.println("College: "+collegeName.hashCode());
 		System.out.println("--------------------");
 		System.out.println("Phy    : "+phy);
 		System.out.println("Chem   : "+chem);
@@ -141,12 +181,4 @@ class Student extends Person
 			grade='F';
 	}
 	
-}
-public class AbstractionTest {
-	public static void main(String[] args) {
-		Student s1 = new Student('M', 30, "Julie",101,99.0f,99.0f,90.0f,90.0f,86.0f,85.0f);
-		s1.showStudent();
-		
-		
-	}
 }
