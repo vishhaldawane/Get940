@@ -1,4 +1,16 @@
 
+
+	team1 = member1 +  member2 + member3 + member4 + member5
+	|	  |		|	|	|	| 	
+	airline  TL 89		64 	90	80	85
+
+			8	8	8	8	8   = 32 hrs per day
+		
+
+
+
+
+
 			Readers are Leaders
 
 		Java Programming Language (not spoken)
@@ -1067,15 +1079,133 @@ But what if the collegeName is declared as static?
 
 
 
+=====================================================
+
+
+Day 3
+
+======================================================================
+
+		static		final		abstract
+						(incomplete/partial)
+======================================================================
+
+  field	/	shared across	CONSTANT/	NA	10 rs coin?
+  data		all objects 	IMMUTABLE
+  member	of a class
+
+----------------------------------------------------------------------
+
+  method 	can refer	CANNOT BE	
+		other static	OVERRIDDEN
+		members
+
+----------------------------------------------------------------------
+
+  class		*		CANNOT BE
+				EXTENDED
+
+----------------------------------------------------------------------
+
+
+packages
+exception handling
+collection
+
+				kiteCount
+				-------------
+				|	|
+				---------
+
+
+ what is the memory diagram BEFORE the birth of k1!!!!
+
+		Kite k1 = new Kite();
+
+ below memory diagram after the birth of k1!!!!
+
+destructor 
 
 
 
+	new  <-- keyword is the allocator
+	delete <-- keyword is teh de-allocator [ not in java ]
+
+	Kite(...) { } <-- constructor
+	~Kite() { } <-- destructor [ not in java ] - garbage collector
+
+				kiteColor|kiteOwner|kiteLength
+				--------------------------------
+				| Red	 |Rita	   |50	      |
+				--------------------------------
+	+---------------------->100
+	|
+	100			
+	k1				getKiteCount(){
+						return kiteCount;
+					}
+
+
+				kiteColor|kiteOwner|kiteLength				
+				--------------------------------
+				| Yellow | Julie   | 40	      | 
+				--------------------------------
+	+---------------------->200
+	|
+	200			
+	k2		
+
+				kiteColor|kiteOwner|kiteLength			
+				--------------------------------
+				| Green	 | Ritesh   |30	      |
+				--------------------------------
+	+---------------------->300
+	|
+	300			
+	k3		
+
+
+				
+				--------------------------------
+				| 
+				--------------------------------
+	+---------------------->400
+	|
+	400			
+	k4		
+			
+
+
+
+
+
+	Class members		vs		Object Members
+		|				|
+		STATIC				NON-STATIC
+		|				|
+		kiteCount			kiteColor
+						kiteOwner
+						kiteLength
+
+	field->	shared 				per object 
+		across all
+		objects
+
+     function->	used to ONLY refer		toString(), showKite(),	
+		other static			kiteIsDown()
+		members				CAN REFER BOTH STATIC AND
+						NON-STATIC 
 
 
 
 
 	
 
+akash
+hrutvik
+pradnya
+nakul
+vanshika
 
 
 
@@ -1083,4 +1213,148 @@ But what if the collegeName is declared as static?
 
 
 
+
+
+	State TRUE or FALSE
+
+
+		We can use this pointer in a static function
+
+
+
+
+
+
+
+
+		Chess
+		| moveKnite() { math...}
+	--------------------
+	|
+	GraphicalChess
+	|moveKnite() { gui...}
+
+
+
+
+			BankAccount
+			|
+	-------------------------------------------
+	|		|		|
+	SavingsAccount	CurrentAccount	CreditAccount
+	|
+FixedDepositAccount
+	|
+FlexiFixedDepositAccount
+	|
+final FlexiTermFixedDepositAccount
+
+
+		ArtGallery
+		|
+		----------------------
+		|	
+		various paintings are there
+		|
+	------------------
+	|
+	painting1
+	| abstract drawing.. / not conrete / not complete / incomplete
+	| primeMinister();
+--------------------------
+|	|	|	|
+viewer1	viewer2	viewer3	viewer4	viewer5
+|	 |	|	 |	 |
+cloud	ghost  cotton	jungle	face
+
+
+			ABSTRACT CLASS MEANT FOR INHERITANCE
+
+	abstract class
+		- a class with optional "partial contract"
+		- WE CANNOT CREATE INSTANCE OF AN ABSTRACT CLASS
+		- BUT WE CAN CREATE INSTANCE OF ITS CHILD (NON-ABSTRACT)
+
+	- IT IS NOT NECESSARY TO HAVE ABSTRACT METHOD(S) IN AN ABSTRACT CLASS
+
+	abstract function
+	
+		- partial contract of a class
+
+		- extending non-abstract child MUST 
+		   implement all the contracts of the abstract hierarchy
+
+
+	abstract class BankAccount
+	{
+		void deposit(float amt) { } 
+		void withdraw (float amt) { } 
+	}
+
+	class SavingsAccount extends BankAccount
+	{
+
+	}
+
+		EngageInSky
+			|
+		-----------------------------------
+		|	|			|
+FlightCabinEngagement	GliderEngagement  ParaGlidingEngagement
+
+
+			Payement <== no clue at all - Non-payement
+			|
+	----------------------------------------------------------------
+	|		|		|			|
+GooglePayment	CashPayement		ChequePayment	FundTransferPayment
+ |								|
+--------------------------------		-------------------------
+|			|			|	|
+ScanToPayGoogle  MobileNumberGooglePay	ImpsPayment	NEFTPayment
+					(1 second)	(2 hours)
+
+	    [noclue]Light
+		| 
+-----------------------------------------------------------------------
+|		|		|		|		|
+[Sun]Light	MoonLight	TubeLight	BulbLight	CandleLight
+
+				|
+			-------------------
+			|		|
+		PhilipsTubeLight	SuryaTubeLight
+
+						Instrument <-- pure blurrrr 
+						|use();
+			------------------------------------------------------------------
+			|								|
+	abstract MusicalInstrument <-- think of this !!!blurrrrrr idea - clue	MedicalInstrument
+		|									|
+------------------------------
+|abstract 		   |abstract 
+StringMusicalInstrument  AirBasedMusicalInstrument
+|	|	  |	    |
+Guitar	Sitar	 Violin	   Flute
+|		    |
+ElectronicGuitar   Cello	
+
+
+	if you find opposite of something--> then go for abstract
+
+		
+	are we living in duality here????
+
+
+		hard   soft
+		wet	dry
+
+		bald	hairy
+	beautiful	average looking girls
+
+	   mountain	valley
+
+		
+		
+		
 
