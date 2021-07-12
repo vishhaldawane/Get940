@@ -1202,12 +1202,18 @@ destructor
 	
 
 akash
-hrutvik
+hrutvik**
 pradnya
 nakul
 vanshika
+Sparsh 
 
 
+		12	.	5
+		0	.	0
+		|		|
+		whole		part
+		
 
 
 
@@ -1330,10 +1336,12 @@ ScanToPayGoogle  MobileNumberGooglePay	ImpsPayment	NEFTPayment
 			------------------------------------------------------------------
 			|								|
 	abstract MusicalInstrument <-- think of this !!!blurrrrrr idea - clue	MedicalInstrument
-		|									|
-------------------------------
-|abstract 		   |abstract 
-StringMusicalInstrument  AirBasedMusicalInstrument
+		|playMusic();									|
+----------------------------------------
+|abstract 		   	|abstract 
+StringBasedMusicalInstrument  AirBasedMusicalInstrument
+	|tuneStrings();
+-------------------
 |	|	  |	    |
 Guitar	Sitar	 Violin	   Flute
 |		    |
@@ -1354,7 +1362,193 @@ ElectronicGuitar   Cello
 
 	   mountain	valley
 
+=======================================================
+
+
+Exception handling 
+---------------------
+
+		exception = runtime error
+
+
+				Errors
+				|
+	-------------------------------------------------------------------
+	|		|		|		|		|
+	syntax		library		runtime		logical		fatal
+	|		|		|		|		|
+	compile		.jar/,class	exception	a+b=8	VirtualMachineError
+			files are
+			missing
+
+	
+BL and EL  IS MIXED TOGETHER - OR SPREAD ACROSS THE JUNGLE OF IF..ELSE
+
+	void fundTransfer(Savings source, Savings target, float amt)
+	{
+	1	search target <=BL
+	2	if target found then
+	3		search source <=BL
+	4		if source found then
+	5			find sufficient balance at source <=BL
+	6			if suff balance found then
+	7				withdraw from source <=BL
+	8				deposit to target <=BL
+	9			else
+	10				insufficient balance at source <=EL
+	11		else
+	12			source not found <=EL
+	13	else
+	14	  	target not found <=EL
+		
+	}
+
+	
+
+	void fundTransfer(Savings source, Savings target, float amt)
+	{
+	1	search target <=BL
+	2	if target NOT found then
+	3		target not found <=EL	
+	4	else
+	5		search source <=BL
+	6		if source NOT found then
+	7			source not found
+	8		else
+	9			find sufficient balance at source <=BL
+	10			if suff balance NOT found then
+	11				insufficient balance at source <=EL
+	12			else
+	13				withdraw from source <=BL
+	14				deposit to target <=BL
+	}
+
+
+
+	void fundTransfer(Savings source, Savings target, float amt)
+	{
+		try <== IT CONTAINS THE BL
+		{
+	1		search target <=BL
+	2		search source <=BL
+	3		find sufficient balance at source <=BL
+	4		withdraw from source <=BL
+	5		deposit to target <=BL
+		}
+			CATCH CLUSTER CONTAINS THE EL HANDLING LOGIC
+	6	catch(if target NOT found then) then
+	7		target not found <=EL
+	8	catch(if source NOT found then) then
+	9		source not found <=EL
+	10	catch(if sufficient balance NOT AT source)
+	11		insufficient balance at source <=EL
+	}
+
+			wk		SL2	
+			
+			   |||
+			  DRAVID
+
+		    SL1		SL3
+
+
+
+			SAURAV 
+			GANGULY
+
+
+
+		OFFICE OFFICE
 		
 		
+			main method of JVM
+				|
+	Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at DivideTest.main(DivideTest.java:14)
+			|
+		main method of your code
+
+
+
+
+	your java code
+	|			  (1)	   (2)			(3)
+	+----------->  float z =  x/0; --> JVM --------------->  CPU
+					    |		      |
+			 ArithmeticException <-term signal<---+
+						 (4)
+			
+			 e= new ArithmeticException ("/by zero"); (5)
+			 throw e;  (6)
+
+			 e is thrown towards your java code(7)
 		
+			if your code is catching it, then you have a 
+			scope to show error and continue the execution (8)
+
+			but if the thrown object is uncaught, then
+			it is rethrown back to the JVM, (9)
+
+			and JVM wont catch it, it terminates your app
+			by showing exception message (10)
+
+
+
+
+			Object
+			|
+	-------------------------------
+				|
+				Throwable
+				|
+		------------------------------------
+			|		|
+			Error		Exception
+					| "checked"
+		-----------------------------------------------
+		|			|		|
+	RuntimeException		IOException	SQLException
+		|"unchecked"			|
+------------------------------		FileNotFoundException
+|		    |	|
+ArithmeticException |	|
+  NullPointerException  |
+	IndexOutOfBoundsException
+			|
+-----------------------------------------
+|				   |
+StringIndexOutOfBoundsException ArrayIndexOutOfBoundsException
+		
+			what if there is no fire at all
+
+				Library
+				|
+		-----------------------------------------
+		|				|
+	fire-extinguisher			fire-extinguisher
+	as cylinder				as sprinkler [ set up ]
+		|				|
+	well trained				do we need fire marshal here?
+	fire marshal is required		
+	to extinguish the fire
+
+	un"checked" by the compiler		checked by the compiler
+		|				|
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
