@@ -1498,21 +1498,25 @@ BL and EL  IS MIXED TOGETHER - OR SPREAD ACROSS THE JUNGLE OF IF..ELSE
 			Object
 			|
 	-------------------------------
-				|
-				Throwable
+		|	|	|
+	   String   Flight	Throwable
+				| String message; 
+				| printStackTrace();
+				| getMessage();
 				|
 		------------------------------------
 			|		|
 			Error		Exception
 					| "checked"
-		-----------------------------------------------
-		|			|		|
-	RuntimeException		IOException	SQLException
+		-------------------------------------------------------------------------------------------
+		|			|		|		|			|
+	RuntimeException		IOException	SQLException InsurancePaperException VehicleOnReserveFuelException RCBook PUCPaper DrivingLicence Cash 
 		|"unchecked"			|
 ------------------------------		FileNotFoundException
-|		    |	|
-ArithmeticException |	|
-  NullPointerException  |
+|		    |	| |  |
+ArithmeticException |	| | RedSignalDishonourdException
+  NullPointerException  |TyreFlatException
+	 getMessage();  |
 	IndexOutOfBoundsException
 			|
 -----------------------------------------
@@ -1532,13 +1536,332 @@ StringIndexOutOfBoundsException ArrayIndexOutOfBoundsException
 	fire marshal is required		
 	to extinguish the fire
 
-	un"checked" by the compiler		checked by the compiler
+	un"checked" by the compiler		checked by the compiler 
 		|				|
+	RuntimeException			Exception
 		
 
 
 
 
+	String str=null;
+
+	System.out.println("str in upper case is  : "+str.toUpperCase());
+
+	
+
+
+
+	RuntimeException and its children (unchecked) can be thrown
+	by any method.
+
+	void foo()
+	{
+		if (x==0)
+			throw new RuntimeException();
+	}
+
+	But if you wish to throw Exception and 
+	its children "checked" (except RuntimeException), then
+	the method has to declare these exceptions
+	in its throws clause
+
+	void far() throws Exception,IOException,SQLException
+	{
+		if (y==0)
+			throw new Exception();
+		if(z==0)
+			throw IOExcpetion();
+		if(x==0)
+			throw SQLException();
+	}
+
+
+	"checked exceptions" must be declared in the "throws" clause
+	of a method "in order to throw" them
+
+
+class Car
+{
+	void drive() throws InsurancePaperException,VehicleOnReserveFuelException
+	{
+
+		if(fuelCapacity<3) {
+			throw new VehicleOnReserveFuelException("Oh no...my vehicle is reserve on fuel....");
+		}
+
+		if(myMemory<25) {
+			throw new InsurancePaperException("Oh Car insurance is expired...");
+		}
+
+		if(tyreFlat==true)
+			throw new TyreFlatException("Oh No..tyre is flat...now search for the nearest puncture repair place...");
+
+		if(speed>80)
+			throw new RedSignalDishonouredException("Oh No..Red signal dishonoured...now the penalty...");
+
+	}
+}
+
+	main()
+	{
+		try
+		{
+			Car c = new Car();
+			c.drive();
+		}
+		catch(TyreFlatException e) {
+			handler for flat tyre
+		}
+		catch(RedSignalDishonouredException e) {
+			handler for red signal
+		}
+		catch(InsurancePaperException e) {
+			handler for insurance paper problems..
+		}
+		catch(VehicleOnReserveFuelException e) {
+			handler for vehicle reserve fuel
+		}
+		catch(RuntimeException e ) {
+			handler for any runtime other than above
+		}
+		catch(Exception e) {
+			hander for any checked other than above
+		}
+		catch(Throwable t) {
+			handler for error and exception too
+		}
+		catch(Object o) { //illegal
+
+		}
+		
+	}
+
+
+Krati - because they were unchecked 
+Akash - father is driving the car
+
+
+
+
+
+
+
+	Packages and Access specifiers
+	-------------------------------
+
+		similar to directories
+
+		directory = to store files 
+
+		packages = to store class files
+
+	to make a package (java) = directory (operating system)
+		   |				|
+		package keyword		     mkdir / new folder
+
+		jungle.tree			d:\jungle\tree (windows)
+					/home/satish/jungle/tree (unix os)
+
+
+mainpackage			jungle
+				|
+		-----------------------------------
+		|	|	|		|
+subpackage	tree	cave	river		JungleTest
+		|	|	|		|
+classes->	Bird	Tiger	Crocodile	main()
+		Monkey	Lion
+
+	to avail the classes from the packages
+	use the import statement(subject to the availability)
+
+
+
+	four access specifiers in java
+
+			1.       <== default/accessible/friendly
+				 within the same folder/package
+				 
+		
+			2. public <== accessible everywhere
+			3. private
+			4. protected
+
+
+
+		Doctor d = new Doctor();
+
+		d.diagnose();
+
+
+		d = new Surgeon();
+
+		d.diagnose();
+
+
+		Ken Arnold
+		James Gosling : The Java Programming Language
+		
+		
+	
+		overriding
+			|
+		1. accessible
+		2. instance specific
+
+		-----------------------------
+		|		|
+		data		method
+		Tiger		static void hunt() { }
+		 privateA	jump() { }
+		|
+		WhiteTiger	jump() { } //accessible method is overridden
+		 privateA	static void hunt() { }
+
+				Tiger.jump(); //never be hidden
+				WhiteTiger.jump(); //never be hidden
+
+
+	java.lang.reflect <==reflection API 
+
+
+
+	Generics and Collections
+	|
+	|
+	Templates function / Template Classes
+			
+
+
+			Components Orthogonal Space
+				
+				 x - data type - int, float, char,String
+				 |		Flight,Account,Employee ...
+				 |
+				/ \	1. ButterMilk
+			       /   \	2. Noodles
+			      /     \	3. Dal/FriedRice
+			     /       \  4. Paneer Chilly/Manchurian
+			    y--->i<---z
+			    |	 |    |
+		    Container	 |    Algorithm
+		    |	       Iterator	|
+	  int  array []		 |	search(int),  sort(int[]), compact()<-sameCode
+	 float array []		 |	search(float), sort(float[]), compact()<-sameCode
+	{0,10,45,0,30,60,25,0}	for()	 30
+				 |
+		this loop will help the Algorithm to iterate/traverse
+		across the Container
+	ButterMilk
+	|
+ 1.	Glass			straw	drink(), stirr();
+ 2.	Bowl		   ChopSticks	eat()
+ 3.     Plate		        Spoon	eat()
+ 4.	Bowl			Fork	eat()
+
+
+	Content + Container = wise selection
+	 |		|
+	type	   purpose
+
+			Efficiency + flexibility
+			|		|
+			time		space
+
+			
+	
+
+	Letter pad of LTI
+
+		==============================
+		   Larsen and Tubro Infotech
+		   Address ; .....
+		Reg.no. ....	Date : ...
+		------------------------------
+
+			main content.
+			offer letter/ transfer letter
+			promo letter/
+			upraisal letter
+
+
+		------------------------------
+		Footer : .................
+		==============================
+
+
+
+
+
+
+
+	
+	
+	
+			    Iterable  (i)  
+				|Iterator iterator();
+				|	
+	?		   Collection  (i)
+	|			|add(Object );
+	?	---------------------------------------
+	|		|duplicate	|unique
+	?		List (i)	Set (i)
+	|		|		|
+	--------------------------	-------------------------
+		|  linear	|	| non-linear	|
+		|		|	|		|
+	ArrayList	LinkedList	TreeSet		HashSet
+	|add(){..}	|add(){..}	|add(){..}	|add(){..}
+	|iterator(){}   |iterator(){}	|iterator(){}	|iterator(){}
+	|		|		    |in/out	|in/out
+ growable array	    growble/resize array   email	bookshelf
+ at end 	     from the beg/end	  
+		     /within
+	|		|
+holding logs 	  PhoneBook
+			
+
+				Instrument
+					|use();
+			-------------------------------------
+			|				|
+			Musical				Medical
+			|playMusic()			|opearte()
+	-----------------------------	---------------------------------
+	|			|	|			|
+	StringBased	  AirBased	SurgicalMedical	PathologicalMedical
+	|tuneString();	    |blowAir();	|steralize();		|readIt();
+	|		    |		|			|
+	Guitar		    Flute	SurgicalCutter		ECGMAchine
+	pluck();   operateSevenHoles();	   cut();		  plotCardio();
+
+		Instrument i = new Guitar(); <-- String Based
+		Instrument i = new Flute();  <-- Air Based
+		Instrument i = new SurgicalCutter(); <-- Surgical Medical
+		Instrument i = new ECGMachine(); <-- Pathological Medical
+
+
+		Collection coll = new ArrayList();
+		Collection coll = new LinkedList();
+		Collection coll = new TreeSet();
+		Collection coll = new HashSet();
+
+
+
+
+
+
+
+		+-------+	+------+	+-------+
+algorithms	|	|	|	|	|	|
+
+                 
+Iterator	 		 		|   |
+		 		 		\   /
+				   		   |
+container	|  5	|	|  45	|	|   8	 |	
+		+-------+	+-------+	+-------+
 
 
 
@@ -1548,6 +1871,64 @@ StringIndexOutOfBoundsException ArrayIndexOutOfBoundsException
 
 
 
+
+
+
+
+
+	1 2 8 14 3
+
+		2
+		|
+	-------------------
+	|L		|R
+	1		8
+			|
+		------------------
+		|		|	
+		3		14
+
+
+
+			1
+			|
+		-----------------
+		|		|
+				2
+				|
+			----------------
+					|
+					8
+					|
+			-------------------------
+				|		|
+				3		14
+
+
+
+
+
+
+
+
+	layer1 - dbtables - normalized tables - emp, dept, customer, ord, item, product,price
+	layer2 - pojo and jdbc
+	layer3 - hibernate
+	layer4 - service layer - core java 
+	layer5 - spring controller - mvc
+	layer6 - angular - UI
+
+		Payee Name : Vishal
+	        Ac no      : 123
+		IFSC code  : ICICI0069
+		+-----------+
+		| Add Order |
+		+-----------+
+
+
+		View All Payee
+
+		
 
 
 	
