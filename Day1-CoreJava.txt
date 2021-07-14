@@ -1931,5 +1931,327 @@ container	|  5	|	|  45	|	|   8	 |
 		
 
 
+
+
+
+		
+
+
+
+
+
+			Collection <-- interface
+
+				List
+				|
+			ArrayList 
+
+	Collections <-- class [ utility class ]
+		|
+	static sort(jukeBox)
+
+
+	Song mysongs[] = new Song[5]; <-- limited size
+
+	mysongs[0]= new Song();
+	mysongs[1]= new Song(); <-- u cannot delete any song
+	mysongs[2]= new Song();
+	mysongs[3]= new Song();
+	mysongs[4]= new Song(); <-- last song 
+
+
+	ArrayList<Song>	jukeBox = new ArrayList<Song>();
+		   |
+	-------------------------
+	|	|	|	|
+	title  artist  album   year
+	<---String--------->   int
+				0      1     2      3
+				1996, 2019   2014, 1998
+
+	class Song implements Comparable
+	{
+		public int compareTo(
+	}
+
+	Collections.sort(jukeBox);
+		     |
+		on what to sort????
+
+
+
+	java.lang			java.util
+	|				|
+	Comparable			Comparator
+	|				|
+	int compareTo(Object o)		int compare(Object o1, Oject o2)
+	|				|
+	Employee e1...			Comparator cmp = ..implementation here;
+	Employee e2....
+
+	e1.compareTo(e2);		cmp.compare(e1,e2);
+	e1.compareTo(e3);		cmp.compare(e1,e3);
+					cmp.compare(e2,e2);
+
+
+
+
+
+1) Hrushikesh Kondilkar : Bus Booking System
+2) Pradnya : Airline Reservation
+
+
+
+
+		Map - Key and Value
+
+
+				Map <-- is not the collection 
+				|
+		--------------------------------------
+			|		|
+			TreeMap		HashMap
+			(tree)		(hashtable)
+			red/black
+
+
+
+public class java.lang.Object {
+
+  public java.lang.Object();
+
+  public final native java.lang.Class<?> getClass(); 	REFLECTION
+
+  public native int hashCode();			HASHCODE
+  public boolean equals(java.lang.Object);	COMPARE OBJECTS
+
+  protected native java.lang.Object clone() throws java.lang.CloneNotSupportedException; CLONING
+
+  public java.lang.String toString(); STRING REPRESENTATION
+
+  public final native void notify(); //MULTITHREADING
+  public final native void notifyAll(); //MULTITHREADING
+  public final native void wait(long) throws java.lang.InterruptedException; //MULTITHREADING
+  public final void wait(long, int) throws java.lang.InterruptedException; //MULTITHREADING
+  public final void wait() throws java.lang.InterruptedException; //MULTITHREADING
+
+  protected void finalize() throws java.lang.Throwable; //GARBAGE COLLECTION
+
+  static {};
+}
+
+class Book extends Object
+{
+	
+}
+
+
+=========================================================================
+
+Business unit of LTI : minimum requirement from them is 
+		that every student mustbe aware of CRUD opeartion in JDBC
+
+
+	online session				physical session
+
+	70 homes				1 classroom - 70
+	|
+	unique conditions			
+
+
+	Trainer				1 2 3 4 5 .............. 69
+	|				| | | | |
+	talking				mute mute mute mute ....
+	|				|	|	|	|
+	all members in the proximity	all the people around the participant
+	are mute			are always on unmute
+
+
+
+
+
+
+
+
+
+
+
+
+
+	ODBC
+	
+
+	JDBC
+
+		Java Database connectivity - API
+
+			
+		Business Logic
+		Development			RDBMS
+		|				|
+		Java				relations (SQL / PLSQL )
+		|				|
+		classes				tables
+		|				|
+		data<-logic			sql + functions/procedures
+		|				|
+		LOGIC				DATA
+		
+
+following diagram is not of inheritance****
+
+
+1. know ur database (ip        port / username / password / schema)
+	Oracle*	   localhost + 1521 / system  /  manager / ??? )
+        HSQLB
+	MySQL
+	MSSQLServer
+	Sybase
+	..
+	..
+2. know ur driver implementation
+
+				Driver (interface)
+				|  |
+				| OracleDriver* - ojdbc6_g.jar
+				|
+		---------------------------------		
+			|
+		DriverManager
+			|
+3.		registerDriver(new OracleDriver());
+
+4.		getConnection("dsn","username","password");
+			|
+			Connection
+			|
+	------------------------------------------
+		|		|		|
+		Statement  PreparedStatement CallableStatment
+		select	insert/update/delete	proce/function
+		|		|		|
+5	  ResultSet		rows affected   output 
+
+6. process the step number 5
+
+7. close the result, close the statement, close the connection 
+
+
+
+
+    create or replace procedure findCustomer(x IN number, y OUT varchar, z OUT varchar)
+    as
+    begin
+      select name,city into y,z from customer where custid = x;
+      exception when
+      no_data_found then
+            y:=null;
+            z:=null;
+   end;
+
+
+
+  create or replace function findOrderTotal(x IN number) return number
+    as
+       total_order_cost number;
+    begin
+	select sum(total) INTO total_order_cost from ord where custid=x;
+	return total_order_cost;
+     exception when
+      no_data_found then
+            return -1;
+   end;
+
+
+=================
+
+
+		String pool
+			|
+		common resource for all		
+
+	empty coffee/tea PAPER cups in stacked manner
+
+		pool of cups -- 5 empty cups in the POOL (2 left)
+
+	once Ravi, Sameer, Rita
+	     |	    |	    |
+	    cup    cup     cup --> CACHE
+	     |	    |	    |
+	    pk     pk       pk 
+		
+
+
+	String month="January"; //immutable - not changeable
+
+	String month1="January";
+
+	String month2="January";
+
+
+		
+	StringBuffer - to make changes in the String  - mutation
+	   |append()
+	   | above method is synchronized method 
+	---------
+	|	|
+	t1	t2
+
+	StringBuilder - to make changes in the String - mutation
+	   | append() - asynchronous
+	------------
+	|	   |
+	t1	   t2
+
+
+synchronous access of the water		asynchronous access of the water
+human3					human3
+   human2	BoreWell		
+	human1 <-|		human2 	well  human1
+	--------------------- 	----------------------------
+		||			|
+		||			|
+		||80 feet		| 80 feet
+		||			|
+	--------|| -----------
+	  water current
+
+
+		coldrink		pizza
+		bottle			(precut - 8 pie)
+
+
+
+
+
+
+		     0  1  2  3  4  5  6  7
+	int score[]={10,20,30,40,50,60,70,80};
+
+
+		for(int i=3;i<6;i++)
+		{
+			score[i];
+		}
+		
+		for(int x : score )
+		{
+			x
+		}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 
