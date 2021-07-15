@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<style>
+			label,input { font-size:23 }
+		</style>
+	</head>
+
+	<body>
+
+		<h1> Greet1 </h1>
+		
+		<script>		
+			function add()
+			{			
+				var x = document.getElementById("num1").value;		
+				var y = document.getElementById("num2").value;
+				var z = parseInt(x) + parseInt(y);
+				document.getElementById("res").value=z;
+			}
+			function subtract()
+			{			
+				var x = document.getElementById("num1").value;		
+				var y = document.getElementById("num2").value;
+				var z = parseInt(x) - parseInt(y);
+				document.getElementById("res").value=z;
+			}
+
+			function multiply()
+			{			
+				var x = document.getElementById("num1").value;		
+				var y = document.getElementById("num2").value;
+				var z = parseInt(x) * parseInt(y);
+				document.getElementById("res").value=z;
+			}
+			function divide()
+			{			
+				var x = document.getElementById("num1").value;		
+				var y = document.getElementById("num2").value;
+				var z = parseInt(x) / parseInt(y);
+				document.getElementById("res").value=z;
+			}
+			
+		</script>
+		
+		<label> Enter number1 : <label> <input type=text id=num1> <br>
+		<label> Enter number2 : <label> <input type=text id=num2> <br>
+		<label> Result is : <label> <input type=text id=res> <br>
+
+		<input type=button id="add" value="Add" onclick="add()">
+		<input type=button id="sub" value="Subtract" onclick="subtract()">
+		<input type=button id="mul" value="Multiply" onclick="multiply()">
+		<input type=button id="div" value="Divide" onclick="divide()">
+	</body>
+</html>
+
+
+
+
+
