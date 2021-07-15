@@ -1,4 +1,19 @@
+<!DOCTYPE html>
 <html>
+	<script>
+		function validatePassword()
+		{
+			var pass1= document.getElementById("password1").value;
+			var pass2 = document.getElementById("password2").value;
+
+			if(pass1 == pass2 )
+				document.getElementById("msg").innerHTML="Maching";
+			else
+				document.getElementById("msg").innerHTML="Not Matching";
+
+		}
+	</script>
+
 	<body>
 		<h1 align=center style="background-color:dodgerblue"> Employee Registration System </h1>
 
@@ -14,44 +29,59 @@
 
 		 <tr>
 			<td> <label style="font-size:23">Enter first name </label>  </td>  
-			<td> <input style="font-size:23" type="text" name="firstname"> </td> 
+			<td> <input style="font-size:23" type="text" pattern="[a-zA-Z]+" minLength="4" maxLength="10" id="firstname" required> </td> 
 		 </tr>
 
 		 <tr>
 			<td><label style="font-size:23">Enter middle name </label> </td> 
-			<td><input style="font-size:23" type="text" name="middlename"> </td>
+			<td><input style="font-size:23" type="text" pattern="[a-zA-Z]+" minLength="4" maxLength="10" id="middlename" required> </td>
 		 </tr>
 
 		 <tr>
 			<td><label style="font-size:23">Enter last name </label> </td> 
-			<td><input style="font-size:23" type="text" name="lastname"> </td>
+			<td><input style="font-size:23" type="text" pattern="[a-zA-Z]+" minLength="4" maxLength="10" id="lastname" required> </td>
 		 </tr>
 
 		 <tr>
 			<td><label style="font-size:23">Enter email </label> </td> 
-			<td><input style="font-size:23" type="email" name="usermail"> </td>
+			<td><input style="font-size:23" type="email" id="usermail" required> </td>
 		 </tr>
 
 		 <tr>
 			<td><label style="font-size:23">Enter password </label> </td> 
-			<td><input style="font-size:23" type="password" name="lastname"> </td>
+			<td><input style="font-size:23" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password1" required> </td>
+		 </tr>
+
+
+		 <tr>
+			<td><label style="font-size:23">Confirm password </label> </td> 
+			<td><input style="font-size:23" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password2" onkeyup="validatePassword()" required> </td>
+			<td id="msg">Hi<td>
 		 </tr>
 
 		 <tr>
 			<td><label style="font-size:23">Gender </label> </td> 
 			<td>
-				<input type="radio" name="gender" value=female> <label style="font-size:23"> Female </label>
-				<input type="radio" name="gender" value=male> <label style="font-size:23"> Male </label>
+				<input type="radio" name="gender" id="gender" value=female> <label style="font-size:23"> Female </label>
+				<input type="radio" name="gender" id="gender" value=male> <label style="font-size:23"> Male </label>
 			</td>
 
 		 </tr>
 
+ 		 <tr>
+			<td><label style="font-size:23">Birthdate </label> </td> 
+			<td>
+				<input type="date" id="mydate" style="font-size:23" name="date"> 
+			</td>
+
+
+		 </tr>
 
 		 <tr>
 			<td><label style="font-size:23">Qualification </label> </td> 
 			<td>
 				
-				<select style="font-size:23">
+				<select id="qual" style="font-size:23">
 					<option>BscIT</option>
 					<option>BE</option>
 					<option>MCA</option>
@@ -65,15 +95,15 @@
 		 <tr>
 			<td><label style="font-size:23">Other details</label> </td> 
 			<td>
-				<input type="checkbox" name="certified" value=certified> <label style="font-size:23"> Certified </label>
-				<input type="checkbox" name="salaried" value=salaried> <label style="font-size:23"> Salaried </label>
-				<input type="checkbox" name="married" value=married> <label style="font-size:23"> Married </label>
+				<input type="checkbox" id="certified" value=certified> <label style="font-size:23"> Certified </label>
+				<input type="checkbox" id="salaried" value=salaried> <label style="font-size:23"> Salaried </label>
+				<input type="checkbox" id="married" value=married> <label style="font-size:23"> Married </label>
 			</td>
 		 </tr>
 
 		<tr>
 			<td> <label style="font-size:23">Address </label> </td>
-			<td><textarea style="font-size:23" rows=5>
+			<td><textarea id="address" style="font-size:23" rows=5>
 			</textarea> </td>
 		</tr>
 
