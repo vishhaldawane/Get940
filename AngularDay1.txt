@@ -1,0 +1,523 @@
+nivediata 
+mounika chowhan
+
+
+
+
+//overridden method 
+
+class DrunkenMaster
+{
+	void drinkAndFight() //overridden - must be accessible and instance method
+	{
+	}
+}
+class DrunkenDisciple extends DrunkenMaster
+{
+	void drinkAndFight() //overriding
+	{
+
+	}
+}
+
+A. its an overridden method
+B. its NOT an overridden method
+C. method must be public 
+D. none of the above
+
+
+
+
+	State true or false
+
+
+	Abstract class cannot be final 
+
+	A. TRUE
+	B. FALSE
+
+
+
+
+
+	State true or false
+
+		Abstract class cannot have constructor
+
+
+	A. true
+	B. false
+
+
+
+
+
+
+
+
+
+
+
+
+
+	class Employee
+	{
+		private int sal;
+
+		void compareSalary(final Employee x)
+		{
+			x = new Employee(); //we want to prevent this
+
+			if(sal > x.sal) {
+  			   System.out.println("your sal is less than x.sal");
+			}
+		}
+	}	
+	main() {
+		Employee e1 ...		      //100
+		Employee e2 = new Employee(); //200
+
+		e1.compareSalary(e2);
+	}
+
+	A. x has invalid qualifier
+	B. x cannot refer to any other object now
+	C. x cannot access sal
+	D. none of the above
+
+
+
+
+
+	interface Graphics //pixel level contract
+	{
+		void flipA(); //public and abstract
+	}
+
+	interface GraphicalCard extends Graphics // may be gui contract
+	{
+		void flipB();
+	}
+	class Monitor implements GraphicalCard
+	{
+		public void flipA() { } //this will contain pixel level contract
+		public void flipB() { } //this will contain GUI level contract
+	}
+
+
+	A. flip() is ambiguous
+
+	B. flip is implemented
+
+	C. compile time error
+
+	D. interface cannot extend another interface
+	
+
+=======================================================================
+
+	?		Collection
+	|			|
+	?	-----------------------------------
+	|	|			|
+	?	List		?	Set		boolean equals
+	|	|		|	|	add()? on what ground to add
+	--------------------	?	--------------------
+	|		|	|	|		|
+	ArrayList	LinkedList	TreeSet		HashSet
+			FN -> SN
+			FN <- SN
+			|      |
+			ctx1   ctx2
+
+
+
+		framework = "semi"developed application 
+
+Angular	
+
+		MVC Pattern	   vs		MVC Framework
+		|				|
+	
+	CHENNAI					Mumbai	Delhi		Pune
+						|	   |	  	|
+						Naresh	   Rutesh	Sumesh
+						|Controller
+					-----------------
+					|		|
+					chef		view
+					Paresh		Ritesh
+
+
+
+				Rajesh
+
+    Jayesh
+	|
+  Controller <-- take order from the customer <- Pizza = Customer1 = flight ticket status : AIRLINE
+	|ordertaker				MeduWada = Customer2 = account balance summary BANKING
+ ----------------------				Masala Dosa =	 Customer3 = insurance claim status  INSURANCE 
+ | dbms		    |
+ |dataservice  	    | [ html/css ]
+Model		   View	
+| TS ->title	    | <span> {{title}} is running
+|	mycompany   |
+Haresh		Ramesh
+|		    |
+chef		presenter
+|		 |
+kitchen		decorate the pizza
+|		in presentable manner
+making pizza	precut on it - 6/8 pie
+now
+
+
+
+
+		Rajesh : Hotel business - on his own - one man army
+
+		Haresh : as Chef
+
+		Ramesh : as presenter
+
+
+
+
+
+
+
+			Instrument
+				|use();
+		--------------------------------------
+		|				|
+		MusI				MedI	
+		|play();
+	---------------
+	|
+	SBMI
+	|tune();
+	Guitar
+	pluck(){}
+
+
+
+
+
+	Computer = programs 
+			|
+		----------------------------------------------		
+		|		|		|		can talk to  services
+		PLSQL		Java		Angular			|
+		|		|		|		      TypeScript
+	procedures	objects = 	     components = html + css + ts (js)
+	functions	( data + functions )		  data  style  dynamic code
+
+					[Add Payee] is an activity
+
+			------------------------------------------------------
+	
+			html -> Enter payee name     : Vishal D
+			------------------------------------------------------
+				Enter payee a/c no   : password way
+			------------------------------------------------------
+				ReEnter payee a/c no : visible way
+			------------------------------------------------------
+				Enter IFSC code      : ICICI00202
+			------------------------------------------------------
+				[ Add ] <-- 
+			------------------------------------------------------
+
+
+	one command will generate the below component
+
+	ng generate  component AddPayee
+
+		AddPayeeComponent	
+			|
+	-----------------------------------------------------------
+	|			|			|
+add-payee.component.html  add-payee.component.css	add-payee.component.ts
+
+
+	FundTransferComponent
+		|
+---------------------------------------------------------------------
+	|			|			|
+FundTransferComponent.html  FundTransferComponent.css FundTransferComponent.ts
+
+
+
+	traditional html
+	|
+	global css for decoration
+	global js for payee management
+	global js for transfer management
+	addpayee.html
+	fundtransfer.html
+
+
+
+coffee vending machine   water vending machine	snacks vending machine
+	|			|			|
+	place request		place request		place request
+	|			|			|
+coffee type			hot/cold	good day choco chips/lays
+	|			|			|
+	connecting to the
+	jars
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		Q. question...
+	
+			...
+		radio optionA
+		radio optionB
+		radio optionC
+		radio optionD
+
+		[Submit] <-- click [Show Answer] : optionB
+
+	1. ng new mycompany
+
+			mycompany
+				|
+		---------------------------------
+			|
+			src
+			|			document.getElementById("id");
+	---------------------------------------
+	|		|		|   app-root
+app-routing.module.ts	app.module.ts app.component.html - 333 <span> {{title}} is running </span> <==VIEW
+				      app.component.css - empty				<==VIEW (with style)
+				MODEL->  app.component.ts - title = "mycompany" 	MODEL <= DATA
+
+	2. ng serve - starts the server to serve the pages
+
+	3. localhost:4200
+
+
+
+
+
+	JSON
+
+	JavaScript Object Notation
+
+
+
+	to transport data from the server to the web client
+
+
+{
+		object-> "studentList" : [
+	object->{"firstName" : "Suresh", "lastName" : "Saxena", "grade" : "A"},
+	object->{"firstName" : "Rakesh", "lastName" : "Gupta", "grade" : "B"},
+	object->{"firstName" : Samir", "lastName" : "Joshi", "grade" : "C"},
+	]		|	 |	   |		 |
+}			field  value  name/key/field  value
+
+
+
+
+
+
+
+	Annotation (in java)	called as Decorator (in angular )
+	|
+	extended version of comments
+	
+	EXTRA information of a class/field/method/parameter/argument/constructor....
+
+
+	comments = "non executable" lines
+	comments = not the part of your program logic
+	comments = not the part of .class file (.exe files in C++ )
+	comments = are not standardized
+
+	Annotation = "executable" lines
+	Annotation = the part of your program logic
+	Annotation = the part of .class file (.exe files in C++ )
+	Annotation = standardized
+
+		/*comment4*/
+	/*comment3*/ class /*comment2*/ SavingsAccount //comment1
+	{ 
+		/*comment5*/
+
+
+	}
+
+
+	xml file
+	as bill
+	|
+	Boy1		Girl2
+	|		|
+	|		|SunGlasses Rayban
+	Cap		Cap (NY) <-- annotation - comment - extra information
+	|		| 
+	TShirt		Tshirt
+	|		| Benetton <-- annotation - comment - extra information
+	|		|
+	Jeans		Jeans
+	|		|  Levis <-- annotation - comment - extra information
+	|		|
+	shoes		shoes
+			   Sketchers <-- annotation - comment - extra information
+
+
+
+
+	Architecture:	Modules	Components
+			Template MetaData ( decorators | annotations )
+
+			Data/Event Binding {{ }} <-- interpolation
+				|
+		------------------------------
+			|		|
+			oneway		two way
+
+		Directives 	Services  	Dependency Injection /IoC
+		|
+		|		Routing <- SPA Feel
+	---------------------
+	|	|	 |
+  Component  Structural Attibute 
+		* sign 
+		<td *ngIf="condition" >
+		*ngSwitch
+		*ngFor
+	
+
+for US it is simple tag ===>	<input type=text name=str value="sachin">
+
+	<sql 
+		driver="oracle.jdbc.OracleDriver" 
+		url="jdbc:oracle:thin:@ip:1521:xe" 
+		user="system" password="manager" 
+		query="select * from emp">
+
+		<tr> <td>
+	</sql>
+
+but in the background it may be like below code
+	class Input
+	{
+		String type;
+		String name;
+		String value;
+		set/get methods
+	}
+	Input i = new Input();
+	i.setType("text");
+	i.setName("str");
+	i.setValue("sachin");
+
+
+
+
+
+
+
+
+
+
+
+		Modules -> FundTransferModule
+				|
+		----------------------------------------------------------
+		|		|		|		|
+AddPayeeComponent  ViewPayeeComponent DeletePayeeComponent  TransferFundsComponent
+ html + css + ts    html + css + ts    html + css + ts	     html + css + ts	
+ {{}}	      |			 |		    |			   |
+	data+logic	  data+logic	     data+logic		   data+logic
+
+
+			AccountSummaryModule
+				|
+	-----------------------------------------------
+		|		|
+AccountSummaryComponent	 LastThreeBalanceComponent
+
+
+			AccountStatementModule
+				|
+	--------------------------------------------------
+	|			|			|
+MonthlyStatementComponent  YearlyStatementComponent	CustomStatementComponent
+
+
+	Your Bank App --> See Balance
+
+			  Transfer Funds
+
+			  Open RD
+		
+			  UPI 
+
+			  Statement Service
+
+
+
+
+	# for an id
+	. for a class
+
+
+
+	<p *ngIf="condition">
+	  Hows life
+	</p>
+
+
+	<p *ngIf="condition; else myElseBlock">
+	  Hows life?
+	</p>
+
+	<p>
+		<ng-template #myElseBlock>
+			life is cool
+		</ng-template>
+	</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
