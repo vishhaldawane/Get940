@@ -1,0 +1,378 @@
+	
+1. 
+
+package mycalc;
+class MyMath
+{
+  public static int MAX=10;
+  public   static int MIN=1;
+  public   static int NORM=2;
+	public static void calculate() { }
+}
+---------------------
+import static mycalc.MyMath.*;
+
+class Test
+{
+	void fun()
+	{
+	calculate(); // no need of class name here, since static import is givem
+
+		if(MAX > MIN)
+			..
+		else
+			...
+	MAX
+		MAX
+			MAX
+	}
+}
+
+2. 
+
+	class Doctor
+	{
+		void diagnose() { Sop("Doctor"); }
+	}
+	class Surgeon extends Doctor
+	{
+		void diagnose() { Sop("Surgeon"); }
+	}
+	class Test
+	{
+		public static void main(String str[]) {
+			Doctor d = new Surgeon();
+			d.diagnose();
+		}
+	}
+
+	a. Doctor
+	b. Surgeon <= right answer
+	c. compile time error
+	d. none of the above
+
+
+
+
+3.	class Test
+	{
+		public static void main(String str[]) {
+			int p; //local variables must be initialized 
+			System.out.println(p);
+			int q=20;
+			System.out.println(q);
+		}
+	}
+	a. 0 20
+	b. null 20 //null is nothing but absence of value / the value is absent
+	c. 20
+	d. compile time error <==
+	
+
+
+4. we can have 2 primary keys in oracle table
+
+		a. true
+		b. false
+
+
+
+
+
+5. we can have multiple foreign keys in a table in oracle
+
+		a. true <==
+		b. false
+
+
+
+Diamond - Dreaded diamond - millions of years of pressure under the earth
+
+		Animal
+		  | eat() <-- ambiguous for FlyingMammal
+		 / \		Bird::eat()  or Mammal::eat()
+		/   \
+	   Bird+     +Mammal		FlyingMammal fm;
+	fly()	\   / giveBirth()	fm.eat(); // how to resolve it
+		 \ /
+		  |
+		FlyingMammal -is not the "direct child" of the Animal
+				"it is the child of two father" <--insane
+
+	a developer has a choice to bypass the ambiguity of eat
+	by making Bird and Mammal as virtual Base(parent)  Classes 
+
+	there is a concept vtable <- virtual table
+
+		Animal.eat()
+
+
+		man women
+
+		
+	
+|		|	|		|
+GrandFather GrandMother	GrandFather GrandMother
+   |23        |23	|23	     |23
+   -------------	--------------
+	|		|
+	Father		Mother
+	|		|
+	46		46 <--- DNA <-- covid 
+	|23		|23
+	-----------------
+		|46
+		Child
+		
+
+	java supports linear inheritance
+
+	1	Animal				Animal
+		| eat();			|eat();
+	------------------		-------------------------
+	| sparrow	| tiger		| sword			| monkey
+ 2	Bird		Mammal		Fish			Mammal
+	|fly();		|giveBirth();	|layEggs();swim();	|giveBirth();
+	-----------------		-----------------------------
+		|				|
+ 3	FlyingMammal (bat)		MammalFish (whale)
+		|
+	FlyingHorse (fairy tale)
+	Unicorn bike <-- Honda
+
+
+
+
+	interface Animal
+	{
+		void eat();
+	}
+	interface Bird extends Animal
+	{
+		void fly(); //eat(); also there
+	}
+
+	interface Mammal extends Animal
+	{
+		void giveBirt(); //eat(); also there
+	}
+
+	interface FlyingMammal extends Bird,Mammal
+	{
+		void flyAtNight();
+	}
+	class Bat implements FlyingMammal
+	{
+
+	}
+			
+					pure partial contract -> interface	
+					partial contract	-> abstract	
+	concrete class 		vs 	nonconcrete class			MedicalInstrument
+
+	TubeLight			Light
+	SunLight
+	MoonLight
+	CandleLight
+	BulbLight
+	WoodFireLight
+
+ U	????????			Instrument
+					|
+	"Guitar,Flute,Drum"		MusicalInstrument
+					|
+ D	Guitar				StringBasedMusicalInstrument
+
+
+
+
+
+
+
+
+
+	Enter principal amount		25000
+	Enter rate of interest		5.55
+	Enter the number of years	3	
+	
+	Simple Interest is : 	 <---875 value is  <--- 	pnr/100
+
+
+
+
+
+
+
+
+		slider 
+	             
+principal	100000					10000000 1CR
+	                  ^
+		spinner for rate of interest
+		year as slider
+	
+	home loan	vehicle loan		commodity on finance
+	|		|			|
+	emi calc	emi calc		emi calc
+	|		|			|
+	80,00,000	12,00,000		30,000
+
+
+
+
+
+
+
+in java we call it as a class/bean/pojo | angular -> Component
+
+
+		ng sever <-- to host the angular application
+
+		ng generate pipe cube <---- 
+		|	|    |	   |
+	   angular  to make what   cube.pipe.ts <-- type script file is created
+					|
+				also an entry is made inside app.module.ts
+
+			mycompany
+			|
+	-----------------------------------
+		|module			|module
+		home			welcome
+		|			|
+		|			-----------------------------------
+		|			|		|		|
+		|			account		transfer	statement
+		login			userdashboardcomponent
+		register		accountsummarycomponent
+		forgotpassword		fundtransfercomponent
+		resetpassword		accountstatementcomponent
+
+	Home page -> Sign up		Sign In
+			|		|
+		registration		login -> user dash board can be seen
+							welcome
+		ng generate component login
+					|
+				login.comonent.ts
+				login.comonent.html
+				login.comonent.css
+				login.comonent.spec.ts
+
+		ng generate component register
+		ng generate component forgotpassword
+		ng generate component resetpassword
+
+
+
+		ng generate component SearchTicket
+
+
+
+	Airline Reservation		Online Banking
+		|				|
+search ticket <= highest priority	registration <--- highest priority
+
+
+
+	modules
+	services 
+	API call - CRUD
+
+	
+
+
+
+
+
+	select max(sal),deptno from emp group by deptno,comm
+
+	primary key - can be once 
+	unique - will it maintain unique row or "unique value in a column?"
+	not null - domain constraint - it cannot be given on table level
+	check - to check the value
+	foreign key - can be multiple
+
+
+	update query syntax
+	update tablename set col=newvalue, col2=newvalue
+			where clause...
+
+	memorize the syntax of DDL
+
+		alter table <= to add column	
+				to modify column 
+				to drop existing column	
+				to rename column
+		create table
+		truncate table
+		drop table
+		rename table <= syntax
+
+	in css
+		
+	. for the class
+	# for the id
+
+	explore->float - control the text around the image
+
+		register.html	login.html
+		register.css	login.css	
+
+		SPA feel
+
+		
+
+		
+	Decorator/Annotation in java
+	    |
+	@Component({ 
+  		selector: 'app-root', /*this would be the tag name*/ 
+  		templateUrl: './app.component.html', /* VIEW */
+  		styleUrls: ['./app.component.css'  ] /* STYLE OF THE VIEW */
+	})	        |
+			many
+
+	@Injectable <-- services / DI
+
+	@Pipe <-- custom pipe
+
+	@NgModule(		many
+		{		   |	
+			declaration[s] :[ 6  ],
+			import[s] :[ other modules]
+			provider[s]: [ CurrencyConverterService ]
+			bootstrap: [AppComponent]
+		}
+	)
+
+	@NgModule(		
+		{		   	
+			declaration :[ 6  ],
+			imports :[ other modules]
+			providers: [ CurrencyConverterService ]
+			bootstrap: [AppComponent]
+		}
+	)
+
+	@NgModule(		
+		{		   
+			declarations :[ 6  ],
+			import :[ other modules]
+			provider: [ CurrencyConverterService ]
+			bootstrap: [AppComponent]
+		}
+	)
+
+
+	[(ngModel)] <-- two way binding - FormsModule
+	{{}} <-- interpollation
+	<img [src]="imgUrl"> <-- property binding
+	
+	<div (click)="change($event)"> <-- event binding
+		</div>
+
+
+
+
+
