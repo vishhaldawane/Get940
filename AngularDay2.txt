@@ -376,3 +376,349 @@ search ticket <= highest priority	registration <--- highest priority
 
 
 
+
+
+	1. State true or false
+
+		Foreign key can have multiple null values
+
+		a. true
+		b. false 
+
+	
+	create table abc
+	(
+		email varchar2(20) unique
+	);
+	insert into abc values (null); //value is absent
+	insert into abc values (null);
+	insert into abc values (null);
+
+
+
+
+	2. Which one of the column is the foreign key
+
+		emp_id	ename	job   dept_id
+
+
+		a. emp_id
+		b. dept_id
+		c. job
+		d. none of the above
+
+		READING THE QUESTION IS MOST IMPORTANT
+		
+
+	3. WHAT IS A UNIQUE CONSTRAINT?
+
+		a. UNIQUE VALUE IN A COLUMN
+		b. MAKE A UNIQUE ROW FOR A TABLE
+		c. MAKE A UNIQUE ROW BY ADDING A UNIQUE VALUE IN A COLUMN
+		d. MAKE A UNIQUE COLUMN BY ADDING UNIQUE ROW VALUE
+
+
+	TABLE EMP
+	---------
+	EMAIL <-- unique	EMPNO
+	------			------
+row1	abc@gmai.com		123
+row2	pqr@gmai.com 		123
+				123
+				123
+
+
+
+		1. time pressure (non technical)
+		2. your surrounding (non technical)
+		3. camera (exra conscious) (non technical)
+		4. knowledge  - technical
+		5. wisdmon ( pure technical - experience )
+
+
+
+
+
+
+	4. What is property binding in angular?
+
+
+		a	<img src="imgurl">
+
+		b	<img [src]="imgurl">
+
+		c	<img src="{{imgurl}}">
+
+		d	<img [(src)]="imgurl">
+
+
+
+
+
+
+	5. What is two way binding in angular?
+
+
+		a	<img src="imgurl">
+
+		b	<img [src]="imgurl">
+
+		c	<img src="{{imgurl}}">
+
+		d	<img [(src)]="imgurl">
+
+
+
+
+	6. What is interpollation in angular?
+
+
+		a	<img src="imgurl">
+
+		b	<img [src]="imgurl">
+
+		c	<img src="{{imgurl}}">
+
+		d	<img [(src)]="imgurl">
+
+		
+
+
+	7. 
+		choice=5 <-- what is the output below if break is not given
+		switch(choice) {		or break is given
+		  case 1: hello 
+		  case 2: hi  
+		  default: bye 
+		}
+
+			
+
+	Module
+	-----------
+
+		collection of related components
+
+
+		fundtransfer
+		|
+	------------------------------------
+	|		|		|
+AddPayeeComponent  ViewPayeeComponent  DeletePayeeComponent
+
+		app.module.ts
+		|
+		import -> for AccountStatementModule ( to avail the exported
+							components)
+
+	ng generate module FundTransfer
+
+	ng generate module AccountStatement
+				| account-statement.module.ts
+				|	declarations of below components
+				|	+  exports of below components
+		-------------------------------------------------	
+		|		|			|
+MonthlyStatementComponent  YearlyStatementComponent CustomPeriodStatementComponent  
+
+
+	a module can not only have components
+	but also pipe, services too
+
+	Component
+	|
+	html /css /	ts
+	|	|	|
+	data	style	logic
+
+	Pipe  -> doing some activity -> involved with some data
+	|
+	is not html/css view		100 | sqrt
+
+	Module -> is not a visible component
+	|
+	is not html/css view
+
+	Service = to serve 
+	|
+	activity
+		CurrencyConverterService
+			convert(source,target,amt) : number
+			{
+
+			}
+
+		AccountService
+
+
+	fundTransferModule
+		|
+-----------------------------------------------
+|			|
+AddPayeeComponent	class FundTransferService { //CRUD
+ViewPayeeComponent		|
+ViewAllPayeeComponent	fetchPayeeFromTheDatabase(payeeid) : Payee
+DeletePayeeComponent	{
+				..doing some dbms connection
+				fetch the particular payee
+				and return it....
+			}
+			addPayeeToTheDatabase() {
+				..doing some dbms connection
+				sending the payee info
+				to add to the remote db
+			}
+			findAllPayees() : Payee[] {
+				doing some db connection..
+				fetch all payees and return
+			}
+		}
+
+		class StatementService {
+			findMonthlyStatement(acno:number):Statement {
+			}
+			findYearlyStatement(acno:number):Statement {
+			}	
+			findCustomStatement(acno:number, dt1, dt2):Statement {
+			}
+			
+		
+		}
+
+
+
+
+
+
+
+
+
+
+	1. ng generate service CurrencyConverter
+				|
+			currency-converter.service.ts <-- created	
+			|
+		add these two function in -> class CurrencyConverterService
+		 convert() {   console.log('convert is invoked...') }
+		 findCurrency() {    console.log('Finding currency......')  }
+
+	2. app.component.ts   a datamember is created/and injected with
+		|		    |		the instance of
+		|		    |			|
+		constructor(private ccs:CurrencyConverterService)
+		{
+		}
+		calculateIt() {	 <-- already defined by us
+			ccs.findCurrency(); ccs.convert();
+		}
+		
+	3. app.component.html
+		<button (click)="calculate($event)"> CalculateIt</button>  <br>
+
+
+html -> select option for SOURCE, select option for TARGET, text box : amount
+		convert<-- button
+		           |	
+	   the regular function will be invoked to pickup
+	the selected values from html
+		and then it will invoke the service's function
+
+ ccs.convert(source, target, amount); -> it should take source and target country names,
+		USD   INR    5000
+conversion of amount of source country as per the target country
+		|	 |			   |	
+		5000	USD			 INR
+					375000 must be returned
+			5000 * 75
+----------------------------------------------------
+		INR   USD    5000
+			5000 / 75
+			
+
+
+
+
+		ng generate module Account
+					|
+					account <---folder
+					|
+	AccountService		account.module.ts
+	|			|
+-----------------			declarations:[AccountOpeningComponent,	
+|	|	|			AccountDashboardComponent,
+..	..	..			AccountBalancePipe
+					 ]
+				exports: [ AccountDashboardComponent,
+					AccountOpeningComponent]
+			
+		components, pipes, services
+		30		5	20
+	
+	
+			Hrutvik <-- Team Leader
+			|
+	------------------------------------------------------------------
+	|		|		|		|		|
+	self		Harshit		Krati	
+	|		|		|
+	Account		FundTransfer	Statement
+	Module		Module		Module
+	|		|		|
+	10 2  5 	10 2 8		10 1 7
+	|  p  s		c  p s		c  p s
+	c
+	|
+ AccountOpeningComponent
+ AccountDashboardComponent
+ ..
+ ..
+ pipe -> AccountBalancePipe
+ service -> AccountService
+		|
+	-----------------
+	|	|	|
+	|	| updateBalanceService() { }
+	| fetchBalanceService() { }
+	openAccountService() { }
+ 	
+		
+		
+
+	Routing in Angular <-- SPA feel
+
+		<a href="link">  linkname </a>
+
+
+
+
+			home 1
+			| signin  sigup	 about 10
+	-----------------------------------------------
+		|		|		|
+		login 2	<------	register 3	dashboard 6
+		| forgot	 home		|
+		| reset			---------------------------------
+		|  home			|		|	    |
+	-----------------	  see profile 7   edit profile 8   logout 9
+	|		|			
+forgotten 4		reset 5
+password		password
+  home/login		  home/login
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
