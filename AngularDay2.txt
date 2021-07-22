@@ -689,13 +689,28 @@ conversion of amount of source country as per the target country
 		<a href="link">  linkname </a>
 
 
+	http://localhost:4200 -> Home page of your site
+	http://localhost:4200/about 
+	http://localhost:4200/register
+	http://localhost:4200/login
+	http://localhost:4200/login/reset
+	http://localhost:4200/login/forgot
+	http://localhost:4200/dashboard
+	http://localhost:4200/dashboard/logout
 
 
-			home 1
-			| signin  sigup	 about 10
+class User { username string, password string , isLoggedIn boolean }
+		
+	sessionStorage - set and get
+	sessionStorage
+
+			App <-- root of your application
+			|
+			home <-- root
+			| about signin  sigup	 
 	-----------------------------------------------
-		|		|		|
-		login 2	<------	register 3	dashboard 6
+	|	|		|		|
+	about 1	login 2	<------	register 3	dashboard 6
 		| forgot	 home		|
 		| reset			---------------------------------
 		|  home			|		|	    |
@@ -707,8 +722,161 @@ password		password
 
 
 
+---------------------------------------------
 
 
+
+				   <--TABLES ARE 3->
+  select loc, ename,name,city from dept,emp,customer 	
+	where dept.deptno = emp.deptno   <-- CONDTION 1
+	and   emp.empno = customer.repid <-- CONDTION 2 
+	and job='SALESMAN';
+
+
+
+
+
+
+	1. which query is used to show the names
+	   ending with r?
+
+
+	a	select * from emp where ename like '%r'
+	b	select * from emp where ename =    '%r'
+	c	select * from emp where ename like '_r'
+	d	select * from emp where ename like '%r%'
+	
+
+
+		rollno name  phy  chem  math	
+		1	A         20    18	
+		2	B    10   15	    
+		3	C    15         10
+	
+		assuming above records, what the output of below query
+		select phy+chem+math from student
+
+		a. null
+		   25
+		   null
+
+		b. 38
+		   25
+		   25
+
+		c. 38
+		   25
+		   null
+
+		d. null <-- write option
+		   null
+		   null
+	
+
+
+
+		
+	2. which clause is used to filter the rows 
+		
+		a. where <== RIGHT 
+		b. group by
+		c. having
+		d. order by
+
+
+
+
+	3. which ARE the following can be an alternative to a primary key
+
+		a. unique + not null  <==RIGHT
+
+		b. unique
+
+		c. foreign key + not null <==RIGHT
+
+		d. foreign key
+
+
+
+
+	4. Which constraint is used to enforce the validation
+		of city names like 'MUMBAI,'PUNE' and 'JAIPUR'
+
+
+		a. check <==correct
+		b. unique
+		c. foreign key
+		d. not null
+
+
+
+	5. Which one of the following is a DDL command
+
+
+		a. grant table
+		
+		b. alter table <-- right
+
+		c. delete from table 
+	
+		d. revoke table
+
+	WEB = MEMORY SKILLS
+
+
+	@Component - components
+		( by heart details )
+
+	@NgModule - for modules
+		( by heart details )
+
+	@Injectable - for services
+
+	css - popular syntax - font, color, background, float, 
+		padding, spacing, margin
+
+	HTML - POPULAR TAGS - headers, table, input
+			radio, checkbox, div span
+
+	JS = getElementById, by value, bytag, byname...
+		var to make a variable
+		document.getElementById("idhere").value
+
+		.class  #id
+
+
+
+
+
+
+====================================================================
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ ->	1  layer	DB     		tables  - user  
+	2. layer	Java - 		POJO    - class User { }		
+	3. layer	Repository 	CRUD	Hibernate as ORM
+	4. layer	Service		main business logic on server
+	5. layer	Controller	spring controller/rest controller
+ ->	6. layer	Angular		html + css + ts + services + modules
+					pipes	
+	
 
 
 
