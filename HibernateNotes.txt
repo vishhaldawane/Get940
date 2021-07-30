@@ -1,0 +1,289 @@
+			
+
+
+				who
+		where			when
+
+	why			what			how
+	|
+	Hibernate
+	ORM framework
+	|
+	Object  = java objects [ java class/object is not a table ]
+	Relational = tables of the db [ oracle table is not a java class/object]
+	Mapping = association
+
+			Association
+				|
+		------------------------------
+		|	|	|	|
+		isA	hasA	usesA	ProducesA
+		structural	  functional
+
+		class Heart { void pumpBlood() { } }
+		class Brain { void pumpLogic() { } }
+		class Human
+		{
+			int age;
+			Heart h = new Heart(); // hasA
+			Brain b = new Brain(); // hasA
+			void snooze() { }
+
+		}
+		class Person extends Human { } //isA
+		class Pen { } class Paper { }
+		class Poetry {
+			String content;
+		}
+		class Poet extends Person //isA
+		{
+			int poetId;
+			String poetryType; // romance, grief, breakup
+
+			//producesA		usesA	usesA	
+			 |			|	|
+			Poetry makePoetry(Paper p, Pen pp)
+			{
+				Poetry mp = new Poetry ();
+				mp.content="The Sea is Vast, My Boat is frail,Thou Art (Goddess of Wisdom) with me,And all is well";
+				return mp;
+			}	
+		}	
+
+	//cRUD - read, create, update, delete
+
+		main() {
+			Poet thePoet = new Poet(101,"Hrutvik",'M',23);
+			thePoet.setAddress(WestAvenue, Princess Street, Mumbai, 908765);
+			Pen myPen = new Pen("Blue","Parker");
+			Paper myPaper = new Paper("CardBoard");
+			Poetry poetry = thePoet.makePoetry(myPaper,myPen);
+
+			DriverManager.regite.r...
+			DriverManager.getConne....
+			conn.prepareStatement("insert into poet..
+			conn.prepareStatement("insert into poetry.
+			conn.prepareStatement("insert into brain..
+			conn.prepareStatement("insert into heart..
+			conn.prepareStatement("insert into address
+			conn.prepareStatement("insert into pen
+			conn.prepareStatement("insert into paper..
+			
+			update..
+					delete
+
+			select
+
+			select all records
+
+		JDBC BOILER PLACE CODE
+
+
+
+		}
+
+		parent table and child table
+		|			|
+		primary key	  foreign key
+	
+		framework = semi developed application
+
+		;
+
+
+	ServiceRegistry 		Flower
+		|			|
+	---------------------	----------------------
+	|			|
+ServiceRegistryBuilder		Rose
+
+			StandardServiceRegistryBuilder
+				|
+			configre().build()
+
+
+	method chaining in java
+
+
+
+
+
+	class	Poet	<---> poet table
+
+
+	@Entity
+	@Table(name="mypoet") <---- table name
+	class Poet
+	{
+		@Id
+		int poetid;
+
+		@OneToMany
+		List<Address> a = new ArrayList<Address>();
+
+		@OneToOne
+		Passport p = new Passport();
+
+
+	}
+
+	
+		Poet thePoet = new Poet(101,"Hrutvik",'M',23);
+		thePoet.setAddress(...);
+		thePoet.setPassport(...);
+
+	Hibernate .....
+		..
+		..
+	Session session = ...getSession();
+
+
+			session.save(thePoet);
+
+			session.get(101);
+
+			thePoet.setAge(24);
+			session.update(thePoet);
+
+			session.remove(101);
+		
+	
+
+
+		Kitchen - jdbc boiler plate code
+		|
+		ORM - Hibernate  - Toplink
+		|	 |
+		You	 |
+			 |
+			some settings are required
+			so that hibernate will come to know 
+			which db?
+			which port?
+			which instance?
+			what is the username?
+			what is the password?
+			which class is mapped to which table?
+			if to overwrite the table or not
+			...
+			..
+
+
+	Poet thePoet = new Poet(101,"Hrutvik",'M',23);
+				|
+		--------------------------
+		|			|
+		poet.txt		poet <-- row on a poet table 
+	Serialization			Persistence
+
+			Java Persistence API - JPA 
+				|
+		----------------------------------
+		|				|
+		Hibernate			Toplink
+
+		Instrument
+			|
+		MusicalInstrument
+			|
+		StringBasedMusicalInstrument
+			|tuneString();
+	------------------------------------------
+	|		|			|
+	Sitar		Guitar			Violin
+	 ting()		   pluck()		  bowing()
+	|		|			|
+hibernate.properties 	hibernate.cfg.xml	persistence.xml
+key = value pairs		xml way		xml way
+		
+
+
+
+		1. database with dept table
+
+		2. hibernate.cfg.xml <-- setting this file
+
+		3. Your POJO - plain old java object
+
+			class Department { } for dept table
+			Department d = new Department(50,"QMS","Mumbai");
+		4. Application to connect to hibernate framework
+
+			
+	1. eclipse
+		make a new maven project
+	2. group id
+		com.lti.sales
+	3. artifact id
+		SalesProject
+
+	4. finish
+
+	5. in the src/main/java -> right click-> new class->
+		 make your pojo as "class Department" in package com.dept
+
+	6. hibernate.cfg.xml file
+
+	7. pom.xml - add the hibernate, junit, oracle dependencies
+
+	D:\app\OSIS\product\11.2.0\dbhome_1\jdbc\lib
+	   |    |		|		  |
+	   |  username		version		ojdbc6_g.jar
+	oracle installation folder
+
+		oracle8.jar for oracle 18
+
+		hsqldb.jar
+
+
+	8. code to connect to hibernate framework
+
+
+
+		Kitchen
+		|
+		ORM
+		|
+
+	select 
+
+	department0_.DEPTNO as DEPTNO1_0_0_, 
+	department0_.LOC as LOC2_0_0_, 
+	department0_.DNAME as DNAME3_0_0_ 
+
+	from dept department0_ 
+
+	where department0_.DEPTNO=?
+	
+		10TH august
+
+	layer1 db		done <--NORMALIZED 
+	layer2 pojo		done
+	layer3 repo		done <-- ORM - ongoing
+	layer4 service		YOU <-- Airline Reservation Logic
+	layer5 spring rest	PENDING
+	layer6 angular	- 	done
+
+
+	like 100 normal style		dislikes25
+	|
+	on click
+	it should be
+	like 101 <= bold style <-- class should change here
+	|
+	again on click
+	it is 
+	back to normal style
+	100
+
+	.class 
+
+	1 like
+	2 dislike
+
+	3  like -- event
+	4  dislike -- event
+
+	5 
+	6
+
