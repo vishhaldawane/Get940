@@ -18,6 +18,8 @@ public interface EmployeeRepository {
 	void insertEmployee(Employee ref);
 	
 	Employee selectEmployee(int employeeNumber) throws EmployeeNotFoundException;
+	List<Employee> selectAllEmployees() ;
+	
 	List<Employee> selectEmployeeByJob(String job) throws EmployeeNotFoundException;
 	List<Employee> selectEmployeeByHiredateRange(Date startDate, Date endDate) throws EmployeeNotFoundException;
 	List<Employee> selectEmployeeBySalaryRange(float minSalary, float maxSalary) throws EmployeeNotFoundException;
@@ -26,7 +28,7 @@ public interface EmployeeRepository {
 	List<Employee> selectEmployeeByDeptno(int deptno) throws EmployeeNotFoundException;
 
 	void updateEmployee(Employee employee) throws EmployeeNotFoundException;
-	void deleteEmployee(Employee employee) throws EmployeeNotFoundException;
+	void deleteEmployee(int  empno) throws EmployeeNotFoundException;
 }
 
 
