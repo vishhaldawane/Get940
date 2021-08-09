@@ -1,0 +1,30 @@
+<html>
+
+<body>
+ <div>
+    <input type=text placeholder="Search By Emp Number" name=e1 [(ngModel)]="empno" (ngModelChange)="updateEmployeeArray()">
+
+ </div>
+<h1> All Employees </h1>
+
+<table border=3 cellspacing=10 cellpadding=10 *ngIf="tempEmployees && tempEmployees.length">
+    <thead>
+        <tr>
+            <th>Employee Number</th>
+            <th>Employee Name</th>
+            <th>Employee Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let emp of tempEmployees">
+            <td> {{emp.employeeNumber}}</td>
+            <td> {{emp.employeeName}}</td>
+            <td> {{emp.employeeSalary}}</td>     
+            <td>
+                <button type=button (click)="deleteEmployee(emp.employeeNumber)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
