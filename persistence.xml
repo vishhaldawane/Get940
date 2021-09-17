@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+  version="2.1">
+
+  <persistence-unit name="MyJPA">
+    
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    
+    <class>com.lti.pojo.Department</class>  <!-- hold ctrl key+mouse hover -->
+    
+    <properties>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+      <property name="hibernate.show_sql" value="true" />
+      <property name="hibernate.hbm2ddl.auto" value="update" />
+      
+       <!-- JDBC Database connection settings -->
+        <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@DESKTOP-EPTT35F:1521:XE"/>
+        <property name="javax.persistence.jdbc.user" value="scott"/>
+        <property name="javax.persistence.jdbc.password" value="tiger"/>
+        
+        <!-- JDBC connection pool settings ... using built-in test pool -->
+        <property name="connection.pool_size" value="1" />
+        
+         
+        <!-- Set the current session context -->
+        <property name="current_session_context_class" value="thread" />
+        
+        <!-- dbcp connection pool configuration -->
+        <property name="hibernate.dbcp.initialSize" value="5" />
+        <property name="hibernate.dbcp.maxTotal" value="20" />
+        <property name="hibernate.dbcp.maxIdle" value="10" />
+        <property name="hibernate.dbcp.minIdle" value="5" />
+        <property name="hibernate.dbcp.maxWaitMillis" value="-1" />
+		
+    </properties>
+
+  </persistence-unit>
+  
+</persistence>
