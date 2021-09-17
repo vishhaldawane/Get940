@@ -1,26 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-	version="2.0">
-
-	<persistence-unit name="Hibernate-JPA">
-		  <provider>org.hibernate.ejb.HibernatePersistence</provider> 
-		
-		<properties>
-		
-		 <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:OSE" />
-			<property name="javax.persistence.jdbc.user" value="scott" />
-			<property name="javax.persistence.jdbc.password" value="tiger" /> 
-		 <!-- 	<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbc.JDBCDriver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:hsql://localhost/hibernatedb" />
-			<property name="javax.persistence.jdbc.user" value="sa" />
-			<property name="javax.persistence.jdbc.password" value="" /> 
-		 -->				
-			<!-- ORM Specific -->
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-		</properties>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="MyDataJPA">
+		<class>model.Customer</class>
+		<class>model.Dept</class>
+		<class>model.Emp</class>
+		<class>model.Item</class>
+		<class>model.ItemPK</class>
+		<class>model.Ord</class>
+		<class>model.Price</class>
+		<class>model.Product</class>
 	</persistence-unit>
 </persistence>
